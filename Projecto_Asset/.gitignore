@@ -1,0 +1,9 @@
+# Python / Jupyter
+__pycache__/
+.ipynb_checkpoints/
+
+# Dados locais
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
