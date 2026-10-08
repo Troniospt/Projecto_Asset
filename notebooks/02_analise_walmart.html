@@ -7795,7 +7795,7 @@ a.anchor-link {
 </style>
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e066d4cb">
+<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e066d4cb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7808,7 +7808,39 @@ a.anchor-link {
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.distributions.empirical_distribution</span><span class="w"> </span><span class="kn">import</span> <span class="n">ECDF</span>
+<span class="c1">#%pip install nbconvert</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nbformat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nbconvert</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTMLExporter</span>
+
+<span class="n">ficheiro</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"02_analise_walmart.ipynb"</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">ficheiro</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">notebook</span> <span class="o">=</span> <span class="n">nbformat</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">as_version</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">exportador</span> <span class="o">=</span> <span class="n">HTMLExporter</span><span class="p">()</span>
+<span class="n">exportador</span><span class="o">.</span><span class="n">exclude_input</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># esconde o código</span>
+
+<span class="n">html</span><span class="p">,</span> <span class="n">recursos</span> <span class="o">=</span> <span class="n">exportador</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span><span class="n">notebook</span><span class="p">)</span>
+
+<span class="n">destino</span> <span class="o">=</span> <span class="n">ficheiro</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">".html"</span><span class="p">)</span>
+<span class="n">destino</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"HTML criado em: </span><span class="si">{</span><span class="n">destino</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>HTML criado em: C:\Users\anton\Desktop\Pós-Grad\Asset Pricing and Portfolio Management\projecto_git\Projecto_Asset\notebooks\02_analise_walmart.html
+</pre>
 </div>
 </div>
 </div>
