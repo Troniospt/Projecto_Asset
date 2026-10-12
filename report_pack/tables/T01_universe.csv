@@ -1,0 +1,25 @@
+﻿Ticker,Sector,First date,Ann. return (CAGR),Ann. volatility,Max drawdown,Avg. correlation with the other stocks
+NVDA,Information Technology,2010-01-05,45.6%,45.4%,-66.3%,0.35
+AAPL,Information Technology,2010-01-05,26.8%,28.1%,-43.8%,0.38
+MSFT,Information Technology,2010-01-05,20.2%,26.1%,-37.1%,0.40
+AVGO,Information Technology,2010-01-05,39.9%,38.3%,-48.3%,0.35
+AMD,Information Technology,2010-01-05,27.5%,56.9%,-84.1%,0.30
+MU,Information Technology,2010-01-05,31.5%,50.7%,-73.8%,0.33
+BRK-B,Financials,2010-01-05,13.0%,19.2%,-29.6%,0.44
+JPM,Financials,2010-01-05,16.3%,27.4%,-43.6%,0.41
+V,Financials,2010-01-05,19.3%,24.8%,-36.4%,0.40
+LLY,Health Care,2010-01-05,26.3%,26.7%,-34.5%,0.25
+JNJ,Health Care,2010-01-05,12.2%,17.1%,-27.4%,0.31
+AMZN,Consumer Discretionary,2010-01-05,24.4%,32.9%,-56.1%,0.33
+TSLA,Consumer Discretionary,2010-06-30,39.9%,57.3%,-73.6%,0.25
+T,Communication Services,2010-01-05,8.4%,21.0%,-39.4%,0.28
+GOOGL,Communication Services,2010-01-05,20.5%,27.9%,-44.3%,0.38
+GE,Industrials,2010-01-05,11.2%,31.6%,-81.2%,0.35
+CAT,Industrials,2010-01-05,19.9%,29.9%,-44.6%,0.38
+WMT,Consumer Staples,2010-01-05,13.5%,20.0%,-36.4%,0.26
+COST,Consumer Staples,2010-01-05,20.1%,20.3%,-31.4%,0.34
+XOM,Energy,2010-01-05,9.3%,25.0%,-62.4%,0.32
+NEE,Utilities,2010-01-05,14.7%,22.3%,-45.0%,0.28
+WELL,Real Estate,2010-01-05,15.1%,28.3%,-63.3%,0.29
+LIN,Materials,2010-01-05,13.0%,21.2%,-32.6%,0.41
+SPY,ETF (benchmark),2010-01-05,14.1%,17.1%,-33.7%,

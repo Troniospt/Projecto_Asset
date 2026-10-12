@@ -1,0 +1,19 @@
+﻿Asset,Frequency,Series,Lag,Q stat,p-value,Reject H0 (5%)
+WMT,Daily,r,5,13.11,0.022,Yes
+WMT,Daily,r,10,29.26,0.001,Yes
+WMT,Daily,r,20,45.18,0.001,Yes
+WMT,Weekly,r,4,9.24,0.055,No
+WMT,Weekly,r,8,12.24,0.141,No
+WMT,Weekly,r,12,18.20,0.110,No
+WMT,Monthly,r,3,1.29,0.732,No
+WMT,Monthly,r,6,4.14,0.658,No
+WMT,Monthly,r,12,6.79,0.871,No
+SPY,Daily,r,5,70.93,<0.001,Yes
+SPY,Daily,r,10,168.20,<0.001,Yes
+SPY,Daily,r,20,203.86,<0.001,Yes
+SPY,Weekly,r,4,11.05,0.026,Yes
+SPY,Weekly,r,8,17.68,0.024,Yes
+SPY,Weekly,r,12,22.74,0.030,Yes
+SPY,Monthly,r,3,6.10,0.107,No
+SPY,Monthly,r,6,7.87,0.248,No
+SPY,Monthly,r,12,12.79,0.384,No

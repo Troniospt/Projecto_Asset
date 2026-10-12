@@ -1,0 +1,10 @@
+﻿Portfolio,% beats SPY: Sharpe,% beats SPY: Ann. return,% beats SPY: Max drawdown,% beats SPY: Ann. volatility,% beats SPY: Sterling
+EW,85,88,37,13,87
+Markowitz (λ=3),49,75,11,0,67
+GMV,52,51,56,81,50
+Max Sharpe,55,72,24,14,65
+Inverse vol,86,85,59,44,88
+Risk parity (ERC),86,86,58,46,88
+Most diversified,80,86,46,36,84
+Max decorrelation,75,87,29,12,86
+Group pick (23 stocks),92,96,38,4,94

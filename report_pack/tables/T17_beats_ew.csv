@@ -1,0 +1,10 @@
+﻿Portfolio,% beats EW: Sharpe,% beats EW: Ann. return,% beats EW: Max drawdown,% beats EW: Ann. volatility,% beats EW: Sterling
+Markowitz (λ=3),21,57,9,1,45
+GMV,31,26,65,98,30
+Max Sharpe,34,54,27,19,46
+Inverse vol,47,27,87,100,33
+Risk parity (ERC),51,26,86,100,32
+Most diversified,47,39,61,75,40
+Max decorrelation,41,64,26,27,54
+Group pick (23 stocks),62,49,55,56,54
+SPY (buy & hold),15,12,63,87,13

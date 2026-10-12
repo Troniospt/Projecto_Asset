@@ -1,0 +1,11 @@
+﻿Portfolio,0 bps,10 bps,25 bps,50 bps
+EW,1,1,1,1
+Markowitz (λ=3),9,9,9,9
+GMV,7,7,7,7
+Max Sharpe,8,8,8,8
+Inverse vol,3,3,3,3
+Risk parity (ERC),2,2,2,2
+Most diversified,4,5,5,5
+Max decorrelation,6,6,6,6
+Group pick (23 stocks),5,4,4,4
+SPY (buy & hold),10,10,10,10
