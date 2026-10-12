@@ -7796,7 +7796,7 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8e4e287a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=03fa12c8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7813,7 +7813,7 @@ a.anchor-link {
 </thead>
 <tbody>
 <tr>
-<td>The figures, <strong>numbered in the order of the report</strong> (<code>F01</code>, <code>F02</code>, … for the main text; <code>A01</code>, … for the appendix)</td>
+<td>The figures, <strong>numbered in the order of the report</strong> (<code>F01</code>, <code>F02</code>, … for the main text; <code>FA01</code>, … for the appendix)</td>
 <td><code>report_pack/figures/</code></td>
 </tr>
 <tr>
@@ -7836,7 +7836,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fd216ba5">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ae79dbfd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7853,8 +7853,11 @@ a.anchor-link {
 <span class="n">FIGURES</span> <span class="o">=</span> <span class="s1">'../figures'</span>
 <span class="n">PACK</span> <span class="o">=</span> <span class="s1">'../report_pack'</span>
 
-<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/figures'</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/tables'</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># figures/ and tables/ are recreated from scratch every time (so that no old file is left behind);</span>
+<span class="c1"># REPORT_NOTES.md and README.md, written by hand, are in the main folder and are never touched</span>
+<span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/figures'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/tables'</span><span class="p">]:</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
@@ -7866,7 +7869,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7cd3551c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=81ff1931">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7874,12 +7877,12 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="1.-Figures:-copy-them-with-a-number-in-the-order-of-the-report">1. Figures: copy them with a number in the order of the report<a class="anchor-link" href="#1.-Figures:-copy-them-with-a-number-in-the-order-of-the-report">¶</a></h2><p>The report follows the structure suggested in the brief (executive summary; data; methods and assumptions; results;
 robustness checks and limitations; conclusions; references and reproducibility appendix) and the numbering of the group's draft
-(1. universe, 2.1 stylised facts, 3. strategies). <code>Main</code> figures are meant for the main text, <code>Appendix</code> figures for the appendix —
+(1. universe, 2.1 stylised facts, 3. strategies). <code>Main</code> figures (F..) are meant for the main text, <code>Appendix</code> figures (FA..) for the appendix —
 the group can move them as it prefers.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e66b2b0d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7ccde8c4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7898,7 +7901,7 @@ the group can move them as it prefers.</p>
      <span class="s1">'notebook 04, section 2'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="c1"># --- 2.1 Stylised facts (WMT)</span>
     <span class="p">(</span><span class="s1">'F03'</span><span class="p">,</span> <span class="s1">'day_log_returns.png'</span><span class="p">,</span> <span class="s1">'2.1.1 Serial correlation / 2.1.4 Volatility clustering'</span><span class="p">,</span>
-     <span class="s1">'Daily log returns of Walmart (WMT), 2010-2026.'</span><span class="p">,</span>
+     <span class="s1">'Daily log returns of Walmart (WMT), 2010-2026 (the same series is the top panel of F07: use one of the two).'</span><span class="p">,</span>
      <span class="s1">'notebook 02'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'F04'</span><span class="p">,</span> <span class="s1">'03_acf_returns_wmt.png'</span><span class="p">,</span> <span class="s1">'2.1.1 Little or no serial correlation'</span><span class="p">,</span>
      <span class="s1">'Autocorrelation function of WMT log returns at daily, weekly and monthly frequency, with 95% bands (±1.96/√N).'</span><span class="p">,</span>
@@ -7916,13 +7919,13 @@ the group can move them as it prefers.</p>
      <span class="s1">'Autocorrelation of absolute and squared WMT log returns at daily, weekly and monthly frequency.'</span><span class="p">,</span>
      <span class="s1">'notebook 03, section 6'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'F09'</span><span class="p">,</span> <span class="s1">'03_news_impact_curve.png'</span><span class="p">,</span> <span class="s1">'2.1.5 Leverage effect'</span><span class="p">,</span>
-     <span class="s1">'News impact curve of the daily GJR-GARCH(1,1) model with Student-t innovations: next-day variance after a negative vs a positive shock of the same size.'</span><span class="p">,</span>
+     <span class="s1">'News impact curve of the daily GJR-GARCH(1,1) model with Student-t innovations, WMT and SPY: next-day variance after a negative vs a positive shock of the same size.'</span><span class="p">,</span>
      <span class="s1">'notebook 03, section 7'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'F10'</span><span class="p">,</span> <span class="s1">'03_leverage_correlation.png'</span><span class="p">,</span> <span class="s1">'2.1.5 Leverage effect'</span><span class="p">,</span>
      <span class="s1">'Correlation between the daily return r(t) and the absolute return k days later |r(t+k)|, WMT and SPY (negative = leverage effect).'</span><span class="p">,</span>
      <span class="s1">'notebook 03, section 7'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'F11'</span><span class="p">,</span> <span class="s1">'03_conditional_volatility_wmt.png'</span><span class="p">,</span> <span class="s1">'2.1.5 Leverage effect / 2.1.4 Volatility clustering'</span><span class="p">,</span>
-     <span class="s1">'Conditional volatility of WMT estimated with the daily GJR-GARCH(1,1) model (annualised).'</span><span class="p">,</span>
+     <span class="s1">'Conditional volatility of WMT from the daily GJR-GARCH(1,1) model with Student-t innovations (annualised), with the rolling 21-day volatility for comparison.'</span><span class="p">,</span>
      <span class="s1">'notebook 03, section 7'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'F12'</span><span class="p">,</span> <span class="s1">'03_qqplot_std_residuals_wmt.png'</span><span class="p">,</span> <span class="s1">'2.1.6 Conditional non-normality'</span><span class="p">,</span>
      <span class="s1">'Q-Q plots of the standardised residuals of the GJR-GARCH model against the normal and the Student-t distribution, WMT, three frequencies.'</span><span class="p">,</span>
@@ -7932,13 +7935,13 @@ the group can move them as it prefers.</p>
      <span class="s1">'Weights of each strategy estimated with the last 12 months of data on the 23 stocks (illustration, not a backtest result).'</span><span class="p">,</span>
      <span class="s1">'notebook 04, section 4'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'F14'</span><span class="p">,</span> <span class="s1">'04_risk_contributions_iv_vs_erc.png'</span><span class="p">,</span> <span class="s1">'3. Strategies: inverse volatility vs equal risk contributions'</span><span class="p">,</span>
-     <span class="s1">'Weights and risk contributions of inverse volatility and risk parity (ERC): with correlated assets, inverse volatility does not equalise risk contributions.'</span><span class="p">,</span>
+     <span class="s1">'Risk contributions (</span><span class="si">% o</span><span class="s1">f portfolio risk) of inverse volatility and risk parity (ERC), 23 stocks, last 12 months: with correlated assets inverse volatility does not equalise risk contributions (dashed = 1/N = 4.35%; weights in table TA05).'</span><span class="p">,</span>
      <span class="s1">'notebook 04, section 4'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'F15'</span><span class="p">,</span> <span class="s1">'04_efficient_frontier.png'</span><span class="p">,</span> <span class="s1">'3. Strategies: Markowitz vs GMV vs Max Sharpe'</span><span class="p">,</span>
      <span class="s1">'In-sample efficient frontier (last 12 months, long-only) with the position of each strategy; Markowitz with λ = 3 is distinct from GMV and Max Sharpe.'</span><span class="p">,</span>
      <span class="s1">'notebook 04, section 4'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'F16'</span><span class="p">,</span> <span class="s1">'04_experiment_design.png'</span><span class="p">,</span> <span class="s1">'3. Backtest design'</span><span class="p">,</span>
-     <span class="s1">'The 100 sampled 3-year periods (grey = 2-year estimation, blue = out-of-sample year) and how often each stock was drawn (seed 2026).'</span><span class="p">,</span>
+     <span class="s1">'The 100 sampled 3-year periods (grey = first two years, used for estimation with a trailing 1-year window; blue = out-of-sample year) and how often each stock was drawn (seed 2026).'</span><span class="p">,</span>
      <span class="s1">'notebook 04, section 5'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="c1"># --- 3. Results</span>
     <span class="p">(</span><span class="s1">'F17'</span><span class="p">,</span> <span class="s1">'04_boxplots_metrics.png'</span><span class="p">,</span> <span class="s1">'3. Results: distribution across the 100 experiments'</span><span class="p">,</span>
@@ -7960,14 +7963,14 @@ the group can move them as it prefers.</p>
      <span class="s2">"CAPM beta and annualised Jensen's alpha of each portfolio against SPY, estimated in each out-of-sample year (100 experiments, net of costs)."</span><span class="p">,</span>
      <span class="s1">'notebook 04, section 9.7'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'F23'</span><span class="p">,</span> <span class="s1">'04_wealth_example.png'</span><span class="p">,</span> <span class="s1">'3. Results: an example during a crisis'</span><span class="p">,</span>
-     <span class="s1">'Growth of 1 USD in the out-of-sample year of one experiment that includes the March 2020 crash (net of costs).'</span><span class="p">,</span>
+     <span class="s1">'Growth of 1 USD in the out-of-sample year of experiment 62 (11 Nov 2019 - 9 Nov 2020), which includes the March 2020 crash (net of costs).'</span><span class="p">,</span>
      <span class="s1">'notebook 04, section 9.6'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="c1"># --- Robustness</span>
     <span class="p">(</span><span class="s1">'F24'</span><span class="p">,</span> <span class="s1">'04_cost_sensitivity.png'</span><span class="p">,</span> <span class="s1">'Robustness: transaction costs'</span><span class="p">,</span>
      <span class="s1">'Median Sharpe ratio of each portfolio with 0, 10, 25 and 50 bps of transaction costs.'</span><span class="p">,</span>
      <span class="s1">'notebook 04, section 10.1'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'F25'</span><span class="p">,</span> <span class="s1">'04_sharpe_diff_vs_ew_over_time.png'</span><span class="p">,</span> <span class="s1">'Robustness: dependence on the period'</span><span class="p">,</span>
-     <span class="s1">'Sharpe ratio of each portfolio minus that of EW, by evaluation year of the experiment.'</span><span class="p">,</span>
+     <span class="s1">'Sharpe ratio of each optimised strategy and of the Group pick minus that of EW in the same experiment, by start of the out-of-sample year.'</span><span class="p">,</span>
      <span class="s1">'notebook 04, section 10.4'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'F26'</span><span class="p">,</span> <span class="s1">'04_universe23_boxplot_sharpe.png'</span><span class="p">,</span> <span class="s1">'Robustness: the strategies on the group</span><span class="se">\'</span><span class="s1">s 23-stock universe'</span><span class="p">,</span>
      <span class="s1">'Net Sharpe ratio of the strategies applied to all 23 stocks (the same stocks as the Group pick), 100 experiments.'</span><span class="p">,</span>
@@ -7979,27 +7982,27 @@ the group can move them as it prefers.</p>
      <span class="s1">'Calendar-year returns of the Group pick, SPY and ^GSPC (2026 = year to date, until 18 September).'</span><span class="p">,</span>
      <span class="s1">'notebook 04, section 12'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="c1"># --- Appendix</span>
-    <span class="p">(</span><span class="s1">'A01'</span><span class="p">,</span> <span class="s1">'normalized_price_history.png'</span><span class="p">,</span> <span class="s1">'Appendix: data'</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">'FA01'</span><span class="p">,</span> <span class="s1">'normalized_price_history.png'</span><span class="p">,</span> <span class="s1">'Appendix: data'</span><span class="p">,</span>
      <span class="s1">'Normalised adjusted price of Walmart (initial value = 1), 2010-2026.'</span><span class="p">,</span> <span class="s1">'notebook 02'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'A02'</span><span class="p">,</span> <span class="s1">'wmt_moving_averages.png'</span><span class="p">,</span> <span class="s1">'Appendix: data'</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">'FA02'</span><span class="p">,</span> <span class="s1">'wmt_moving_averages.png'</span><span class="p">,</span> <span class="s1">'Appendix: data'</span><span class="p">,</span>
      <span class="s1">'Walmart adjusted price with 30-day and 200-day moving averages.'</span><span class="p">,</span> <span class="s1">'notebook 02'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'A03'</span><span class="p">,</span> <span class="s1">'week_log_returns.png'</span><span class="p">,</span> <span class="s1">'Appendix: stylised facts'</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">'FA03'</span><span class="p">,</span> <span class="s1">'week_log_returns.png'</span><span class="p">,</span> <span class="s1">'Appendix: stylised facts'</span><span class="p">,</span>
      <span class="s1">'Weekly log returns of Walmart.'</span><span class="p">,</span> <span class="s1">'notebook 02'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'A04'</span><span class="p">,</span> <span class="s1">'month_log_returns.png'</span><span class="p">,</span> <span class="s1">'Appendix: stylised facts'</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">'FA04'</span><span class="p">,</span> <span class="s1">'month_log_returns.png'</span><span class="p">,</span> <span class="s1">'Appendix: stylised facts'</span><span class="p">,</span>
      <span class="s1">'Monthly log returns of Walmart.'</span><span class="p">,</span> <span class="s1">'notebook 02'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'A05'</span><span class="p">,</span> <span class="s1">'wmt_log_returns_distribution.png'</span><span class="p">,</span> <span class="s1">'Appendix: stylised facts'</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">'FA05'</span><span class="p">,</span> <span class="s1">'wmt_log_returns_distribution.png'</span><span class="p">,</span> <span class="s1">'Appendix: stylised facts'</span><span class="p">,</span>
      <span class="s1">'Distribution of WMT log returns at daily, weekly and monthly frequency.'</span><span class="p">,</span> <span class="s1">'notebook 02'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'A06'</span><span class="p">,</span> <span class="s1">'wmt_log_returns_vs_normal.png'</span><span class="p">,</span> <span class="s1">'Appendix: stylised facts'</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">'FA06'</span><span class="p">,</span> <span class="s1">'wmt_log_returns_vs_normal.png'</span><span class="p">,</span> <span class="s1">'Appendix: stylised facts'</span><span class="p">,</span>
      <span class="s1">'WMT daily log returns compared with simulated normal returns (Gaussian white noise) of the same mean and volatility.'</span><span class="p">,</span>
      <span class="s1">'notebook 02'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'A07'</span><span class="p">,</span> <span class="s1">'04_pairwise_win_rates.png'</span><span class="p">,</span> <span class="s1">'Appendix: head-to-head comparison'</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">'FA07'</span><span class="p">,</span> <span class="s1">'04_pairwise_win_rates.png'</span><span class="p">,</span> <span class="s1">'Appendix: head-to-head comparison'</span><span class="p">,</span>
      <span class="s1">'Head-to-head win rates of the 10 portfolios on Sharpe, return, maximum drawdown, volatility and Sterling, and the median paired Sharpe difference.'</span><span class="p">,</span>
      <span class="s1">'notebook 04, section 9.5'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'A08'</span><span class="p">,</span> <span class="s1">'04_universe23_pairwise_sharpe.png'</span><span class="p">,</span> <span class="s1">'Appendix: the 23-stock universe'</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">'FA08'</span><span class="p">,</span> <span class="s1">'04_universe23_pairwise_sharpe.png'</span><span class="p">,</span> <span class="s1">'Appendix: the 23-stock universe'</span><span class="p">,</span>
      <span class="s1">'Head-to-head Sharpe comparison of the strategies applied to the 23-stock universe.'</span><span class="p">,</span> <span class="s1">'notebook 04, section 11'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'A09'</span><span class="p">,</span> <span class="s1">'04_fullsample_drawdowns.png'</span><span class="p">,</span> <span class="s1">'Appendix: full sample'</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">'FA09'</span><span class="p">,</span> <span class="s1">'04_fullsample_drawdowns.png'</span><span class="p">,</span> <span class="s1">'Appendix: full sample'</span><span class="p">,</span>
      <span class="s1">'Drawdowns of the Group pick, SPY and ^GSPC, 2010-2026.'</span><span class="p">,</span> <span class="s1">'notebook 04, section 12'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'A10'</span><span class="p">,</span> <span class="s1">'04_avg_weight_by_stock.png'</span><span class="p">,</span> <span class="s1">'Appendix: weights'</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">'FA10'</span><span class="p">,</span> <span class="s1">'04_avg_weight_by_stock.png'</span><span class="p">,</span> <span class="s1">'Appendix: weights'</span><span class="p">,</span>
      <span class="s1">'Average weight of each stock when it is drawn, by strategy (equal weight would be 8.3%).'</span><span class="p">,</span> <span class="s1">'notebook 04, section 10.5'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
 <span class="p">]</span>
 
@@ -8040,7 +8043,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=21f09f82">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=30e55448">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8092,7 +8095,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=39dfe686">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=72aeaf2d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8128,7 +8131,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b30db68d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=967e8c30">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8138,7 +8141,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cf63c76d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d02bf0d0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8167,8 +8170,9 @@ Figures in figures/ that are not in the pack: []
 <span class="n">facts_evidence</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s1">'03_facts_summary'</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">load</span><span class="p">(</span><span class="s1">'03_facts_summary'</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
 <span class="n">add_table</span><span class="p">(</span><span class="s1">'T04'</span><span class="p">,</span> <span class="s1">'facts_evidence'</span><span class="p">,</span> <span class="s1">'Evidence for each stylised fact: statistic, p-value and conclusion (WMT, with SPY for comparison)'</span><span class="p">,</span>
           <span class="s1">'2.1 Stylised facts (summary)'</span><span class="p">,</span> <span class="n">facts_evidence</span><span class="p">,</span>
-          <span class="n">note</span><span class="o">=</span><span class="s1">'Tests: 1) Ljung-Box on returns; 2) Jarque-Bera; 3) bootstrap test of skewness; 4) Ljung-Box on |r| and r^2; '</span>
-               <span class="s1">'5) gamma of the GJR-GARCH (Student-t); 6) excess kurtosis and Jarque-Bera of the standardised residuals.'</span><span class="p">,</span>
+          <span class="n">note</span><span class="o">=</span><span class="s1">'p-value column: 1) Ljung-Box on returns at lag 10 (daily), 8 (weekly), 6 (monthly); 2) Jarque-Bera; 3) bootstrap test of skewness; '</span>
+               <span class="s1">'4) Ljung-Box on r^2 (the statistic column shows the Ljung-Box p-value on |r|; Partial = only one of the two is significant); '</span>
+               <span class="s1">'5) gamma of the GJR-GARCH (Student-t); 6) Jarque-Bera of the standardised residuals.'</span><span class="p">,</span>
           <span class="n">pvalue</span><span class="o">=</span><span class="p">[</span><span class="s1">'p-value'</span><span class="p">])</span>
 
 <span class="n">acf</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s1">'03_acf_lags_1_5'</span><span class="p">)</span>
@@ -8228,7 +8232,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1c39d8cf">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=28d4de61">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8238,7 +8242,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=52dc22c8">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5ec4d859">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8250,7 +8254,7 @@ Figures in figures/ that are not in the pack: []
     <span class="p">[</span><span class="s1">'a) Equally weighted (EW)'</span><span class="p">,</span> <span class="s1">'w_i = 1/N (N = 12 stocks drawn in each experiment)'</span><span class="p">,</span> <span class="s1">'nothing'</span><span class="p">,</span> <span class="s1">'Main benchmark of the brief'</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">'b) Markowitz mean-variance'</span><span class="p">,</span> <span class="s1">'max w</span><span class="se">\'</span><span class="s1">μ - (λ/2) w</span><span class="se">\'</span><span class="s1">Σw'</span><span class="p">,</span> <span class="s1">'μ and Σ (trailing 1 year)'</span><span class="p">,</span> <span class="s1">'Risk aversion λ = 3 (sensitivity: λ = 1 and 5)'</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">'c) Global minimum variance (GMV)'</span><span class="p">,</span> <span class="s1">'min w</span><span class="se">\'</span><span class="s1">Σw'</span><span class="p">,</span> <span class="s1">'Σ'</span><span class="p">,</span> <span class="s1">'Ignores expected returns'</span><span class="p">],</span>
-    <span class="p">[</span><span class="s1">'d) Max Sharpe'</span><span class="p">,</span> <span class="s1">'max (w</span><span class="se">\'</span><span class="s1">μ - r_f) / √(w</span><span class="se">\'</span><span class="s1">Σw)'</span><span class="p">,</span> <span class="s1">'μ, Σ and r_f at the rebalancing date'</span><span class="p">,</span> <span class="s1">'Tangency portfolio'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">'d) Max Sharpe'</span><span class="p">,</span> <span class="s1">'max (w</span><span class="se">\'</span><span class="s1">μ - r_f) / √(w</span><span class="se">\'</span><span class="s1">Σw)'</span><span class="p">,</span> <span class="s1">'μ, Σ and r_f (DGS3 of the last trading day before the rebalancing)'</span><span class="p">,</span> <span class="s1">'Tangency portfolio'</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">'e) Inverse volatility'</span><span class="p">,</span> <span class="s1">'w_i ∝ 1/σ_i'</span><span class="p">,</span> <span class="s1">'σ_i only (ignores correlations)'</span><span class="p">,</span> <span class="s1">'No optimiser'</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">'e) Risk parity (ERC)'</span><span class="p">,</span> <span class="s1">'equal risk contributions: w_i (Σw)_i / w</span><span class="se">\'</span><span class="s1">Σw = 1/N'</span><span class="p">,</span> <span class="s1">'Σ (with correlations)'</span><span class="p">,</span> <span class="s1">'Weights &gt; 0'</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">'f) Most diversified'</span><span class="p">,</span> <span class="s1">'max DR = w</span><span class="se">\'</span><span class="s1">σ / √(w</span><span class="se">\'</span><span class="s1">Σw)'</span><span class="p">,</span> <span class="s1">'Σ'</span><span class="p">,</span> <span class="s1">'Highest diversification ratio'</span><span class="p">],</span>
@@ -8264,14 +8268,17 @@ Figures in figures/ that are not in the pack: []
                <span class="s1">'Optimisers: scipy SLSQP (ftol 1e-10, retry with 1e-8; equal weights if both fail - 0 failures in the main run).'</span><span class="p">)</span>
 
 <span class="n">backtest_design</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
-    <span class="p">[</span><span class="s1">'Experiments'</span><span class="p">,</span> <span class="s1">'100 three-year datasets (756 trading days), random seed 2026'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">'Experiments'</span><span class="p">,</span> <span class="s1">'100 contiguous three-year datasets (756 trading days) sampled at random, random seed 2026 (parameters fixed before the results were seen)'</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">'Assets per experiment'</span><span class="p">,</span> <span class="s1">'12 stocks drawn at random from the 23 (only stocks with data in the whole window); the Group pick holds all of them'</span><span class="p">],</span>
-    <span class="p">[</span><span class="s1">'Split'</span><span class="p">,</span> <span class="s1">'Years 1-2: estimation (warm-up); year 3: out-of-sample evaluation (252 days)'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">'Split'</span><span class="p">,</span> <span class="s1">'Days 1-504: estimation period; days 505-756: out-of-sample evaluation (252 days). With the trailing 1-year window, '</span>
+              <span class="s1">'the warm-up weights (held from day 379) use days 127-378 and the evaluation weights use days 253-504 and 379-630; only days 505-756 enter the metrics'</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">'Estimation window'</span><span class="p">,</span> <span class="s1">'Trailing 1 year (252 days), only data available before each rebalancing'</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">'Rebalancing'</span><span class="p">,</span> <span class="s1">'Semi-annual (every 126 trading days), first rebalancing one semester before the evaluation year; weights drift between rebalancings'</span><span class="p">],</span>
-    <span class="p">[</span><span class="s1">'Trading convention'</span><span class="p">,</span> <span class="s1">'Weights set with data up to the close of day t-1 and applied from day t'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">'Trading convention'</span><span class="p">,</span> <span class="s1">'Weights set with data up to the close of day t-1 and traded at that close (market-on-close), so they apply from day t; '</span>
+                           <span class="s1">'a one-day execution lag would be stricter'</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">'Returns'</span><span class="p">,</span> <span class="s1">'Simple returns for portfolios and wealth; log returns only for the stylised facts'</span><span class="p">],</span>
-    <span class="p">[</span><span class="s1">'Transaction costs'</span><span class="p">,</span> <span class="s1">'10 bps on the traded value Σ|Δw| (robustness: 0, 25, 50 bps); SPY buy &amp; hold has no costs'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">'Transaction costs'</span><span class="p">,</span> <span class="s1">'10 bps per unit of two-way turnover Σ|Δw| (switching the whole portfolio costs 20 bps; robustness: 0, 25, 50 bps); '</span>
+                          <span class="s1">'the initial purchase happens at the warm-up rebalancing, before the evaluation year; SPY buy &amp; hold has no costs'</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">'Risk-free rate'</span><span class="p">,</span> <span class="s1">'3-year US Treasury yield (FRED DGS3), daily rate = annual / 252'</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">'Metrics'</span><span class="p">,</span> <span class="s1">'Annualised return (geometric), volatility, Sharpe, Sortino, maximum drawdown, Calmar, Sterling = return / (|MDD| + 10%), turnover, effective N, diversification ratio, CAPM beta and alpha'</span><span class="p">],</span>
     <span class="p">[</span><span class="s1">'Summary across experiments'</span><span class="p">,</span> <span class="s1">'Medians, dispersion (P25/P75), </span><span class="si">% o</span><span class="s1">f experiments that beat EW / the Group pick / SPY, ranks and head-to-head win rates (no significance tests: the windows overlap)'</span><span class="p">],</span>
@@ -8285,7 +8292,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=617d95b3">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4f1bec5b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8295,7 +8302,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=92fbba6b">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cb4fddb0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8358,7 +8365,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=239baca2">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1215fb9e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8368,7 +8375,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e274c7cd">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e7fa3c34">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8402,9 +8409,10 @@ Figures in figures/ that are not in the pack: []
 <span class="n">regime_return</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s1">'04_return_by_regime'</span><span class="p">)</span>
 <span class="n">regime</span><span class="p">[</span><span class="s1">'Return: SPY down'</span><span class="p">]</span> <span class="o">=</span> <span class="n">regime_return</span><span class="p">[</span><span class="s1">'SPY down'</span><span class="p">]</span>
 <span class="n">regime</span><span class="p">[</span><span class="s1">'Return: SPY up'</span><span class="p">]</span> <span class="o">=</span> <span class="n">regime_return</span><span class="p">[</span><span class="s1">'SPY up'</span><span class="p">]</span>
-<span class="n">add_table</span><span class="p">(</span><span class="s1">'T30'</span><span class="p">,</span> <span class="s1">'market_regime'</span><span class="p">,</span> <span class="s1">'Median Sharpe ratio and return in the years in which SPY fell or rose'</span><span class="p">,</span>
+<span class="n">add_table</span><span class="p">(</span><span class="s1">'T30'</span><span class="p">,</span> <span class="s1">'market_regime'</span><span class="p">,</span> <span class="s1">'Median Sharpe ratio and return in the experiments whose out-of-sample year had SPY down or up'</span><span class="p">,</span>
           <span class="s1">'Robustness: dependence on the period'</span><span class="p">,</span> <span class="n">regime</span><span class="p">,</span>
-          <span class="n">note</span><span class="o">=</span><span class="s1">'"SPY down" = evaluation years with a negative SPY return (12 of the 100 experiments).'</span><span class="p">,</span>
+          <span class="n">note</span><span class="o">=</span><span class="s1">'"SPY down" = 12 of the 100 experiments, with a negative SPY return in the out-of-sample year; they overlap and come from about four '</span>
+               <span class="s1">'episodes (2015-16, 2018, 2019-20, 2021-23), so they are far fewer than 12 independent observations.'</span><span class="p">,</span>
           <span class="n">percent</span><span class="o">=</span><span class="p">[</span><span class="s1">'Return: SPY down'</span><span class="p">,</span> <span class="s1">'Return: SPY up'</span><span class="p">])</span>
 
 <span class="c1"># This table has two header rows in the CSV (version, measure): we join them into one name, e.g. "12 stocks (main): Median Sharpe"</span>
@@ -8458,7 +8466,68 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=af885b6e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a0d975ae">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="2.5-Trade-offs-for-the-conclusion-(return,-downside-risk,-concentration,-turnover-and-complexity)">2.5 Trade-offs for the conclusion (return, downside risk, concentration, turnover and complexity)<a class="anchor-link" href="#2.5-Trade-offs-for-the-conclusion-(return,-downside-risk,-concentration,-turnover-and-complexity)">¶</a></h3><p>The brief asks to discuss these trade-offs. This table puts them side by side: the numbers come from tables T15 and T17, the last two
+columns describe what each portfolio needs to estimate and how complex it is to run.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=69b9f17f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">medians_table</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s1">'04_median_metrics'</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'Strategy'</span><span class="p">)</span>
+<span class="n">beats_ew_table</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s1">'04_beats_ew'</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">load</span><span class="p">(</span><span class="s1">'04_beats_ew'</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">complexity</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'EW'</span><span class="p">:</span> <span class="p">(</span><span class="s1">'nothing'</span><span class="p">,</span> <span class="s1">'Low'</span><span class="p">),</span>
+    <span class="s1">'Markowitz (λ=3)'</span><span class="p">:</span> <span class="p">(</span><span class="s1">'expected returns, covariances, λ (optimiser)'</span><span class="p">,</span> <span class="s1">'High'</span><span class="p">),</span>
+    <span class="s1">'GMV'</span><span class="p">:</span> <span class="p">(</span><span class="s1">'covariances (optimiser)'</span><span class="p">,</span> <span class="s1">'Medium'</span><span class="p">),</span>
+    <span class="s1">'Max Sharpe'</span><span class="p">:</span> <span class="p">(</span><span class="s1">'expected returns, covariances, r_f (optimiser)'</span><span class="p">,</span> <span class="s1">'High'</span><span class="p">),</span>
+    <span class="s1">'Inverse vol'</span><span class="p">:</span> <span class="p">(</span><span class="s1">'volatilities only (simple formula)'</span><span class="p">,</span> <span class="s1">'Low'</span><span class="p">),</span>
+    <span class="s1">'Risk parity (ERC)'</span><span class="p">:</span> <span class="p">(</span><span class="s1">'covariances (optimiser)'</span><span class="p">,</span> <span class="s1">'Medium'</span><span class="p">),</span>
+    <span class="s1">'Most diversified'</span><span class="p">:</span> <span class="p">(</span><span class="s1">'covariances (optimiser)'</span><span class="p">,</span> <span class="s1">'Medium'</span><span class="p">),</span>
+    <span class="s1">'Max decorrelation'</span><span class="p">:</span> <span class="p">(</span><span class="s1">'correlations (optimiser)'</span><span class="p">,</span> <span class="s1">'Medium'</span><span class="p">),</span>
+    <span class="s1">'Group pick (23 stocks)'</span><span class="p">:</span> <span class="p">(</span><span class="s1">'nothing (but the stock selection was made with hindsight)'</span><span class="p">,</span> <span class="s1">'Low'</span><span class="p">),</span>
+    <span class="s1">'SPY (buy &amp; hold)'</span><span class="p">:</span> <span class="p">(</span><span class="s1">'nothing (one ETF)'</span><span class="p">,</span> <span class="s1">'Lowest'</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">estimated</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span> <span class="ow">in</span> <span class="n">complexity</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="n">PORTFOLIO</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="s1">'Median return'</span><span class="p">:</span> <span class="n">medians_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">name</span><span class="p">,</span> <span class="s1">'Ann. return'</span><span class="p">],</span>
+        <span class="s1">'Median volatility'</span><span class="p">:</span> <span class="n">medians_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">name</span><span class="p">,</span> <span class="s1">'Ann. volatility'</span><span class="p">],</span>
+        <span class="s1">'Median max drawdown'</span><span class="p">:</span> <span class="n">medians_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">name</span><span class="p">,</span> <span class="s1">'Max drawdown'</span><span class="p">],</span>
+        <span class="s1">'Median Sharpe'</span><span class="p">:</span> <span class="n">medians_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">name</span><span class="p">,</span> <span class="s1">'Sharpe'</span><span class="p">],</span>
+        <span class="s1">'% beats EW (Sharpe)'</span><span class="p">:</span> <span class="n">beats_ew_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">name</span><span class="p">,</span> <span class="s1">'% beats EW: Sharpe'</span><span class="p">]</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">beats_ew_table</span><span class="o">.</span><span class="n">index</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'nan'</span><span class="p">),</span>
+        <span class="s1">'Effective N'</span><span class="p">:</span> <span class="n">medians_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">name</span><span class="p">,</span> <span class="s1">'Effective N'</span><span class="p">],</span>
+        <span class="s1">'Turnover (annual)'</span><span class="p">:</span> <span class="n">medians_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">name</span><span class="p">,</span> <span class="s1">'Turnover (annual)'</span><span class="p">],</span>
+        <span class="s1">'What is estimated'</span><span class="p">:</span> <span class="n">estimated</span><span class="p">,</span>
+        <span class="s1">'Complexity'</span><span class="p">:</span> <span class="n">level</span><span class="p">,</span>
+    <span class="p">})</span>
+<span class="n">tradeoffs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+<span class="n">add_table</span><span class="p">(</span><span class="s1">'T37'</span><span class="p">,</span> <span class="s1">'tradeoffs'</span><span class="p">,</span> <span class="s1">'Trade-offs: return, downside risk, concentration, turnover and complexity (medians, net of 10 bps)'</span><span class="p">,</span>
+          <span class="s1">'6. Conclusions and recommendation'</span><span class="p">,</span> <span class="n">tradeoffs</span><span class="p">,</span>
+          <span class="n">note</span><span class="o">=</span><span class="s1">'Effective N = 1/Σw² (12 = equal weights on the 12 stocks of each experiment; the Group pick holds 22-23). Complexity = how much must be '</span>
+               <span class="s1">'estimated and optimised at each rebalancing.'</span><span class="p">,</span>
+          <span class="n">percent</span><span class="o">=</span><span class="p">[</span><span class="s1">'Median return'</span><span class="p">,</span> <span class="s1">'Median volatility'</span><span class="p">,</span> <span class="s1">'Median max drawdown'</span><span class="p">],</span> <span class="n">whole</span><span class="o">=</span><span class="p">[</span><span class="s1">'% beats EW (Sharpe)'</span><span class="p">],</span> <span class="n">dec1</span><span class="o">=</span><span class="p">[</span><span class="s1">'Effective N'</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6c023a1c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8468,52 +8537,52 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d7e76e9d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1c8b1e3e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">all_assets</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s1">'03_descriptive_stats_all_assets'</span><span class="p">)</span>
-<span class="n">add_table</span><span class="p">(</span><span class="s1">'A01'</span><span class="p">,</span> <span class="s1">'descriptive_all_assets'</span><span class="p">,</span> <span class="s1">'Descriptive statistics of all 25 series (23 stocks, SPY, ^GSPC) at three frequencies'</span><span class="p">,</span>
+<span class="n">add_table</span><span class="p">(</span><span class="s1">'TA01'</span><span class="p">,</span> <span class="s1">'descriptive_all_assets'</span><span class="p">,</span> <span class="s1">'Descriptive statistics of all 25 series (23 stocks, SPY, ^GSPC) at three frequencies'</span><span class="p">,</span>
           <span class="s1">'Appendix: data'</span><span class="p">,</span> <span class="n">all_assets</span><span class="p">,</span>
           <span class="n">percent2</span><span class="o">=</span><span class="p">[</span><span class="s1">'Mean'</span><span class="p">,</span> <span class="s1">'Std. dev.'</span><span class="p">,</span> <span class="s1">'Min'</span><span class="p">,</span> <span class="s1">'Max'</span><span class="p">],</span> <span class="n">percent</span><span class="o">=</span><span class="p">[</span><span class="s1">'Ann. mean'</span><span class="p">,</span> <span class="s1">'Ann. volatility'</span><span class="p">],</span> <span class="n">whole</span><span class="o">=</span><span class="p">[</span><span class="s1">'N'</span><span class="p">],</span> <span class="n">pvalue</span><span class="o">=</span><span class="p">[</span><span class="s1">'JB p-value'</span><span class="p">])</span>
 
 <span class="n">design</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s1">'04_experiment_design'</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'start_index'</span><span class="p">])</span>
-<span class="n">add_table</span><span class="p">(</span><span class="s1">'A02'</span><span class="p">,</span> <span class="s1">'experiment_design'</span><span class="p">,</span> <span class="s1">'The 100 experiments: periods and the 12 stocks drawn (seed 2026)'</span><span class="p">,</span>
+<span class="n">add_table</span><span class="p">(</span><span class="s1">'TA02'</span><span class="p">,</span> <span class="s1">'experiment_design'</span><span class="p">,</span> <span class="s1">'The 100 experiments: periods and the 12 stocks drawn (seed 2026)'</span><span class="p">,</span>
           <span class="s1">'Appendix: backtest design'</span><span class="p">,</span> <span class="n">design</span><span class="p">,</span> <span class="n">whole</span><span class="o">=</span><span class="p">[</span><span class="s1">'Experiment'</span><span class="p">,</span> <span class="s1">'N eligible'</span><span class="p">])</span>
 
 <span class="n">weights</span> <span class="o">=</span> <span class="n">first_column_as_name</span><span class="p">(</span><span class="n">load</span><span class="p">(</span><span class="s1">'04_weights_illustration'</span><span class="p">),</span> <span class="s1">'Stock'</span><span class="p">)</span>
-<span class="n">add_table</span><span class="p">(</span><span class="s1">'A03'</span><span class="p">,</span> <span class="s1">'weights_illustration'</span><span class="p">,</span> <span class="s1">'Illustration: weights of each strategy with the last 12 months of data (23 stocks)'</span><span class="p">,</span>
+<span class="n">add_table</span><span class="p">(</span><span class="s1">'TA03'</span><span class="p">,</span> <span class="s1">'weights_illustration'</span><span class="p">,</span> <span class="s1">'Illustration: weights of each strategy with the last 12 months of data (23 stocks)'</span><span class="p">,</span>
           <span class="s1">'Appendix: strategies'</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="p">[</span><span class="n">column</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">weights</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">column</span> <span class="o">!=</span> <span class="s1">'Stock'</span><span class="p">])</span>
 
 <span class="n">characteristics</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s1">'04_illustration_characteristics'</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'Strategy'</span><span class="p">:</span> <span class="n">PORTFOLIO</span><span class="p">})</span>
-<span class="n">add_table</span><span class="p">(</span><span class="s1">'A04'</span><span class="p">,</span> <span class="s1">'illustration_characteristics'</span><span class="p">,</span> <span class="s1">'Illustration: ex-ante characteristics of each strategy (last 12 months, 23 stocks)'</span><span class="p">,</span>
+<span class="n">add_table</span><span class="p">(</span><span class="s1">'TA04'</span><span class="p">,</span> <span class="s1">'illustration_characteristics'</span><span class="p">,</span> <span class="s1">'Illustration: ex-ante characteristics of each strategy (last 12 months, 23 stocks)'</span><span class="p">,</span>
           <span class="s1">'Appendix: strategies'</span><span class="p">,</span> <span class="n">characteristics</span><span class="p">,</span>
           <span class="n">percent</span><span class="o">=</span><span class="p">[</span><span class="s1">'Exp. return'</span><span class="p">,</span> <span class="s1">'Volatility'</span><span class="p">,</span> <span class="s1">'Max weight'</span><span class="p">],</span> <span class="n">dec1</span><span class="o">=</span><span class="p">[</span><span class="s1">'Effective N (1/Σw²)'</span><span class="p">],</span> <span class="n">whole</span><span class="o">=</span><span class="p">[</span><span class="s1">'N assets with w &gt; 1%'</span><span class="p">])</span>
 
 <span class="n">iv_erc</span> <span class="o">=</span> <span class="n">first_column_as_name</span><span class="p">(</span><span class="n">load</span><span class="p">(</span><span class="s1">'04_iv_vs_erc'</span><span class="p">),</span> <span class="s1">'Stock'</span><span class="p">)</span>
-<span class="n">add_table</span><span class="p">(</span><span class="s1">'A05'</span><span class="p">,</span> <span class="s1">'iv_vs_erc'</span><span class="p">,</span> <span class="s1">'Inverse volatility vs ERC: weights and risk contributions (last 12 months, 23 stocks)'</span><span class="p">,</span>
+<span class="n">add_table</span><span class="p">(</span><span class="s1">'TA05'</span><span class="p">,</span> <span class="s1">'iv_vs_erc'</span><span class="p">,</span> <span class="s1">'Inverse volatility vs ERC: weights and risk contributions (last 12 months, 23 stocks)'</span><span class="p">,</span>
           <span class="s1">'Appendix: strategies'</span><span class="p">,</span> <span class="n">iv_erc</span><span class="p">,</span>
           <span class="n">percent</span><span class="o">=</span><span class="p">[</span><span class="s1">'Weight IV'</span><span class="p">,</span> <span class="s1">'Risk contrib. IV'</span><span class="p">,</span> <span class="s1">'Weight ERC'</span><span class="p">,</span> <span class="s1">'Risk contrib. ERC'</span><span class="p">])</span>
 
 <span class="n">average_weight</span> <span class="o">=</span> <span class="n">first_column_as_name</span><span class="p">(</span><span class="n">load</span><span class="p">(</span><span class="s1">'04_avg_weight_by_stock'</span><span class="p">),</span> <span class="s1">'Stock'</span><span class="p">)</span>
-<span class="n">add_table</span><span class="p">(</span><span class="s1">'A06'</span><span class="p">,</span> <span class="s1">'avg_weight_by_stock'</span><span class="p">,</span> <span class="s1">'Average weight of each stock when it is drawn, by strategy'</span><span class="p">,</span>
+<span class="n">add_table</span><span class="p">(</span><span class="s1">'TA06'</span><span class="p">,</span> <span class="s1">'avg_weight_by_stock'</span><span class="p">,</span> <span class="s1">'Average weight of each stock when it is drawn, by strategy'</span><span class="p">,</span>
           <span class="s1">'Appendix: weights'</span><span class="p">,</span> <span class="n">average_weight</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="p">[</span><span class="n">column</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">average_weight</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">column</span> <span class="o">!=</span> <span class="s1">'Stock'</span><span class="p">])</span>
 
-<span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">metric</span> <span class="ow">in</span> <span class="p">[(</span><span class="s1">'A07'</span><span class="p">,</span> <span class="s1">'04_pairwise_return'</span><span class="p">,</span> <span class="s1">'a higher return'</span><span class="p">),</span>
-                                  <span class="p">(</span><span class="s1">'A08'</span><span class="p">,</span> <span class="s1">'04_pairwise_max_drawdown'</span><span class="p">,</span> <span class="s1">'a smaller maximum drawdown'</span><span class="p">),</span>
-                                  <span class="p">(</span><span class="s1">'A09'</span><span class="p">,</span> <span class="s1">'04_pairwise_volatility'</span><span class="p">,</span> <span class="s1">'a lower volatility'</span><span class="p">),</span>
-                                  <span class="p">(</span><span class="s1">'A10'</span><span class="p">,</span> <span class="s1">'04_pairwise_sterling'</span><span class="p">,</span> <span class="s1">'a higher Sterling ratio'</span><span class="p">)]:</span>
+<span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">metric</span> <span class="ow">in</span> <span class="p">[(</span><span class="s1">'TA07'</span><span class="p">,</span> <span class="s1">'04_pairwise_return'</span><span class="p">,</span> <span class="s1">'a higher return'</span><span class="p">),</span>
+                                  <span class="p">(</span><span class="s1">'TA08'</span><span class="p">,</span> <span class="s1">'04_pairwise_max_drawdown'</span><span class="p">,</span> <span class="s1">'a smaller maximum drawdown'</span><span class="p">),</span>
+                                  <span class="p">(</span><span class="s1">'TA09'</span><span class="p">,</span> <span class="s1">'04_pairwise_volatility'</span><span class="p">,</span> <span class="s1">'a lower volatility'</span><span class="p">),</span>
+                                  <span class="p">(</span><span class="s1">'TA10'</span><span class="p">,</span> <span class="s1">'04_pairwise_sterling'</span><span class="p">,</span> <span class="s1">'a higher Sterling ratio'</span><span class="p">)]:</span>
     <span class="n">table</span> <span class="o">=</span> <span class="n">first_column_as_name</span><span class="p">(</span><span class="n">load</span><span class="p">(</span><span class="n">file_name</span><span class="p">),</span> <span class="s1">'Portfolio A (row)'</span><span class="p">)</span>
     <span class="n">add_table</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">file_name</span><span class="p">[</span><span class="mi">3</span><span class="p">:],</span> <span class="sa">f</span><span class="s1">'Head-to-head: % of experiments in which A (row) has </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s1"> than B (column)'</span><span class="p">,</span>
               <span class="s1">'Appendix: head-to-head comparison'</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span>
               <span class="n">whole</span><span class="o">=</span><span class="p">[</span><span class="n">column</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">column</span> <span class="o">!=</span> <span class="s1">'Portfolio A (row)'</span><span class="p">])</span>
 
 <span class="n">universe23_pairwise</span> <span class="o">=</span> <span class="n">first_column_as_name</span><span class="p">(</span><span class="n">load</span><span class="p">(</span><span class="s1">'04_universe23_pairwise_sharpe'</span><span class="p">),</span> <span class="s1">'Portfolio A (row)'</span><span class="p">)</span>
-<span class="n">add_table</span><span class="p">(</span><span class="s1">'A11'</span><span class="p">,</span> <span class="s1">'universe23_pairwise_sharpe'</span><span class="p">,</span> <span class="s1">'On the 23-stock universe: head-to-head comparison by net Sharpe ratio'</span><span class="p">,</span>
+<span class="n">add_table</span><span class="p">(</span><span class="s1">'TA11'</span><span class="p">,</span> <span class="s1">'universe23_pairwise_sharpe'</span><span class="p">,</span> <span class="s1">'On the 23-stock universe: head-to-head comparison by net Sharpe ratio'</span><span class="p">,</span>
           <span class="s1">'Appendix: the 23-stock universe'</span><span class="p">,</span> <span class="n">universe23_pairwise</span><span class="p">,</span>
           <span class="n">whole</span><span class="o">=</span><span class="p">[</span><span class="n">column</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">universe23_pairwise</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">column</span> <span class="o">!=</span> <span class="s1">'Portfolio A (row)'</span><span class="p">])</span>
 
@@ -8530,14 +8599,14 @@ Figures in figures/ that are not in the pack: []
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Number of tables: 47
+<pre>Number of tables: 48
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e4eab4b9">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ae0ffba7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8551,12 +8620,12 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f1912b5a">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f066456d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">excel_formats</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'percent'</span><span class="p">:</span> <span class="s1">'0.0%'</span><span class="p">,</span> <span class="s1">'percent2'</span><span class="p">:</span> <span class="s1">'0.00%'</span><span class="p">,</span> <span class="s1">'whole'</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span> <span class="s1">'pvalue'</span><span class="p">:</span> <span class="s1">'0.000'</span><span class="p">,</span>
@@ -8683,15 +8752,15 @@ Figures in figures/ that are not in the pack: []
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Saved: ../report_pack/tables/report_tables.xlsx | 47 tables + index sheet
-Saved: 47 CSV files and all_tables.md in ../report_pack/tables/
+<pre>Saved: ../report_pack/tables/report_tables.xlsx | 48 tables + index sheet
+Saved: 48 CSV files and all_tables.md in ../report_pack/tables/
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=49fbe991">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5b622b2b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8701,19 +8770,22 @@ Saved: 47 CSV files and all_tables.md in ../report_pack/tables/
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8f326c5d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b40675af">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'# Report pack - index of figures and tables'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span>
          <span class="s1">'Created automatically by `notebooks/05_report_pack.ipynb` (do not edit by hand: run the notebook again).'</span><span class="p">,</span>
          <span class="s1">'Figures are in `figures/` (numbered in the order of the report); tables are in `tables/report_tables.xlsx` '</span>
          <span class="s1">'(one sheet per table), `tables/&lt;number&gt;_&lt;name&gt;.csv` and `tables/all_tables.md`.'</span><span class="p">,</span>
-         <span class="s1">'The written guide with the key findings and numbers is `REPORT_NOTES.md`.'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span>
+         <span class="s1">'The written guide with the key findings and numbers is `REPORT_NOTES.md`.'</span><span class="p">,</span>
+         <span class="s1">'F = figure and T = table for the main text; FA and TA = appendix. The "report section" labels follow the numbering of the '</span>
+         <span class="s1">'group</span><span class="se">\'</span><span class="s1">s draft (1. universe and data, 2.1 stylised facts, 3. strategies, backtest and results); in `REPORT_NOTES.md` the draft</span><span class="se">\'</span><span class="s1">s '</span>
+         <span class="s1">'section 3 is split into methods (section 3), results (section 4) and robustness (section 5).'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span>
          <span class="s1">'## Figures'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span>
          <span class="s1">'| No. | File | Report section | Caption (suggested) | Made by | Main / Appendix |'</span><span class="p">,</span>
          <span class="s1">'|---|---|---|---|---|---|'</span><span class="p">]</span>
@@ -8747,18 +8819,18 @@ Saved: 47 CSV files and all_tables.md in ../report_pack/tables/
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Saved: ../report_pack/INDEX.md
-38 figures and 47 tables in the report pack
+38 figures and 48 tables in the report pack
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7e70b066">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=98022e98">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># A quick look at the most important table of the report (T15), as it will appear in the report</span>

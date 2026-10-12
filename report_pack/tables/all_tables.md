@@ -108,7 +108,7 @@ Note: Based on the tests of tables T04-T12 (5% significance level).
 | SPY | Monthly | 5. Leverage effect | gamma = 0.571 | 0.583 | Not significant |
 | SPY | Monthly | 6. Conditional non-normality | z excess kurtosis = 0.33 | <0.001 | Supported |
 
-Note: Tests: 1) Ljung-Box on returns; 2) Jarque-Bera; 3) bootstrap test of skewness; 4) Ljung-Box on |r| and r^2; 5) gamma of the GJR-GARCH (Student-t); 6) excess kurtosis and Jarque-Bera of the standardised residuals.
+Note: p-value column: 1) Ljung-Box on returns at lag 10 (daily), 8 (weekly), 6 (monthly); 2) Jarque-Bera; 3) bootstrap test of skewness; 4) Ljung-Box on r^2 (the statistic column shows the Ljung-Box p-value on |r|; Partial = only one of the two is significant); 5) gamma of the GJR-GARCH (Student-t); 6) Jarque-Bera of the standardised residuals.
 
 ## T05. Autocorrelation of log returns, lags 1 to 5
 
@@ -267,7 +267,7 @@ Note: z = residual / conditional volatility. Excess kurtosis > 0 and a small Jar
 | a) Equally weighted (EW) | w_i = 1/N (N = 12 stocks drawn in each experiment) | nothing | Main benchmark of the brief |
 | b) Markowitz mean-variance | max w'μ - (λ/2) w'Σw | μ and Σ (trailing 1 year) | Risk aversion λ = 3 (sensitivity: λ = 1 and 5) |
 | c) Global minimum variance (GMV) | min w'Σw | Σ | Ignores expected returns |
-| d) Max Sharpe | max (w'μ - r_f) / √(w'Σw) | μ, Σ and r_f at the rebalancing date | Tangency portfolio |
+| d) Max Sharpe | max (w'μ - r_f) / √(w'Σw) | μ, Σ and r_f (DGS3 of the last trading day before the rebalancing) | Tangency portfolio |
 | e) Inverse volatility | w_i ∝ 1/σ_i | σ_i only (ignores correlations) | No optimiser |
 | e) Risk parity (ERC) | equal risk contributions: w_i (Σw)_i / w'Σw = 1/N | Σ (with correlations) | Weights > 0 |
 | f) Most diversified | max DR = w'σ / √(w'Σw) | Σ | Highest diversification ratio |
@@ -283,14 +283,14 @@ Note: Common constraints for every strategy: long-only (w_i >= 0), fully investe
 
 | Item | Convention |
 |---|---|
-| Experiments | 100 three-year datasets (756 trading days), random seed 2026 |
+| Experiments | 100 contiguous three-year datasets (756 trading days) sampled at random, random seed 2026 (parameters fixed before the results were seen) |
 | Assets per experiment | 12 stocks drawn at random from the 23 (only stocks with data in the whole window); the Group pick holds all of them |
-| Split | Years 1-2: estimation (warm-up); year 3: out-of-sample evaluation (252 days) |
+| Split | Days 1-504: estimation period; days 505-756: out-of-sample evaluation (252 days). With the trailing 1-year window, the warm-up weights (held from day 379) use days 127-378 and the evaluation weights use days 253-504 and 379-630; only days 505-756 enter the metrics |
 | Estimation window | Trailing 1 year (252 days), only data available before each rebalancing |
 | Rebalancing | Semi-annual (every 126 trading days), first rebalancing one semester before the evaluation year; weights drift between rebalancings |
-| Trading convention | Weights set with data up to the close of day t-1 and applied from day t |
+| Trading convention | Weights set with data up to the close of day t-1 and traded at that close (market-on-close), so they apply from day t; a one-day execution lag would be stricter |
 | Returns | Simple returns for portfolios and wealth; log returns only for the stylised facts |
-| Transaction costs | 10 bps on the traded value Σ\|Δw\| (robustness: 0, 25, 50 bps); SPY buy & hold has no costs |
+| Transaction costs | 10 bps per unit of two-way turnover Σ\|Δw\| (switching the whole portfolio costs 20 bps; robustness: 0, 25, 50 bps); the initial purchase happens at the warm-up rebalancing, before the evaluation year; SPY buy & hold has no costs |
 | Risk-free rate | 3-year US Treasury yield (FRED DGS3), daily rate = annual / 252 |
 | Metrics | Annualised return (geometric), volatility, Sharpe, Sortino, maximum drawdown, Calmar, Sterling = return / (\|MDD\| + 10%), turnover, effective N, diversification ratio, CAPM beta and alpha |
 | Summary across experiments | Medians, dispersion (P25/P75), % of experiments that beat EW / the Group pick / SPY, ranks and head-to-head win rates (no significance tests: the windows overlap) |
@@ -555,7 +555,7 @@ Note: Regression of the daily excess returns of each portfolio on those of SPY i
 | Group pick (23 stocks) | 1.96 | 2.25 | 1.62 |
 | SPY (buy & hold) | 1.47 | 1.93 | 0.77 |
 
-## T30. Median Sharpe ratio and return in the years in which SPY fell or rose
+## T30. Median Sharpe ratio and return in the experiments whose out-of-sample year had SPY down or up
 
 *Report section: Robustness: dependence on the period*
 
@@ -572,7 +572,7 @@ Note: Regression of the daily excess returns of each portfolio on those of SPY i
 | Group pick (23 stocks) | 0.06 | 1.97 | 2.1% | 38.3% |
 | SPY (buy & hold) | -0.30 | 1.35 | -5.4% | 20.4% |
 
-Note: "SPY down" = evaluation years with a negative SPY return (12 of the 100 experiments).
+Note: "SPY down" = 12 of the 100 experiments, with a negative SPY return in the out-of-sample year; they overlap and come from about four episodes (2015-16, 2018, 2019-20, 2021-23), so they are far fewer than 12 independent observations.
 
 ## T31. Do the results depend on the stocks drawn? Main draw, new draw and all eligible stocks
 
@@ -672,7 +672,26 @@ Note: The 23 stocks were chosen in 2026, so this is NOT out-of-sample evidence. 
 
 Note: The brief asks to document failures. Each failed SLSQP optimisation is retried once with a looser tolerance; if it fails again, equal weights are used and the failure is logged in results/04_optimisation_failures.csv.
 
-## A01. Descriptive statistics of all 25 series (23 stocks, SPY, ^GSPC) at three frequencies
+## T37. Trade-offs: return, downside risk, concentration, turnover and complexity (medians, net of 10 bps)
+
+*Report section: 6. Conclusions and recommendation*
+
+| Portfolio | Median return | Median volatility | Median max drawdown | Median Sharpe | % beats EW (Sharpe) | Effective N | Turnover (annual) | What is estimated | Complexity |
+|---|---|---|---|---|---|---|---|---|---|
+| EW | 31.2% | 16.9% | -11.1% | 1.81 |  | 12.0 | 0.27 | nothing | Low |
+| Markowitz (λ=3) | 39.8% | 34.5% | -23.5% | 1.23 | 21 | 1.5 | 2.21 | expected returns, covariances, λ (optimiser) | High |
+| GMV | 17.3% | 12.8% | -9.8% | 1.34 | 31 | 4.4 | 0.95 | covariances (optimiser) | Medium |
+| Max Sharpe | 27.9% | 20.8% | -14.4% | 1.29 | 34 | 2.8 | 2.14 | expected returns, covariances, r_f (optimiser) | High |
+| Inverse vol | 25.7% | 14.7% | -9.8% | 1.78 | 47 | 10.9 | 0.27 | volatilities only (simple formula) | Low |
+| Risk parity (ERC) | 26.5% | 14.4% | -10.0% | 1.80 | 51 | 10.7 | 0.31 | covariances (optimiser) | Medium |
+| Most diversified | 28.7% | 15.2% | -10.7% | 1.70 | 47 | 6.3 | 0.84 | covariances (optimiser) | Medium |
+| Max decorrelation | 33.3% | 19.0% | -13.1% | 1.66 | 41 | 7.1 | 0.86 | correlations (optimiser) | Medium |
+| Group pick (23 stocks) | 35.6% | 15.8% | -10.1% | 1.70 | 62 | 23.0 | 0.28 | nothing (but the stock selection was made with hindsight) | Low |
+| SPY (buy & hold) | 17.7% | 14.0% | -9.4% | 1.13 | 15 |  | 0.00 | nothing (one ETF) | Lowest |
+
+Note: Effective N = 1/Σw² (12 = equal weights on the 12 stocks of each experiment; the Group pick holds 22-23). Complexity = how much must be estimated and optimised at each rebalancing.
+
+## TA01. Descriptive statistics of all 25 series (23 stocks, SPY, ^GSPC) at three frequencies
 
 *Report section: Appendix: data*
 
@@ -754,7 +773,7 @@ Note: The brief asks to document failures. Each failed SLSQP optimisation is ret
 | ^GSPC | Weekly | 871 | 0.22% | 2.25% | -16.23% | 11.42% | -0.77 | 6.07 | 11.3% | 16.2% | <0.001 |
 | ^GSPC | Monthly | 199 | 0.99% | 4.14% | -13.37% | 11.94% | -0.49 | 0.68 | 11.9% | 14.4% | 0.003 |
 
-## A02. The 100 experiments: periods and the 12 stocks drawn (seed 2026)
+## TA02. The 100 experiments: periods and the 12 stocks drawn (seed 2026)
 
 *Report section: Appendix: backtest design*
 
@@ -861,7 +880,7 @@ Note: The brief asks to document failures. Each failed SLSQP optimisation is ret
 | 99 | 2014-10-13 | 2016-10-12 | 2017-10-11 | 23 | AVGO, COST, GE, GOOGL, JPM, MSFT, MU, NEE, NVDA, T, V, XOM |
 | 100 | 2020-05-12 | 2022-05-11 | 2023-05-11 | 23 | AVGO, CAT, COST, GE, GOOGL, MSFT, MU, NEE, NVDA, TSLA, V, WMT |
 
-## A03. Illustration: weights of each strategy with the last 12 months of data (23 stocks)
+## TA03. Illustration: weights of each strategy with the last 12 months of data (23 stocks)
 
 *Report section: Appendix: strategies*
 
@@ -891,7 +910,7 @@ Note: The brief asks to document failures. Each failed SLSQP optimisation is ret
 | WELL | 4.3% | 0.0% | 4.2% | 8.4% | 5.3% | 5.2% | 6.5% | 5.3% |
 | LIN | 4.3% | 0.0% | 8.0% | 0.0% | 6.3% | 6.3% | 6.5% | 4.4% |
 
-## A04. Illustration: ex-ante characteristics of each strategy (last 12 months, 23 stocks)
+## TA04. Illustration: ex-ante characteristics of each strategy (last 12 months, 23 stocks)
 
 *Report section: Appendix: strategies*
 
@@ -906,7 +925,7 @@ Note: The brief asks to document failures. Each failed SLSQP optimisation is ret
 | Most diversified | 26.2% | 8.2% | 2.60 | 13.7 | 15.3% | 19 | 3.45 |
 | Max decorrelation | 41.8% | 12.6% | 2.94 | 14.9 | 14.0% | 19 | 2.76 |
 
-## A05. Inverse volatility vs ERC: weights and risk contributions (last 12 months, 23 stocks)
+## TA05. Inverse volatility vs ERC: weights and risk contributions (last 12 months, 23 stocks)
 
 *Report section: Appendix: strategies*
 
@@ -936,7 +955,7 @@ Note: The brief asks to document failures. Each failed SLSQP optimisation is ret
 | WELL | 5.3% | 4.0% | 5.2% | 4.3% | 0.06 |
 | LIN | 6.3% | 3.6% | 6.3% | 4.3% | 0.05 |
 
-## A06. Average weight of each stock when it is drawn, by strategy
+## TA06. Average weight of each stock when it is drawn, by strategy
 
 *Report section: Appendix: weights*
 
@@ -966,7 +985,7 @@ Note: The brief asks to document failures. Each failed SLSQP optimisation is ret
 | WELL | 8.3% | 8.2% | 11.1% | 11.8% | 8.8% | 10.3% | 15.8% | 14.3% |
 | LIN | 8.3% | 0.2% | 8.9% | 1.7% | 10.3% | 9.0% | 2.8% | 2.1% |
 
-## A07. Head-to-head: % of experiments in which A (row) has a higher return than B (column)
+## TA07. Head-to-head: % of experiments in which A (row) has a higher return than B (column)
 
 *Report section: Appendix: head-to-head comparison*
 
@@ -983,7 +1002,7 @@ Note: The brief asks to document failures. Each failed SLSQP optimisation is ret
 | Group pick (23 stocks) | 49 | 43 | 80 | 50 | 71 | 70 | 59 | 42 |  | 96 |
 | SPY (buy & hold) | 12 | 25 | 49 | 28 | 15 | 14 | 14 | 13 | 4 |  |
 
-## A08. Head-to-head: % of experiments in which A (row) has a smaller maximum drawdown than B (column)
+## TA08. Head-to-head: % of experiments in which A (row) has a smaller maximum drawdown than B (column)
 
 *Report section: Appendix: head-to-head comparison*
 
@@ -1000,7 +1019,7 @@ Note: The brief asks to document failures. Each failed SLSQP optimisation is ret
 | Group pick (23 stocks) | 55 | 89 | 34 | 68 | 28 | 23 | 50 | 70 |  | 38 |
 | SPY (buy & hold) | 63 | 89 | 44 | 76 | 41 | 42 | 54 | 71 | 62 |  |
 
-## A09. Head-to-head: % of experiments in which A (row) has a lower volatility than B (column)
+## TA09. Head-to-head: % of experiments in which A (row) has a lower volatility than B (column)
 
 *Report section: Appendix: head-to-head comparison*
 
@@ -1017,7 +1036,7 @@ Note: The brief asks to document failures. Each failed SLSQP optimisation is ret
 | Group pick (23 stocks) | 56 | 100 | 1 | 80 | 14 | 14 | 35 | 71 |  | 4 |
 | SPY (buy & hold) | 87 | 100 | 19 | 86 | 56 | 54 | 64 | 88 | 96 |  |
 
-## A10. Head-to-head: % of experiments in which A (row) has a higher Sterling ratio than B (column)
+## TA10. Head-to-head: % of experiments in which A (row) has a higher Sterling ratio than B (column)
 
 *Report section: Appendix: head-to-head comparison*
 
@@ -1034,7 +1053,7 @@ Note: The brief asks to document failures. Each failed SLSQP optimisation is ret
 | Group pick (23 stocks) | 54 | 60 | 73 | 54 | 65 | 64 | 59 | 50 |  | 94 |
 | SPY (buy & hold) | 13 | 33 | 50 | 35 | 12 | 12 | 16 | 14 | 6 |  |
 
-## A11. On the 23-stock universe: head-to-head comparison by net Sharpe ratio
+## TA11. On the 23-stock universe: head-to-head comparison by net Sharpe ratio
 
 *Report section: Appendix: the 23-stock universe*
 
