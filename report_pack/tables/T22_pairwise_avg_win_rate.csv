@@ -1,0 +1,11 @@
+﻿Portfolio,Avg % won: Sharpe,Avg % won: Ann. return,Avg % won: Max drawdown,Avg % won: Ann. volatility,Avg % won: Sterling,Rivals beaten in > 50% (Sharpe)
+Group pick (23 stocks),68,62,51,42,64,9
+Risk parity (ERC),65,47,73,74,54,8
+EW,61,61,47,37,61,7
+Inverse vol,59,44,71,70,50,6
+Most diversified,58,53,57,60,54,5
+Max decorrelation,55,65,33,27,62,4
+Max Sharpe,40,56,31,21,50,3
+GMV,38,29,69,96,33,2
+Markowitz (λ=3),29,62,9,1,50,0
+SPY (buy & hold),27,19,60,72,21,1

@@ -1,0 +1,7 @@
+﻿Asset,Frequency,Skewness,Skewtest p (assumes normal tails),Bootstrap 95% CI low,Bootstrap 95% CI high,Bootstrap p (skew >= 0),N below -3σ,N above +3σ,Quantile 1%,Quantile 99%
+WMT,Daily,-0.255,<0.001,-1.108,0.603,0.273,30,28,-3.25%,3.17%
+WMT,Weekly,-0.853,<0.001,-1.768,0.003,0.026,9,6,-7.95%,7.67%
+WMT,Monthly,-0.360,0.037,-0.756,0.145,0.083,2,0,-12.97%,12.08%
+SPY,Daily,-0.555,<0.001,-1.404,0.277,0.113,39,21,-3.08%,2.61%
+SPY,Weekly,-0.740,<0.001,-1.510,0.014,0.029,8,4,-6.05%,5.69%
+SPY,Monthly,-0.491,0.005,-0.851,-0.112,0.005,1,0,-9.23%,10.33%

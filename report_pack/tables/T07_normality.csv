@@ -1,0 +1,7 @@
+﻿Asset,Frequency,Excess kurtosis,Kurtosis test p-value,Jarque-Bera,JB p-value,% |z|>3 (data),% |z|>3 (normal)
+WMT,Daily,14.32,<0.001,35953.8,<0.001,1.38,0.27
+WMT,Weekly,6.67,<0.001,1722.1,<0.001,1.72,0.27
+WMT,Monthly,0.84,0.036,10.1,0.006,1.01,0.27
+SPY,Daily,12.40,<0.001,27147.2,<0.001,1.43,0.27
+SPY,Weekly,5.83,<0.001,1312.1,<0.001,1.38,0.27
+SPY,Monthly,0.67,0.071,11.7,0.003,0.50,0.27

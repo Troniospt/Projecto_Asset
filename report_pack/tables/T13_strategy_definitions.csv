@@ -1,0 +1,11 @@
+﻿Strategy,Objective / allocation rule,What is estimated,Parameters and notes
+a) Equally weighted (EW),w_i = 1/N (N = 12 stocks drawn in each experiment),nothing,Main benchmark of the brief
+b) Markowitz mean-variance,max w'μ - (λ/2) w'Σw,μ and Σ (trailing 1 year),Risk aversion λ = 3 (sensitivity: λ = 1 and 5)
+c) Global minimum variance (GMV),min w'Σw,Σ,Ignores expected returns
+d) Max Sharpe,max (w'μ - r_f) / √(w'Σw),"μ, Σ and r_f (DGS3 of the last trading day before the rebalancing)",Tangency portfolio
+e) Inverse volatility,w_i ∝ 1/σ_i,σ_i only (ignores correlations),No optimiser
+e) Risk parity (ERC),equal risk contributions: w_i (Σw)_i / w'Σw = 1/N,Σ (with correlations),Weights > 0
+f) Most diversified,max DR = w'σ / √(w'Σw),Σ,Highest diversification ratio
+f) Max decorrelation,min w'Cw (C = correlation matrix),correlations only,Minimum variance as if all volatilities were equal
+Group pick (23 stocks),w_i = 1/N over all the group's stocks with data (23; 22 before TSLA),nothing,The group's own selection; same rebalancing and costs
+SPY (buy & hold),bought at the start of the evaluation year and held,nothing,Market benchmark (investable S&P 500 ETF); no costs

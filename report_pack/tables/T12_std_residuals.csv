@@ -1,0 +1,13 @@
+﻿Asset,Frequency,Innovations,z skewness,z excess kurtosis,z JB p-value,LB z p-value,LB z² p-value
+WMT,Daily,normal,-0.64,15.02,<0.001,0.128,0.988
+WMT,Daily,t,-0.66,15.67,<0.001,0.141,0.962
+WMT,Weekly,normal,-0.78,4.62,<0.001,0.188,0.659
+WMT,Weekly,t,-0.99,7.13,<0.001,0.297,1.000
+WMT,Monthly,normal,-0.25,0.53,0.110,0.751,0.828
+WMT,Monthly,t,-0.32,0.66,0.029,0.756,0.885
+SPY,Daily,normal,-0.73,2.60,<0.001,0.509,0.537
+SPY,Daily,t,-0.79,3.17,<0.001,0.353,0.662
+SPY,Weekly,normal,-0.84,2.32,<0.001,0.448,0.850
+SPY,Weekly,t,-0.85,2.34,<0.001,0.384,0.889
+SPY,Monthly,normal,-0.75,0.26,<0.001,0.633,0.834
+SPY,Monthly,t,-0.78,0.33,<0.001,0.599,0.794
