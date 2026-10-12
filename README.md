@@ -3,7 +3,8 @@
 NOVA IMS · Postgraduate Programme in Data Science for Finance
 
 Goal: study the empirical properties of stock returns (stylised facts) and compare
-8 portfolio construction strategies with a *walk-forward* backtest of 100 experiments.
+8 portfolio construction strategies with a *walk-forward* backtest of 100 experiments, together with the group's own
+23-stock pick (equally weighted) and SPY.
 
 ## Repository structure
 
@@ -12,7 +13,7 @@ Goal: study the empirical properties of stock returns (stylised facts) and compa
 | `notebooks/01_data_collection.ipynb` | Universe (23 S&P 500 stocks + SPY + ^GSPC), download from Yahoo Finance, data treatment (dividends, splits, currency, calendar, missing data), daily/weekly/monthly log returns. Also as `.html` |
 | `notebooks/02_walmart_eda.ipynb` | Exploratory analysis of Walmart (WMT): prices, histograms, Q-Q plots, quantiles, VaR, ACF, comparison with SPY/^GSPC. Also as `.html` |
 | `notebooks/03_stylised_facts_garch.ipynb` | The 6 stylised facts of WMT at daily, weekly and monthly frequency (Ljung-Box, Jarque-Bera, skewness with bootstrap, ARCH-LM, GJR-GARCH, standardised residuals), with SPY as a comparison; appendix (section 10) with descriptive statistics and Jarque-Bera p-values of all 25 series at the 3 frequencies. Also as `.html` |
-| `notebooks/04_strategies_backtest.ipynb` | The 8 strategies, illustration with 23 stocks, backtest of 100 experiments, metrics, robustness (costs, quarterly rebalancing, Markowitz λ, periods, stocks), conclusions. Executed with the real FRED DGS3 series (extracted 8 October 2026). Also as `.html` |
+| `notebooks/04_strategies_backtest.ipynb` | The 8 strategies, illustration with 23 stocks, backtest of 100 experiments, metrics, robustness (costs, quarterly rebalancing, Markowitz λ, periods, stocks), conclusions. The **Group pick (23 stocks)** — the group's own 23 stocks, each equally weighted (1/23; 1/22 before TSLA has data) and rebalanced like every strategy — is a 10th portfolio in every comparison, next to the 8 strategies and SPY (it differs from strategy a) EW, which applies 1/N to the 12 stocks drawn in each experiment). Also: head-to-head (pairwise) win rates of all 10 portfolios (section 9.5), the 8 strategies on the group's 23-stock universe (section 11) and the Group pick over the full sample 2010-2026 (section 12, biased by hindsight). Executed with the real FRED DGS3 series (extracted 8 October 2026). Also as `.html` |
 | `notebooks/data/` | Prices and returns produced by notebook 01 (`clean_prices.csv`, `daily_log_returns.csv`, `weekly_log_returns.csv`, `monthly_log_returns.csv`) and the daily WMT history used by notebook 02 (`walmart_history.csv`: open, high, low, close, adjusted close, volume, dividends and splits). These are the frozen data of the report: do not delete them. The risk-free rate (`risk_free_DGS3.csv`) is created by notebook 04 |
 | `figures/` | All charts (PNG). Those from notebook 02 have no prefix, those from notebook 03 start with `03_`, those from notebook 04 with `04_` |
 | `results/` | All tables as CSV and as Excel (`03_stylised_facts.xlsx`, `04_strategies_backtest.xlsx`) |
@@ -69,7 +70,7 @@ The paths in the code are relative to that folder (`data/`, `../figures/`, `../r
      again. The file must contain the full series (starting before 2010); the notebook stops with a clear message if the
      series does not cover the sample or is constant. Write down the download date: it is the extraction date of the rate.
    - Before running, **close in Excel** the files in `results/` (on Windows, Excel locks them → `PermissionError`).
-   - At the end, section 13 prints an automatic summary with the numbers of your run; section 14 has the conclusions and
+   - At the end, section 15 prints an automatic summary with the numbers of your run; section 16 has the conclusions and
      the recommendation (check the sentences about the Sharpe ratio against those numbers).
    - Then export the HTML (`jupyter nbconvert --to html 04_strategies_backtest.ipynb`) and **commit** the executed
      notebook, its HTML, `figures/04_*`, `results/04_*`, `data/risk_free_DGS3.csv` and `data/risk_free_DGS3_info.txt`.
@@ -92,7 +93,10 @@ decimal commas, and the notebooks can no longer read them). To copy tables into 
   2.5). The simulated normal series in notebook 02 is identical up to the last floating-point digit.
 - **Library versions** — what was tested (clean copies of the project, notebooks 02-04):
   - with the versions **pinned in `requirements.txt`**, Python 3.11 and Python 3.13 gave **bit-for-bit identical** results
-    (all 33 tables, every Excel value, every printed number and all 29 figures; 0 optimisation failures);
+    (all 33 tables, every Excel value, every printed number and all 29 figures that existed at the time of that test; 0 optimisation
+    failures). After the Group pick, head-to-head, 23-stock-universe and full-sample sections were added, notebook 04 was run again
+    in both environments: its 34 tables, every value of its 33-sheet Excel workbook, its 21 figures and every printed number (except
+    the run time) were again bit-for-bit identical;
   - with much newer or older libraries, notebook 04 gave the same tables at the precision shown, and in notebook 03 only a few
     GJR-GARCH estimates of the (unreliable) weekly-normal and monthly models changed in the 4th decimal place.
 
@@ -155,6 +159,7 @@ git push origin Miguel_seco          # push only your own branch
 | Costs | 10 bps on Σ\|Δw\| (robustness: 0, 25, 50 bps) |
 | Risk-free rate | FRED DGS3 (3-year Treasury), daily rate = annual / 252 |
 | Benchmarks | Equally weighted and SPY buy & hold |
+| Group pick | the group's 23 stocks (all the eligible ones: 22 before TSLA has data), equal weights, same rebalancing, warm-up, costs, evaluation year and metrics as the strategies; compared as a 10th portfolio |
 | Markowitz | risk aversion λ = 3 (sensitivity with λ = 1 and 5) |
 
 ## Mapping to the report
@@ -170,9 +175,12 @@ git push origin Miguel_seco          # push only your own branch
 | 2.1.5 Leverage effect | notebook 03, section 7 — `03_news_impact_curve.png`, `03_leverage_correlation.png`, `03_conditional_volatility_wmt.png`, `03_leverage_correlation.csv`, `03_gjr_garch.csv` |
 | 2.1.6 Conditional non-normality | notebook 03, section 8 — `03_qqplot_std_residuals_wmt.png`, `03_std_residuals.csv` |
 | Summary of the stylised facts | notebook 03, section 9 — `03_facts_summary_wmt.csv` |
-| 3. Strategies (objectives and constraints) | notebook 04, sections 3–4 — `04_weights_illustration.png`, `04_efficient_frontier.png`, `04_risk_contributions_iv_vs_erc.png` |
+| 3. Strategies (objectives and constraints) | notebook 04, sections 3–4 — `04_weights_illustration.png`, `04_efficient_frontier.png`, `04_risk_contributions_iv_vs_erc.png` (section 3 also defines the Group pick and why it differs from EW) |
 | 3. Backtest design | notebook 04, sections 5–7 — `04_experiment_design.png`, `04_experiment_design.csv` |
-| 3. Backtest results | notebook 04, section 9 — `04_median_metrics.csv`, `04_dispersion.csv`, `04_beats_ew.csv`, `04_rankings.csv`, `04_boxplots_metrics.png` |
+| 3. Backtest results (10 portfolios: 8 strategies, Group pick, SPY) | notebook 04, section 9 — `04_median_metrics.csv`, `04_dispersion.csv`, `04_beats_ew.csv`, `04_beats_group_pick.csv`, `04_beats_spy.csv`, `04_rankings.csv`, `04_boxplots_metrics.png`, `04_risk_return_and_beats_ew.png`, `04_beats_group_pick_and_spy.png`, `04_turnover_costs_concentration.png`, `04_wealth_example.png` |
+| 3. Head-to-head comparison of all portfolios | notebook 04, section 9.5 — `04_pairwise_sharpe.csv`, `04_pairwise_return.csv`, `04_pairwise_max_drawdown.csv`, `04_pairwise_volatility.csv`, `04_pairwise_sterling.csv`, `04_pairwise_median_sharpe_diff.csv`, `04_pairwise_avg_win_rate.csv`, `04_pairwise_win_rates.png` (the six matrices), `04_pairwise_sharpe.png` (the Sharpe matrix on its own, larger: easier to read in the report) |
 | Robustness (costs, quarterly, λ, period, stocks) | notebook 04, section 10 — `04_sharpe_by_cost.csv`, `04_rebalance_semiann_vs_quarterly.csv`, `04_lambda_sensitivity.csv`, `04_sharpe_by_regime.csv`, `04_subset_comparison.csv` |
-| Optimisation failures | notebook 04 — `04_optimisation_failures.csv` (equal weights are used at those rebalancing dates) |
-| Limitations, conclusions and recommendation | notebook 04, sections 12–14 |
+| The strategies on the group's 23-stock universe (would an optimiser have beaten the Group pick?) | notebook 04, section 11 — `04_universe23_median_metrics.csv`, `04_universe23_beats_group_pick.csv`, `04_universe23_pairwise_sharpe.csv`, `04_universe23_boxplot_sharpe.png`, `04_universe23_pairwise_sharpe.png` |
+| The Group pick over the full sample 2010-2026 vs SPY and ^GSPC (descriptive only: biased by hindsight) | notebook 04, section 12 — `04_fullsample_metrics.csv`, `04_calendar_year_returns.csv`, `04_fullsample_wealth.png`, `04_fullsample_drawdowns.png`, `04_calendar_year_returns.png` |
+| Optimisation failures | notebook 04, section 13 — `04_optimisation_failures.csv` (equal weights are used at those rebalancing dates) |
+| Limitations, conclusions and recommendation | notebook 04, sections 14–16 (automatic summary of the numbers: section 15) |
