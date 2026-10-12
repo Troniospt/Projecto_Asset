@@ -1,0 +1,7 @@
+﻿Asset,Frequency,Lag,LB |r| p-value,LB r² p-value,ARCH-LM stat,ARCH-LM p-value
+WMT,Daily,10,<0.001,<0.001,235.90,<0.001
+WMT,Weekly,8,<0.001,0.188,8.90,0.351
+WMT,Monthly,6,0.848,0.672,3.33,0.767
+SPY,Daily,10,<0.001,<0.001,1214.48,<0.001
+SPY,Weekly,8,<0.001,<0.001,248.43,<0.001
+SPY,Monthly,6,0.005,<0.001,28.15,<0.001

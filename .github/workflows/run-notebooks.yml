@@ -1,5 +1,5 @@
 # "Run workflow" button: runs the notebooks on GitHub's servers and commits the results
-# (executed notebooks, HTML, figures/ and results/) to the branch you chose.
+# (executed notebooks, HTML, figures/, results/ and report_pack/) to the branch you chose.
 # Where: repository page -> Actions -> "Run notebooks" -> Run workflow.
 name: Run notebooks
 
@@ -7,14 +7,15 @@ on:
   workflow_dispatch:
     inputs:
       notebooks:
-        description: "Notebooks to run (01 is never run: it would download new Yahoo prices)"
+        description: "Notebooks to run (01 is never run: it would download new Yahoo prices; 05 rebuilds report_pack/ from the results)"
         type: choice
         options:
-          - "02 03 04"
-          - "04"
+          - "02 03 04 05"
+          - "04 05"
+          - "05"
           - "03"
           - "02"
-        default: "02 03 04"
+        default: "02 03 04 05"
 
 permissions:
   contents: write
@@ -59,7 +60,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add notebooks figures results
+          git add notebooks figures results report_pack
           if git diff --cached --quiet; then
             echo "Nothing changed: the results are identical to the committed ones."
           else

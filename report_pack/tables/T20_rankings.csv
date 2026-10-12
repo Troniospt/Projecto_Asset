@@ -1,0 +1,11 @@
+﻿Portfolio,Average rank,Median rank,% ranked 1st,% in top 3,% ranked last
+Group pick (23 stocks),3.9,3.5,33,50,2
+Risk parity (ERC),4.2,4.0,3,35,0
+EW,4.5,4.5,6,39,1
+Inverse vol,4.7,5.0,3,27,0
+Most diversified,4.8,5.0,11,34,1
+Max decorrelation,5.0,5.0,10,36,2
+Max Sharpe,6.4,8.0,12,25,11
+GMV,6.6,8.0,13,27,30
+Markowitz (λ=3),7.3,9.0,8,20,30
+SPY (buy & hold),7.6,8.0,1,7,23

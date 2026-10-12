@@ -1,0 +1,10 @@
+﻿Portfolio A (row),Group pick (23 stocks),Markowitz (λ=3),GMV,Max Sharpe,Inverse vol,Risk parity (ERC),Most diversified,Max decorrelation,SPY (buy & hold)
+Group pick (23 stocks),,79,64,61,60,46,48,58,92
+Markowitz (λ=3),21,,46,22,21,22,25,31,52
+GMV,36,54,,42,33,29,22,33,53
+Max Sharpe,39,78,58,,38,37,36,37,70
+Inverse vol,40,79,67,62,,23,41,53,99
+Risk parity (ERC),54,78,71,63,77,,42,61,100
+Most diversified,52,75,78,64,59,58,,64,93
+Max decorrelation,42,69,67,63,47,39,36,,89
+SPY (buy & hold),8,48,47,30,1,0,7,11,

@@ -1,0 +1,7 @@
+﻿Portfolio,Ann. return,Ann. volatility,Sharpe,Max drawdown,Turnover (annual),Effective N
+EW,31.2%,16.9%,1.81,-11.1%,0.27,12.0
+GMV,17.3%,12.8%,1.34,-9.8%,0.95,4.4
+Markowitz (λ=5),34.5%,29.8%,1.31,-20.9%,2.37,2.0
+Markowitz (λ=3),39.8%,34.5%,1.23,-23.5%,2.21,1.5
+Markowitz (λ=1),42.6%,40.5%,1.11,-27.2%,2.00,1.0
+Max Sharpe,27.9%,20.8%,1.29,-14.4%,2.14,2.8

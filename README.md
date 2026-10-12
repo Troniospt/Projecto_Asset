@@ -15,6 +15,8 @@ Goal: study the empirical properties of stock returns (stylised facts) and compa
 | `notebooks/03_stylised_facts_garch.ipynb` | The 6 stylised facts of WMT at daily, weekly and monthly frequency (Ljung-Box, Jarque-Bera, skewness with bootstrap, ARCH-LM, GJR-GARCH, standardised residuals), with SPY as a comparison; appendix (section 10) with descriptive statistics and Jarque-Bera p-values of all 25 series at the 3 frequencies. Also as `.html` |
 | `notebooks/04_strategies_backtest.ipynb` | The 8 strategies, illustration with 23 stocks, backtest of 100 experiments, metrics, robustness (costs, quarterly rebalancing, Markowitz λ, periods, stocks), conclusions. The **Group pick (23 stocks)** — the group's own 23 stocks, each equally weighted (1/23; 1/22 before TSLA has data) and rebalanced like every strategy — is a 10th portfolio in every comparison, next to the 8 strategies and SPY (it differs from strategy a) EW, which applies 1/N to the 12 stocks drawn in each experiment). Also: head-to-head (pairwise) win rates of all 10 portfolios (section 9.5), CAPM beta and Jensen's alpha against SPY (section 9.7), the 8 strategies on the group's 23-stock universe (section 11) and the Group pick over the full sample 2010-2026 (section 12, biased by hindsight). Executed with the real FRED DGS3 series (extracted 8 October 2026). Also as `.html` |
 | `notebooks/data/` | Prices and returns produced by notebook 01 (`clean_prices.csv`, `daily_log_returns.csv`, `weekly_log_returns.csv`, `monthly_log_returns.csv`) and the daily WMT history used by notebook 02 (`walmart_history.csv`: open, high, low, close, adjusted close, volume, dividends and splits). These are the frozen data of the report: do not delete them. The risk-free rate (`risk_free_DGS3.csv`) is created by notebook 04 |
+| `notebooks/05_report_pack.ipynb` | Builds the `report_pack/` folder from `figures/` and `results/` (nothing new is computed): numbered figures, formatted tables (Excel, CSV, Markdown) and an index. Also as `.html` |
+| `report_pack/` | **Everything for the report in one folder** — start with `report_pack/REPORT_NOTES.md` (key findings and numbers by report section, assumptions, limitations, recommendation, references, corrections to the draft), then `INDEX.md`, `figures/` and `tables/report_tables.xlsx` |
 | `figures/` | All charts (PNG). Those from notebook 02 have no prefix, those from notebook 03 start with `03_`, those from notebook 04 with `04_` |
 | `results/` | All tables as CSV and as Excel (`03_stylised_facts.xlsx`, `04_strategies_backtest.xlsx`) |
 | `reports/` | Report |
@@ -50,7 +52,7 @@ then `pip install -r requirements.txt`.
 
 Repository page → **Actions** → **Run notebooks** → **Run workflow** → choose the branch and the notebooks → **Run workflow**.
 GitHub runs them with Python 3.11 and the pinned libraries (about 7 minutes) and commits the executed notebooks, the HTML,
-`figures/` and `results/` to that branch. On a fork, the first time, GitHub asks you to enable Actions
+`figures/`, `results/` and `report_pack/` to that branch. On a fork, the first time, GitHub asks you to enable Actions
 ("I understand my workflows, go ahead and enable them"). For safety, the workflow refuses to run on `main` of the group
 repository `Troniospt/Projecto_Asset`.
 
@@ -75,10 +77,12 @@ The paths in the code are relative to that folder (`data/`, `../figures/`, `../r
    - Then export the HTML (`jupyter nbconvert --to html 04_strategies_backtest.ipynb`) and **commit** the executed
      notebook, its HTML, `figures/04_*`, `results/04_*`, `data/risk_free_DGS3.csv` and `data/risk_free_DGS3_info.txt`.
      That run is the reference for every backtest number in the report.
+4. `05` (a few seconds) — rebuilds `report_pack/` (figures, tables and index) from the outputs of 02–04. Run it after 04 and
+   commit `report_pack/` and the notebook (with its HTML: `jupyter nbconvert --to html 05_report_pack.ipynb`).
 
 Never open and save the CSV files of `notebooks/data/` in Excel (with a Portuguese locale Excel rewrites them with `;` and
-decimal commas, and the notebooks can no longer read them). To copy tables into the report, use the **.xlsx** files in
-`results/`.
+decimal commas, and the notebooks can no longer read them). To copy tables into the report, use **`report_pack/tables/report_tables.xlsx`** (rounded and formatted)
+or the .xlsx files in `results/` (full precision).
 
 ## Reproducibility
 
@@ -163,6 +167,9 @@ git push origin Miguel_seco          # push only your own branch
 | Markowitz | risk aversion λ = 3 (sensitivity with λ = 1 and 5) |
 
 ## Mapping to the report
+
+The same mapping, with numbered figures and formatted tables, is in `report_pack/INDEX.md`; the findings and numbers for each
+section are in `report_pack/REPORT_NOTES.md`.
 
 | Report section | Where |
 |---|---|

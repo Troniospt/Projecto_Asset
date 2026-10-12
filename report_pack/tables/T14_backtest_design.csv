@@ -1,0 +1,13 @@
+﻿Item,Convention
+Experiments,"100 three-year datasets (756 trading days), random seed 2026"
+Assets per experiment,12 stocks drawn at random from the 23 (only stocks with data in the whole window); the Group pick holds all of them
+Split,Years 1-2: estimation (warm-up); year 3: out-of-sample evaluation (252 days)
+Estimation window,"Trailing 1 year (252 days), only data available before each rebalancing"
+Rebalancing,"Semi-annual (every 126 trading days), first rebalancing one semester before the evaluation year; weights drift between rebalancings"
+Trading convention,Weights set with data up to the close of day t-1 and applied from day t
+Returns,Simple returns for portfolios and wealth; log returns only for the stylised facts
+Transaction costs,"10 bps on the traded value Σ|Δw| (robustness: 0, 25, 50 bps); SPY buy & hold has no costs"
+Risk-free rate,"3-year US Treasury yield (FRED DGS3), daily rate = annual / 252"
+Metrics,"Annualised return (geometric), volatility, Sharpe, Sortino, maximum drawdown, Calmar, Sterling = return / (|MDD| + 10%), turnover, effective N, diversification ratio, CAPM beta and alpha"
+Summary across experiments,"Medians, dispersion (P25/P75), % of experiments that beat EW / the Group pick / SPY, ranks and head-to-head win rates (no significance tests: the windows overlap)"
+Robustness,"Costs 0-50 bps; quarterly rebalancing; λ = 1, 3, 5; sub-periods and market regimes; new draw of stocks and all eligible stocks; strategies on the 23-stock universe"

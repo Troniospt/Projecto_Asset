@@ -1,0 +1,9 @@
+﻿Portfolio,Exp. return,Volatility,Sharpe (ex-ante),Effective N (1/Σw²),Max weight,N assets with w > 1%,Diversification ratio
+EW,34.9%,12.8%,2.35,23.0,4.3%,23,2.56
+Markowitz (λ=3),190.3%,67.2%,2.76,1.6,76.3%,3,1.09
+GMV,21.4%,7.6%,2.17,9.9,22.0%,17,3.21
+Max Sharpe,60.7%,11.8%,4.72,5.2,33.5%,10,2.58
+Inverse vol,24.3%,9.3%,2.08,20.3,8.2%,23,2.96
+Risk parity (ERC),24.7%,8.4%,2.35,18.4,10.5%,23,3.27
+Most diversified,26.2%,8.2%,2.60,13.7,15.3%,19,3.45
+Max decorrelation,41.8%,12.6%,2.94,14.9,14.0%,19,2.76
