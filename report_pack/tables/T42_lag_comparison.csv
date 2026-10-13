@@ -1,0 +1,11 @@
+﻿Portfolio,Median Sharpe (main),Median Sharpe (1-day lag),Median change in Sharpe (lag - main),% beats EW Sharpe (main),% beats EW Sharpe (1-day lag),Average rank (main),Average rank (1-day lag)
+EW,1.806,1.806,0.000,,,4.49,4.50
+Markowitz (λ=3),1.232,1.297,0.000,21,21,7.35,7.36
+GMV,1.338,1.338,0.000,31,33,6.60,6.56
+Max Sharpe,1.288,1.318,-0.005,34,35,6.36,6.34
+Inverse vol,1.777,1.778,0.000,47,46,4.70,4.75
+Risk parity (ERC),1.801,1.802,0.000,51,51,4.19,4.18
+Most diversified,1.701,1.704,0.000,47,47,4.78,4.80
+Max decorrelation,1.658,1.671,0.000,41,40,5.03,5.01
+Group pick (23 stocks),1.704,1.704,0.000,62,62,3.90,3.91
+SPY (buy & hold),1.128,1.128,0.000,15,15,7.60,7.59

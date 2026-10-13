@@ -16,6 +16,7 @@ Scheme "B - navy accents": 8 colour-blind-safe hues for the 8 strategies (checke
 simulation), the group's own portfolio in navy, the benchmark (SPY) in grey, white background, hairline grid,
 tables with a navy header.
 """
+import math
 import textwrap
 
 import matplotlib.pyplot as plt
@@ -239,13 +240,15 @@ def save_table_png(table, path, title=None, note=None, highlight=('Group pick',)
                      + 2.5 * padding for j in range(n_columns)]
     header_height = max(len(lines) for lines in wrapped_headers) * line_height + 1.2 * padding
     row_heights = [max(len(cell) for cell in row) * line_height + 0.9 * padding for row in wrapped_cells]
-    table_width = sum(column_widths)
+    # math.fsum instead of sum: Python 3.12+ adds floats slightly differently with sum(), which would move the image by a
+    # fraction of a pixel; fsum gives exactly the same total on every Python version
+    table_width = math.fsum(column_widths)
 
     title_lines = wrap(title, int(table_width / (char_width * 1.15))) if title else []
     note_lines = wrap(note, int(table_width / (char_width * 0.9))) if note else []
     title_height = len(title_lines) * line_height * 1.25 + (padding if title else 0)
     note_height = len(note_lines) * line_height * 0.95 + (padding if note else 0)
-    total_height = title_height + header_height + sum(row_heights) + note_height
+    total_height = title_height + header_height + math.fsum(row_heights) + note_height
 
     fig = plt.figure(figsize=(table_width, total_height))
     ax = fig.add_axes([0, 0, 1, 1])

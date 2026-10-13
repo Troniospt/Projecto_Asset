@@ -1,0 +1,18 @@
+﻿Comparison,% of experiments,Band low (95%),Band high (95%),Clear?
+Group pick beats EW (Sharpe),62,50,72,yes
+ERC beats EW (Sharpe),51,36,68,no (band includes 50%)
+Inverse vol beats EW (Sharpe),47,30,67,no (band includes 50%)
+Most diversified beats EW (Sharpe),47,32,66,no (band includes 50%)
+Max decorrelation beats EW (Sharpe),41,32,53,no (band includes 50%)
+GMV beats EW (Sharpe),31,17,48,yes
+Max Sharpe beats EW (Sharpe),34,20,50,no (band includes 50%)
+Markowitz beats EW (Sharpe),21,11,32,yes
+ERC beats inverse vol (Sharpe),65,54,78,yes
+Group pick beats ERC (Sharpe),56,43,68,no (band includes 50%)
+ERC lower volatility than EW,100,100,100,yes
+ERC smaller drawdown than EW,86,77,93,yes
+ERC beats SPY (Sharpe),86,75,95,yes
+ERC lower volatility than SPY,46,30,63,no (band includes 50%)
+ERC smaller drawdown than SPY,58,44,72,no (band includes 50%)
+Group pick beats SPY (Sharpe),92,81,100,yes
+EW beats SPY (Sharpe),85,74,95,yes

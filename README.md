@@ -13,8 +13,8 @@ Goal: study the empirical properties of stock returns (stylised facts) and compa
 | `notebooks/01_data_collection.ipynb` | Universe (23 S&P 500 stocks + SPY + ^GSPC), download from Yahoo Finance, data treatment (dividends, splits, currency, calendar, missing data), daily/weekly/monthly log returns. Also as `.html` |
 | `notebooks/02_walmart_eda.ipynb` | Exploratory analysis of Walmart (WMT): prices, histograms, Q-Q plots, quantiles, VaR, ACF, comparison with SPY/^GSPC. Also as `.html` |
 | `notebooks/03_stylised_facts_garch.ipynb` | The 6 stylised facts of WMT at daily, weekly and monthly frequency (Ljung-Box, Jarque-Bera, skewness with bootstrap, ARCH-LM, GJR-GARCH, standardised residuals), with SPY as a comparison; appendix (section 10) with descriptive statistics and Jarque-Bera p-values of all 25 series at the 3 frequencies. Also as `.html` |
-| `notebooks/04_strategies_backtest.ipynb` | The 8 strategies, illustration with 23 stocks, backtest of 100 experiments, metrics, robustness (costs, quarterly rebalancing, Markowitz λ, periods, stocks), conclusions. The **Group pick (23 stocks)** — the group's own 23 stocks, each equally weighted (1/23; 1/22 before TSLA has data) and rebalanced like every strategy — is a 10th portfolio in every comparison, next to the 8 strategies and SPY (it differs from strategy a) EW, which applies 1/N to the 12 stocks drawn in each experiment). Also: head-to-head (pairwise) win rates of all 10 portfolios (section 9.5), CAPM beta and Jensen's alpha against SPY (section 9.7), the 8 strategies on the group's 23-stock universe (section 11) and the Group pick over the full sample 2010-2026 (section 12, biased by hindsight). Executed with the real FRED DGS3 series (extracted 8 October 2026). Also as `.html` |
-| `notebooks/data/` | Prices and returns produced by notebook 01 (`clean_prices.csv`, `daily_log_returns.csv`, `weekly_log_returns.csv`, `monthly_log_returns.csv`) and the daily WMT history used by notebook 02 (`walmart_history.csv`: open, high, low, close, adjusted close, volume, dividends and splits). These are the frozen data of the report: do not delete them. The risk-free rate (`risk_free_DGS3.csv`) is created by notebook 04 |
+| `notebooks/04_strategies_backtest.ipynb` | The 8 strategies, illustration with 23 stocks, backtest of 100 experiments, metrics, robustness (costs, quarterly rebalancing, Markowitz λ, periods, stocks), conclusions. The **Group pick (23 stocks)** — the group's own 23 stocks, each equally weighted (1/23; 1/22 before TSLA has data) and rebalanced like every strategy — is a 10th portfolio in every comparison, next to the 8 strategies and SPY (it differs from strategy a) EW, which applies 1/N to the 12 stocks drawn in each experiment). Also: head-to-head (pairwise) win rates of all 10 portfolios (section 9.5), CAPM beta and Jensen's alpha against SPY (section 9.7), the 8 strategies on the group's 23-stock universe (section 11) and the Group pick over the full sample 2010-2026 (section 12, biased by hindsight). Robustness added after the code audit: uncertainty bands for the win rates (cluster bootstrap by year, section 9.8), drawdowns in falling markets and in the March 2020 crash, trading one day later (section 10.7), the backtest without the five biggest winners (section 10.8) and a check of the optimiser solutions (section 8). Executed with the real FRED DGS3 series (extracted 8 October 2026). Also as `.html` |
+| `notebooks/data/` | Prices and returns produced by notebook 01 (`clean_prices.csv`, `daily_log_returns.csv`, `weekly_log_returns.csv`, `monthly_log_returns.csv`) and the daily WMT history used by notebook 02 (`walmart_history.csv`: open, high, low, close, adjusted close, volume, dividends and splits). These are the frozen data of the report: do not delete them. The risk-free rate (`risk_free_DGS3.csv`) was downloaded by hand from FRED on 8 October 2026 (`risk_free_DGS3_info.txt`) and is read by notebook 04 |
 | `notebooks/05_report_pack.ipynb` | Builds the `report_pack/` folder from `figures/` and `results/` (nothing new is computed): numbered figures, formatted tables (Excel, CSV, Markdown) and an index. Also as `.html` |
 | `report_pack/` | **Everything for the report in one folder** — start with `report_pack/REPORT_NOTES.md` (key findings and numbers by report section, assumptions, limitations, recommendation, references, corrections to the draft), then `INDEX.md`, `figures/` and `tables/report_tables.xlsx` |
 | `notebooks/appm_style.py` | **The colour scheme and look of every chart and table** (one editable dictionary of colours per portfolio, general colours, colour scales, and the function that saves tables as PNG). All notebooks import it: change a colour there and run the notebooks again |
@@ -55,7 +55,8 @@ Repository page → **Actions** → **Run notebooks** → **Run workflow** → c
 GitHub runs them with Python 3.11 and the pinned libraries (about 7 minutes) and commits the executed notebooks, the HTML,
 `figures/`, `results/` and `report_pack/` to that branch. On a fork, the first time, GitHub asks you to enable Actions
 ("I understand my workflows, go ahead and enable them"). For safety, the workflow refuses to run on `main` of the group
-repository `Troniospt/Projecto_Asset`.
+repository `Troniospt/Projecto_Asset`. Every run creates a new commit even when no number changed: the Excel files store the
+time they were written, so they are always "new" files for git.
 
 ### Option B: run on your computer — 2. Run the notebooks in order, from the `notebooks/` folder
 
@@ -92,7 +93,8 @@ or the .xlsx files in `results/` (full precision).
   (*Adj Close*) change over time (they are recalculated after every new dividend or split); that is why its save cell is disabled.
 - **Random seeds** (every random draw has a fixed seed): notebook 02 `np.random.seed(123)` (simulated normal returns);
   notebook 03 `np.random.seed(2026)` (bootstrap of the skewness); notebook 04 `np.random.seed(2026)` (`SEED`: the periods
-  and stocks of the 100 experiments) and `SEED + 1` = 2027 (only the new draw of stocks in section 10.6). They use NumPy's
+  and stocks of the 100 experiments), `SEED + 1` = 2027 (only the new draw of stocks in section 10.6), `SEED + 2` = 2028 (the
+draw without the five biggest winners, section 10.8) and `SEED + 3` = 2029 (the cluster bootstrap of the uncertainty bands, section 9.8). They use NumPy's
   legacy generator (`np.random.seed` + `randint` / `choice` / `normal`), whose sequence NumPy keeps frozen: the periods, the
   stocks and the bootstrap samples are **identical on any NumPy version and any computer** (tested with NumPy 1.26, 2.2 and
   2.5). The simulated normal series in notebook 02 is identical up to the last floating-point digit.
@@ -101,7 +103,9 @@ or the .xlsx files in `results/` (full precision).
     (all 33 tables, every Excel value, every printed number and all 29 figures that existed at the time of that test; 0 optimisation
     failures). After the Group pick, head-to-head, 23-stock-universe and full-sample sections were added, notebook 04 was run again
     in both environments: its 34 tables, every value of its 33-sheet Excel workbook, its 21 figures and every printed number (except
-    the run time) were again bit-for-bit identical;
+    the run time) were again bit-for-bit identical. After the code audit (October 2026) notebooks 02–05 were run once more in
+    both environments: all 57 CSV files of `results/`, the 40 figures, the 57 report tables and the 56 table images were
+    bit-for-bit identical;
   - with much newer or older libraries, notebook 04 gave the same tables at the precision shown, and in notebook 03 only a few
     GJR-GARCH estimates of the (unreliable) weekly-normal and monthly models changed in the 4th decimal place.
 
@@ -142,11 +146,11 @@ git push origin Miguel_seco          # push only your own branch
 ## Data
 
 - **Prices:** Yahoo Finance via `yfinance` (`auto_adjust=False`, `actions=True`), adjusted close price (*Adj Close*, includes
-  dividends and splits), from 2010-01-04 to 2026-09-18 (4,203 trading days). Extracted in September 2026, between the close of
-  18 September 2026 (last price in the files) and 29 September 2026 (first commit of the files); `end_date = 2026-09-21` in
-  notebook 01. Calendar = SPY trading days. TSLA only has data from 2010-06-29 onwards (122 missing days at the start).
-- **Risk-free rate:** 3-year US Treasury yield, FRED series `DGS3` (% per year); the extraction date is recorded in
-  `notebooks/data/risk_free_DGS3_info.txt` (or it is the date of the manual download).
+  dividends and splits), from 2010-01-04 to 2026-09-18 (4,203 trading days). Extracted between 21 September 2026 (`end_date = 2026-09-21` in
+  notebook 01) and 29 September 2026 (first commit of the files); the last price is the close of 18 September 2026. Write the
+  exact day in the report if the member who ran notebook 01 can confirm it. Calendar = SPY trading days. TSLA only has data from 2010-06-29 onwards (122 missing days at the start).
+- **Risk-free rate:** 3-year US Treasury yield, FRED series `DGS3` (% per year); downloaded by hand from FRED on 8 October 2026
+  (last observation 6 October 2026), as recorded in `notebooks/data/risk_free_DGS3_info.txt`.
 - **SPY vs ^GSPC:** SPY is the investable ETF (market benchmark in the backtest); ^GSPC is the index, not investable and
   without dividends.
 

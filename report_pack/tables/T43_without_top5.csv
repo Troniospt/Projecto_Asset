@@ -1,0 +1,10 @@
+﻿Portfolio,Median return (main),Median return (without top 5),Median Sharpe (main),Median Sharpe (without top 5),% lower volatility than SPY (main),% lower volatility than SPY (without top 5),% smaller drawdown than SPY (main),% smaller drawdown than SPY (without top 5),% beats SPY Sharpe (without top 5),% beats EW Sharpe (without top 5)
+EW,31.2%,21.9%,1.806,1.558,13,70,37,71,84,
+Markowitz (λ=3),39.8%,18.1%,1.232,0.747,0,1,11,19,40,18
+GMV,17.3%,18.8%,1.338,1.409,81,92,56,62,58,38
+Max Sharpe,27.9%,18.7%,1.288,1.050,14,12,24,38,49,25
+Inverse vol,25.7%,21.5%,1.777,1.599,44,85,59,78,82,38
+Risk parity (ERC),26.5%,21.1%,1.801,1.630,46,89,58,79,83,52
+Most diversified,28.7%,22.7%,1.701,1.549,36,65,46,65,75,50
+Max decorrelation,33.3%,23.5%,1.658,1.516,12,48,29,57,73,46
+SPY (buy & hold),17.7%,17.7%,1.128,1.128,,,,,,16

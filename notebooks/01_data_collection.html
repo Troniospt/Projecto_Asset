@@ -7809,11 +7809,18 @@ S&amp;P 500) and <strong>^GSPC</strong> (the S&amp;P 500 index itself).</li>
 <li><strong>Source:</strong> Yahoo Finance, downloaded with the <code>yfinance</code> library (<code>history(..., auto_adjust=False, actions=True, repair=False)</code>).</li>
 <li><strong>Sample:</strong> from 4 January 2010 to 18 September 2026 (the download uses <code>end = 2026-09-21</code>, so the last trading day is
 Friday 18 September 2026). More than 15 years, as the brief requires.</li>
-<li><strong>Extraction date:</strong> September 2026, between the close of Friday 18 September 2026 (the last price in the files) and
-29 September 2026 (when the CSV files were first committed); write the exact date in the report.</li>
+<li><strong>Extraction date:</strong> the download ran between <strong>21 September 2026</strong> (the code uses <code>end = 2026-09-21</code>) and <strong>29 September 2026</strong>
+(when the CSV files were first committed to the group repository); the data end at the close of Friday 18 September 2026, and
+no later dividend adjustment had been applied when they were downloaded. Write the exact date in the report if the member who ran
+the notebook can confirm it.</li>
+<li><strong>Why January 2010:</strong> it is the first full year in which all the selected stocks except TSLA already trade (AVGO listed in August 2009,
+V in March 2008), and it gives 16.7 years of data (&gt; 15 required). The 2008-09 financial crisis is therefore outside the sample.</li>
 <li><strong>Output:</strong> the CSV files in <code>data/</code> (prices, daily/weekly/monthly log returns and the full WMT history
 <code>walmart_history.csv</code> used by notebook 02). They are the frozen dataset used in
 the report: the save cell at the end is disabled so that re-running this notebook never overwrites them.</li>
+<li><strong>The outputs shown below are those of the original extraction session.</strong> The download cells (sections 3-7) are not run again,
+because they would download prices re-adjusted for later dividends. Section 9 (at the end) re-checks the frozen CSV files and can be
+run at any time.</li>
 </ul>
 <h2 id="1-%E2%80%94-Importing-the-libraries">1 — Importing the libraries<a class="anchor-link" href="#1-%E2%80%94-Importing-the-libraries">¶</a></h2>
 </div>
@@ -7831,12 +7838,6 @@ the report: the save cell at the end is disabled so that re-running this noteboo
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.graphics.tsaplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_acf</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.diagnostic</span><span class="w"> </span><span class="kn">import</span> <span class="n">acorr_ljungbox</span><span class="p">,</span> <span class="n">het_arch</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">arch</span><span class="w"> </span><span class="kn">import</span> <span class="n">arch_model</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">zoneinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZoneInfo</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'figure.figsize'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -7857,9 +7858,9 @@ the report: the save cell at the end is disabled so that re-running this noteboo
 A <strong>ticker</strong> identifies the security.</p>
 <p>Selection rule (see the report): about one stock per 5% of S&amp;P 500 sector weight (GICS level 1), at least one stock per
 sector, choosing the highest-weighted companies in each sector (Consumer Staples, about 6% of the index, has 2 stocks —
-see the table in the report). <strong>META</strong> was excluded because its price history does not cover the whole
-sample (it only listed in May 2012) and was replaced by <strong>T</strong> (AT&amp;T), the next highest-weighted stock in the same sector (according to the iShares sector ETF
-used in the report).</p>
+see the table in the report). <strong>Inclusion rule:</strong> every stock must have at least <strong>15 years</strong> of daily prices up to September 2026 (the brief's minimum).
+<strong>TSLA</strong> (listed on 29 June 2010, 16.2 years) qualifies; <strong>META</strong> (listed on 18 May 2012, 14.3 years) does not, so it was replaced by
+<strong>T</strong> (AT&amp;T), a Communication Services stock with the full history (the group's sector table in the report gives the source of the weights).</p>
 </div>
 </div>
 </div>
@@ -8722,16 +8723,20 @@ End: 2026-09-21
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=117e7b4e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2f538103">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="How-the-data-are-treated">How the data are treated<a class="anchor-link" href="#How-the-data-are-treated">¶</a></h3><ul>
-<li><strong>Dividends and corporate actions:</strong> we use the <strong>adjusted close</strong> (<em>Adj Close</em>), which Yahoo Finance corrects for cash
-dividends and splits. A split therefore does not look like a crash (e.g. Walmart's 3-for-1 split in February 2024), and
-returns include the dividends paid.</li>
+<li><strong>Dividends and corporate actions:</strong> Yahoo Finance's <em>Close</em> is already adjusted for <strong>splits</strong> (e.g. Walmart's 3-for-1 split in
+February 2024, the splits of NVDA, AVGO, AMZN, GOOGL, TSLA and AAPL, BRK-B's 50-for-1 split in January 2010 and GE's 1-for-8 reverse
+split in 2021), so a split never looks like a crash. The <strong>adjusted close</strong> (<em>Adj Close</em>), which we use, also adjusts for <strong>cash
+dividends</strong> (including COST's special dividends): for WMT it differs from <em>Close</em> only on the ex-dividend days. Returns therefore include
+the dividends paid (total returns). Yahoo's adjustment factors also account for <strong>spin-offs</strong> (AT&amp;T → Warner Bros. Discovery in 2022,
+GE → GE HealthCare in 2023 and GE Vernova in 2024). Histories are those of today's company: LIN before October 2018 is Praxair,
+WELL was Health Care REIT, AVGO was Avago Technologies before 2016.</li>
 <li><strong>Currency:</strong> all 23 stocks and SPY trade on US exchanges in US dollars, so no currency conversion is needed.</li>
 <li><strong>Trading calendar:</strong> the calendar is the list of days on which <strong>SPY</strong> traded (NYSE/Nasdaq calendar). Every series is
 aligned to it. Time zones are removed and dates are kept at day level, so all series line up on the same dates.</li>
@@ -9088,6 +9093,74 @@ is dropped. With log returns this is the same as adding up the daily log returns
 <span class="sd">                         auto_adjust=False, actions=True, repair=False).to_csv('data/walmart_history.csv')</span>
 <span class="sd">'''</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d6e00851">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="9-%E2%80%94-Check-of-the-frozen-data-files-(safe-to-re-run)">9 — Check of the frozen data files (safe to re-run)<a class="anchor-link" href="#9-%E2%80%94-Check-of-the-frozen-data-files-(safe-to-re-run)">¶</a></h2><p>This last section does not download anything: it reads the CSV files saved in <code>data/</code> and checks that they are complete and
+consistent (calendar, missing values, and that the weekly / monthly / daily log returns can be rebuilt from the prices).</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=0662ee33">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Read the frozen files</span>
+<span class="n">frozen_prices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/clean_prices.csv'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">frozen_daily</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/daily_log_returns.csv'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">frozen_weekly</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/weekly_log_returns.csv'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">frozen_monthly</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/monthly_log_returns.csv'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Prices:'</span><span class="p">,</span> <span class="n">frozen_prices</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="s1">'to'</span><span class="p">,</span> <span class="n">frozen_prices</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="s1">'|'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">frozen_prices</span><span class="p">),</span> <span class="s1">'trading days |'</span><span class="p">,</span>
+      <span class="n">frozen_prices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">'series'</span><span class="p">)</span>
+
+<span class="c1"># Missing values: before the first price (shorter history) and inside the history (gaps)</span>
+<span class="k">for</span> <span class="n">ticker</span> <span class="ow">in</span> <span class="n">frozen_prices</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">observed</span> <span class="o">=</span> <span class="n">frozen_prices</span><span class="p">[</span><span class="n">ticker</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">before_start</span> <span class="o">=</span> <span class="p">(</span><span class="n">frozen_prices</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">observed</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">gaps</span> <span class="o">=</span> <span class="n">frozen_prices</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">observed</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">():,</span> <span class="n">ticker</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">before_start</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">gaps</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">ticker</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">before_start</span><span class="si">}</span><span class="s1"> sessions before its first price, </span><span class="si">{</span><span class="n">gaps</span><span class="si">}</span><span class="s1"> gaps inside its history'</span><span class="p">)</span>
+
+<span class="c1"># Rebuild the returns from the prices and compare with the saved files (largest absolute difference)</span>
+<span class="n">rebuilt_daily</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">frozen_prices</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="n">rebuilt_weekly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">frozen_prices</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">'W-FRI'</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">())</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">frozen_weekly</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">rebuilt_monthly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">frozen_prices</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">'ME'</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">())</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">frozen_monthly</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Largest difference, daily returns  :'</span><span class="p">,</span> <span class="p">(</span><span class="n">rebuilt_daily</span> <span class="o">-</span> <span class="n">frozen_daily</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Largest difference, weekly returns :'</span><span class="p">,</span> <span class="p">(</span><span class="n">rebuilt_weekly</span> <span class="o">-</span> <span class="n">frozen_weekly</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Largest difference, monthly returns:'</span><span class="p">,</span> <span class="p">(</span><span class="n">rebuilt_monthly</span> <span class="o">-</span> <span class="n">frozen_monthly</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Weekly returns:'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">frozen_weekly</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">'all'</span><span class="p">)),</span> <span class="s1">'| monthly returns:'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">frozen_monthly</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">'all'</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Prices: 2010-01-04 to 2026-09-18 | 4203 trading days | 25 series
+TSLA: 122 sessions before its first price, 0 gaps inside its history
+Largest difference, daily returns  : 1.861358289723114e-15
+Largest difference, weekly returns : 1.7503359872605984e-15
+Largest difference, monthly returns: 1.6375789613221059e-15
+Weekly returns: 871 | monthly returns: 199
+</pre>
 </div>
 </div>
 </div>

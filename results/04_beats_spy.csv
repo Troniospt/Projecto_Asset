@@ -1,10 +1,10 @@
-﻿,% beats SPY: Sharpe,% beats SPY: Ann. return,% beats SPY: Max drawdown,% beats SPY: Ann. volatility,% beats SPY: Sterling
-EW,85.0,88.0,37.0,13.0,87.0
-Markowitz (λ=3),49.0,75.0,11.0,0.0,67.0
-GMV,52.0,51.0,56.00000000000001,81.0,50.0
-Max Sharpe,55.00000000000001,72.0,24.0,14.000000000000002,65.0
-Inverse vol,86.0,85.0,59.0,44.0,88.0
-Risk parity (ERC),86.0,86.0,57.99999999999999,46.0,88.0
-Most diversified,80.0,86.0,46.0,36.0,84.0
-Max decorrelation,75.0,87.0,28.999999999999996,12.0,86.0
-Group pick (23 stocks),92.0,96.0,38.0,4.0,94.0
+﻿,% beats SPY: Sharpe,% beats SPY: Ann. return,% beats SPY: Max drawdown,% beats SPY: Ann. volatility,% beats SPY: Sterling,% beats SPY: Calmar
+EW,85.0,88.0,37.0,13.0,87.0,83.0
+Markowitz (λ=3),49.0,75.0,11.0,0.0,67.0,52.0
+GMV,52.0,51.0,56.00000000000001,81.0,50.0,50.0
+Max Sharpe,55.00000000000001,72.0,24.0,14.000000000000002,65.0,57.99999999999999
+Inverse vol,86.0,85.0,59.0,44.0,88.0,81.0
+Risk parity (ERC),86.0,86.0,57.99999999999999,46.0,88.0,83.0
+Most diversified,80.0,86.0,46.0,36.0,84.0,80.0
+Max decorrelation,75.0,87.0,28.999999999999996,12.0,86.0,73.0
+Group pick (23 stocks),92.0,96.0,38.0,4.0,94.0,88.0

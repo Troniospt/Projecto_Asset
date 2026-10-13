@@ -60,8 +60,8 @@ Note: Log returns from adjusted close prices. Weekly and monthly returns use per
 | 2. Non-normal, fat tails | Supported | Supported | Supported |
 | 3. Negative skewness | Not significant | Supported | Not significant |
 | 4. Volatility clustering | Supported | Partial | Not supported |
-| 5. Leverage effect | Supported | Not significant | Not significant |
-| 6. Conditional non-normality | Supported | Supported | Supported |
+| 5. Leverage effect | Supported | Not significant | Inconclusive (GARCH at boundary) |
+| 6. Conditional non-normality | Supported | Supported | Inconclusive (GARCH at boundary) |
 
 Note: Based on the tests of tables T04-T12 (5% significance level).
 
@@ -87,8 +87,8 @@ Note: Based on the tests of tables T04-T12 (5% significance level).
 | WMT | Monthly | 2. Non-normal, fat tails | excess kurtosis = 0.84 | 0.006 | Supported |
 | WMT | Monthly | 3. Negative skewness | skewness = -0.360 | 0.083 | Not significant |
 | WMT | Monthly | 4. Volatility clustering | LB \|r\| p = 0.848 | 0.672 | Not supported |
-| WMT | Monthly | 5. Leverage effect | gamma = 0.000 | 1.000 | Not significant |
-| WMT | Monthly | 6. Conditional non-normality | z excess kurtosis = 0.66 | 0.029 | Supported |
+| WMT | Monthly | 5. Leverage effect | gamma = 0.000 | 1.000 | Inconclusive (GARCH at boundary) |
+| WMT | Monthly | 6. Conditional non-normality | z excess kurtosis = 0.66 | 0.029 | Inconclusive (GARCH at boundary) |
 | SPY | Daily | 1. Little serial correlation | max \|ACF(1-5)\| = 0.100 | <0.001 | Not supported |
 | SPY | Daily | 2. Non-normal, fat tails | excess kurtosis = 12.40 | <0.001 | Supported |
 | SPY | Daily | 3. Negative skewness | skewness = -0.555 | 0.113 | Not significant |
@@ -108,7 +108,7 @@ Note: Based on the tests of tables T04-T12 (5% significance level).
 | SPY | Monthly | 5. Leverage effect | gamma = 0.571 | 0.583 | Not significant |
 | SPY | Monthly | 6. Conditional non-normality | z excess kurtosis = 0.33 | <0.001 | Supported |
 
-Note: p-value column: 1) Ljung-Box on returns at lag 10 (daily), 8 (weekly), 6 (monthly); 2) Jarque-Bera; 3) bootstrap test of skewness; 4) Ljung-Box on r^2 (the statistic column shows the Ljung-Box p-value on |r|; Partial = only one of the two is significant); 5) gamma of the GJR-GARCH (Student-t); 6) Jarque-Bera of the standardised residuals.
+Note: p-value column: 1) Ljung-Box on returns at lag 10 (daily), 8 (weekly), 6 (monthly); 2) Jarque-Bera; 3) bootstrap test of skewness; 4) Ljung-Box on r^2 (the statistic column shows the Ljung-Box p-value on |r|; Partial = only one of the two is significant); 5) gamma of the GJR-GARCH (Student-t, robust standard errors); 6) Jarque-Bera of the standardised residuals. Inconclusive = the GJR-GARCH is at the boundary of its parameters (no volatility dynamics), so its tests cannot be trusted.
 
 ## T05. Autocorrelation of log returns, lags 1 to 5
 
@@ -171,16 +171,16 @@ Note: "% |z|>3" = share of observations more than 3 standard deviations from the
 
 *Report section: 2.1.3 Asymmetry and negative skewness*
 
-| Asset | Frequency | Skewness | Skewtest p (assumes normal tails) | Bootstrap 95% CI low | Bootstrap 95% CI high | Bootstrap p (skew >= 0) | N below -3σ | N above +3σ | Quantile 1% | Quantile 99% |
-|---|---|---|---|---|---|---|---|---|---|---|
-| WMT | Daily | -0.255 | <0.001 | -1.108 | 0.603 | 0.273 | 30 | 28 | -3.25% | 3.17% |
-| WMT | Weekly | -0.853 | <0.001 | -1.768 | 0.003 | 0.026 | 9 | 6 | -7.95% | 7.67% |
-| WMT | Monthly | -0.360 | 0.037 | -0.756 | 0.145 | 0.083 | 2 | 0 | -12.97% | 12.08% |
-| SPY | Daily | -0.555 | <0.001 | -1.404 | 0.277 | 0.113 | 39 | 21 | -3.08% | 2.61% |
-| SPY | Weekly | -0.740 | <0.001 | -1.510 | 0.014 | 0.029 | 8 | 4 | -6.05% | 5.69% |
-| SPY | Monthly | -0.491 | 0.005 | -0.851 | -0.112 | 0.005 | 1 | 0 | -9.23% | 10.33% |
+| Asset | Frequency | Skewness | Skewtest p (assumes normal tails) | Bootstrap 95% CI low | Bootstrap 95% CI high | Bootstrap p (skew >= 0) | N below -3σ | N above +3σ | Quantile 1% | Quantile 99% | Bootstrap p centred (sensitivity) | Bootstrap p two-sided (sensitivity) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| WMT | Daily | -0.255 | <0.001 | -1.108 | 0.603 | 0.273 | 30 | 28 | -3.25% | 3.17% | 0.286 | 0.545 |
+| WMT | Weekly | -0.853 | <0.001 | -1.768 | 0.003 | 0.026 | 9 | 6 | -7.95% | 7.67% | 0.031 | 0.053 |
+| WMT | Monthly | -0.360 | 0.037 | -0.756 | 0.145 | 0.083 | 2 | 0 | -12.97% | 12.08% | 0.040 | 0.166 |
+| SPY | Daily | -0.555 | <0.001 | -1.404 | 0.277 | 0.113 | 39 | 21 | -3.08% | 2.61% | 0.098 | 0.226 |
+| SPY | Weekly | -0.740 | <0.001 | -1.510 | 0.014 | 0.029 | 8 | 4 | -6.05% | 5.69% | 0.029 | 0.057 |
+| SPY | Monthly | -0.491 | 0.005 | -0.851 | -0.112 | 0.005 | 1 | 0 | -9.23% | 10.33% | 0.005 | 0.010 |
 
-Note: The classical skewtest assumes normal tails and over-rejects with fat tails; the bootstrap (resampling the data) does not. Bootstrap p = share of bootstrap samples with skewness >= 0.
+Note: The classical skewtest assumes normal tails and over-rejects with fat tails; the bootstrap (resampling the data) does not. Decision: one-sided bootstrap p = share of bootstrap samples with skewness >= 0 (H1: skewness < 0, fixed in advance). The centred and two-sided p-values are sensitivity checks: when they disagree, the evidence is borderline.
 
 ## T09. Volatility clustering: Ljung-Box on |r| and r^2 and ARCH-LM test
 
@@ -336,17 +336,17 @@ Note: Medians of the 100 out-of-sample years. Sharpe and Sortino use the daily D
 
 *Report section: 3. Results*
 
-| Portfolio | % beats EW: Sharpe | % beats EW: Ann. return | % beats EW: Max drawdown | % beats EW: Ann. volatility | % beats EW: Sterling |
-|---|---|---|---|---|---|
-| Markowitz (λ=3) | 21 | 57 | 9 | 1 | 45 |
-| GMV | 31 | 26 | 65 | 98 | 30 |
-| Max Sharpe | 34 | 54 | 27 | 19 | 46 |
-| Inverse vol | 47 | 27 | 87 | 100 | 33 |
-| Risk parity (ERC) | 51 | 26 | 86 | 100 | 32 |
-| Most diversified | 47 | 39 | 61 | 75 | 40 |
-| Max decorrelation | 41 | 64 | 26 | 27 | 54 |
-| Group pick (23 stocks) | 62 | 49 | 55 | 56 | 54 |
-| SPY (buy & hold) | 15 | 12 | 63 | 87 | 13 |
+| Portfolio | % beats EW: Sharpe | % beats EW: Ann. return | % beats EW: Max drawdown | % beats EW: Ann. volatility | % beats EW: Sterling | % beats EW: Calmar |
+|---|---|---|---|---|---|---|
+| Markowitz (λ=3) | 21 | 57 | 9 | 1 | 45 | 29 |
+| GMV | 31 | 26 | 65 | 98 | 30 | 35 |
+| Max Sharpe | 34 | 54 | 27 | 19 | 46 | 37 |
+| Inverse vol | 47 | 27 | 87 | 100 | 33 | 44 |
+| Risk parity (ERC) | 51 | 26 | 86 | 100 | 32 | 49 |
+| Most diversified | 47 | 39 | 61 | 75 | 40 | 43 |
+| Max decorrelation | 41 | 64 | 26 | 27 | 54 | 46 |
+| Group pick (23 stocks) | 62 | 49 | 55 | 56 | 54 | 60 |
+| SPY (buy & hold) | 15 | 12 | 63 | 87 | 13 | 17 |
 
 Note: Better = higher Sharpe, return and Sterling; smaller drawdown; lower volatility. 50% = as often better as worse.
 
@@ -354,17 +354,17 @@ Note: Better = higher Sharpe, return and Sterling; smaller drawdown; lower volat
 
 *Report section: 3. Results*
 
-| Portfolio | % beats Group pick: Sharpe | % beats Group pick: Ann. return | % beats Group pick: Max drawdown | % beats Group pick: Ann. volatility | % beats Group pick: Sterling |
-|---|---|---|---|---|---|
-| EW | 38 | 51 | 45 | 44 | 46 |
-| Markowitz (λ=3) | 21 | 57 | 11 | 0 | 40 |
-| GMV | 32 | 20 | 66 | 99 | 27 |
-| Max Sharpe | 31 | 50 | 32 | 20 | 46 |
-| Inverse vol | 39 | 29 | 72 | 86 | 35 |
-| Risk parity (ERC) | 44 | 30 | 77 | 86 | 36 |
-| Most diversified | 38 | 41 | 50 | 65 | 41 |
-| Max decorrelation | 39 | 58 | 30 | 29 | 50 |
-| SPY (buy & hold) | 8 | 4 | 62 | 96 | 6 |
+| Portfolio | % beats Group pick: Sharpe | % beats Group pick: Ann. return | % beats Group pick: Max drawdown | % beats Group pick: Ann. volatility | % beats Group pick: Sterling | % beats Group pick: Calmar |
+|---|---|---|---|---|---|---|
+| EW | 38 | 51 | 45 | 44 | 46 | 40 |
+| Markowitz (λ=3) | 21 | 57 | 11 | 0 | 40 | 28 |
+| GMV | 32 | 20 | 66 | 99 | 27 | 35 |
+| Max Sharpe | 31 | 50 | 32 | 20 | 46 | 36 |
+| Inverse vol | 39 | 29 | 72 | 86 | 35 | 38 |
+| Risk parity (ERC) | 44 | 30 | 77 | 86 | 36 | 41 |
+| Most diversified | 38 | 41 | 50 | 65 | 41 | 37 |
+| Max decorrelation | 39 | 58 | 30 | 29 | 50 | 44 |
+| SPY (buy & hold) | 8 | 4 | 62 | 96 | 6 | 12 |
 
 Note: Better = higher Sharpe, return and Sterling; smaller drawdown; lower volatility. 50% = as often better as worse.
 
@@ -372,17 +372,17 @@ Note: Better = higher Sharpe, return and Sterling; smaller drawdown; lower volat
 
 *Report section: 3. Results*
 
-| Portfolio | % beats SPY: Sharpe | % beats SPY: Ann. return | % beats SPY: Max drawdown | % beats SPY: Ann. volatility | % beats SPY: Sterling |
-|---|---|---|---|---|---|
-| EW | 85 | 88 | 37 | 13 | 87 |
-| Markowitz (λ=3) | 49 | 75 | 11 | 0 | 67 |
-| GMV | 52 | 51 | 56 | 81 | 50 |
-| Max Sharpe | 55 | 72 | 24 | 14 | 65 |
-| Inverse vol | 86 | 85 | 59 | 44 | 88 |
-| Risk parity (ERC) | 86 | 86 | 58 | 46 | 88 |
-| Most diversified | 80 | 86 | 46 | 36 | 84 |
-| Max decorrelation | 75 | 87 | 29 | 12 | 86 |
-| Group pick (23 stocks) | 92 | 96 | 38 | 4 | 94 |
+| Portfolio | % beats SPY: Sharpe | % beats SPY: Ann. return | % beats SPY: Max drawdown | % beats SPY: Ann. volatility | % beats SPY: Sterling | % beats SPY: Calmar |
+|---|---|---|---|---|---|---|
+| EW | 85 | 88 | 37 | 13 | 87 | 83 |
+| Markowitz (λ=3) | 49 | 75 | 11 | 0 | 67 | 52 |
+| GMV | 52 | 51 | 56 | 81 | 50 | 50 |
+| Max Sharpe | 55 | 72 | 24 | 14 | 65 | 58 |
+| Inverse vol | 86 | 85 | 59 | 44 | 88 | 81 |
+| Risk parity (ERC) | 86 | 86 | 58 | 46 | 88 | 83 |
+| Most diversified | 80 | 86 | 46 | 36 | 84 | 80 |
+| Max decorrelation | 75 | 87 | 29 | 12 | 86 | 73 |
+| Group pick (23 stocks) | 92 | 96 | 38 | 4 | 94 | 88 |
 
 Note: Better = higher Sharpe, return and Sterling; smaller drawdown; lower volatility. 50% = as often better as worse.
 
@@ -512,18 +512,20 @@ Note: Regression of the daily excess returns of each portfolio on those of SPY i
 
 *Report section: Robustness: rebalancing frequency*
 
-| Portfolio | Sharpe (semi-annual) | Sharpe (quarterly) | Return (semi-annual) | Return (quarterly) | Turnover (semi-annual) | Turnover (quarterly) | % beats EW Sharpe (quarterly) |
-|---|---|---|---|---|---|---|---|
-| EW | 1.81 | 1.72 | 31.2% | 31.9% | 0.27 | 0.38 |  |
-| Markowitz (λ=3) | 1.23 | 1.18 | 39.8% | 35.8% | 2.21 | 2.93 | 17 |
-| GMV | 1.34 | 1.40 | 17.3% | 16.9% | 0.95 | 1.22 | 29 |
-| Max Sharpe | 1.29 | 1.36 | 27.9% | 28.5% | 2.14 | 3.08 | 34 |
-| Inverse vol | 1.78 | 1.73 | 25.7% | 25.8% | 0.27 | 0.38 | 42 |
-| Risk parity (ERC) | 1.80 | 1.82 | 26.5% | 26.0% | 0.31 | 0.42 | 48 |
-| Most diversified | 1.70 | 1.78 | 28.7% | 28.0% | 0.84 | 1.11 | 47 |
-| Max decorrelation | 1.66 | 1.69 | 33.3% | 34.4% | 0.86 | 1.13 | 43 |
-| Group pick (23 stocks) | 1.70 | 1.75 | 35.6% | 34.9% | 0.28 | 0.38 | 62 |
-| SPY (buy & hold) | 1.13 | 1.13 | 17.7% | 17.7% | 0.00 | 0.00 | 15 |
+| Portfolio | Sharpe (semi-annual) | Sharpe (quarterly) | Return (semi-annual) | Return (quarterly) | Turnover (semi-annual) | Turnover (quarterly) | % beats EW Sharpe (quarterly) | % beats EW Sharpe (semi-annual) | Median change in Sharpe (quarterly - semi-annual) | Average rank (semi-annual) | Average rank (quarterly) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| EW | 1.81 | 1.72 | 31.2% | 31.9% | 0.27 | 0.38 |  |  | 0.006 | 4.49 | 4.37 |
+| Markowitz (λ=3) | 1.23 | 1.18 | 39.8% | 35.8% | 2.21 | 2.93 | 17 | 21 | 0.015 | 7.35 | 7.35 |
+| GMV | 1.34 | 1.40 | 17.3% | 16.9% | 0.95 | 1.22 | 29 | 31 | 0.016 | 6.60 | 6.80 |
+| Max Sharpe | 1.29 | 1.36 | 27.9% | 28.5% | 2.14 | 3.08 | 34 | 34 | 0.009 | 6.36 | 6.28 |
+| Inverse vol | 1.78 | 1.73 | 25.7% | 25.8% | 0.27 | 0.38 | 42 | 47 | -0.002 | 4.70 | 4.82 |
+| Risk parity (ERC) | 1.80 | 1.82 | 26.5% | 26.0% | 0.31 | 0.42 | 48 | 51 | 0.001 | 4.19 | 4.34 |
+| Most diversified | 1.70 | 1.78 | 28.7% | 28.0% | 0.84 | 1.11 | 47 | 47 | 0.028 | 4.78 | 4.60 |
+| Max decorrelation | 1.66 | 1.69 | 33.3% | 34.4% | 0.86 | 1.13 | 43 | 41 | 0.041 | 5.03 | 4.92 |
+| Group pick (23 stocks) | 1.70 | 1.75 | 35.6% | 34.9% | 0.28 | 0.38 | 62 | 62 | 0.000 | 3.90 | 3.84 |
+| SPY (buy & hold) | 1.13 | 1.13 | 17.7% | 17.7% | 0.00 | 0.00 | 15 | 15 | 0.000 | 7.60 | 7.68 |
+
+Note: Medians of the Sharpe ratio move when a few experiments change place; the paired change (same experiment) and the average rank in each experiment are the more reliable comparison.
 
 ## T28. Markowitz risk aversion: λ = 1, 3 and 5 between Max Sharpe, GMV and EW (medians)
 
@@ -544,16 +546,16 @@ Note: Regression of the daily excess returns of each portfolio on those of SPY i
 
 | Portfolio | 2012-2016 | 2017-2020 | 2021-2026 |
 |---|---|---|---|
-| EW | 1.83 | 1.98 | 1.59 |
-| Markowitz (λ=3) | 1.52 | 1.36 | 0.85 |
-| GMV | 1.41 | 1.13 | 1.46 |
-| Max Sharpe | 1.39 | 1.23 | 1.32 |
-| Inverse vol | 1.83 | 1.88 | 1.54 |
-| Risk parity (ERC) | 1.86 | 1.92 | 1.72 |
-| Most diversified | 1.89 | 1.73 | 1.61 |
-| Max decorrelation | 1.77 | 1.83 | 1.47 |
-| Group pick (23 stocks) | 1.96 | 2.25 | 1.62 |
-| SPY (buy & hold) | 1.47 | 1.93 | 0.77 |
+| EW | 1.44 | 2.09 | 1.68 |
+| Markowitz (λ=3) | 1.41 | 1.36 | 1.05 |
+| GMV | 1.34 | 1.37 | 1.27 |
+| Max Sharpe | 1.26 | 1.48 | 1.30 |
+| Inverse vol | 1.61 | 1.97 | 1.77 |
+| Risk parity (ERC) | 1.65 | 1.99 | 1.80 |
+| Most diversified | 1.66 | 2.21 | 1.68 |
+| Max decorrelation | 1.47 | 2.08 | 1.62 |
+| Group pick (23 stocks) | 1.65 | 2.49 | 1.71 |
+| SPY (buy & hold) | 1.33 | 2.00 | 0.82 |
 
 ## T30. Median Sharpe ratio and return in the experiments whose out-of-sample year had SPY down or up
 
@@ -578,18 +580,18 @@ Note: "SPY down" = 12 of the 100 experiments, with a negative SPY return in the 
 
 *Report section: Robustness: dependence on the asset subset*
 
-| Portfolio | 12 stocks (main): Median Sharpe | 12 stocks (main): Rank | 12 stocks (main): Median return | 12 stocks (main): % beats EW (Sharpe) | 12 stocks (new draw): Median Sharpe | 12 stocks (new draw): Rank | 12 stocks (new draw): Median return | 12 stocks (new draw): % beats EW (Sharpe) | All eligible stocks: Median Sharpe | All eligible stocks: Rank | All eligible stocks: Median return | All eligible stocks: % beats EW (Sharpe) |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| EW | 1.81 | 1.0 | 31.2% |  | 1.64 | 4.0 | 30.3% |  | 1.70 | 3.5 | 35.6% |  |
-| Markowitz (λ=3) | 1.23 | 9.0 | 39.8% | 21 | 1.02 | 10.0 | 29.8% | 21 | 1.24 | 9.0 | 48.3% | 21 |
-| GMV | 1.34 | 7.0 | 17.3% | 31 | 1.23 | 8.0 | 17.4% | 34 | 1.46 | 7.0 | 18.9% | 36 |
-| Max Sharpe | 1.29 | 8.0 | 27.9% | 34 | 1.25 | 7.0 | 27.1% | 39 | 1.38 | 8.0 | 29.3% | 39 |
-| Inverse vol | 1.78 | 3.0 | 25.7% | 47 | 1.58 | 6.0 | 26.0% | 47 | 1.66 | 5.0 | 27.9% | 40 |
-| Risk parity (ERC) | 1.80 | 2.0 | 26.5% | 51 | 1.59 | 5.0 | 26.4% | 49 | 1.75 | 2.0 | 29.1% | 54 |
-| Most diversified | 1.70 | 5.0 | 28.7% | 47 | 1.66 | 3.0 | 26.3% | 50 | 1.85 | 1.0 | 27.5% | 52 |
-| Max decorrelation | 1.66 | 6.0 | 33.3% | 41 | 1.67 | 2.0 | 30.7% | 43 | 1.60 | 6.0 | 32.1% | 42 |
-| Group pick (23 stocks) | 1.70 | 4.0 | 35.6% | 62 | 1.70 | 1.0 | 35.6% | 68 | 1.70 | 3.5 | 35.6% | 0 |
-| SPY (buy & hold) | 1.13 | 10.0 | 17.7% | 15 | 1.13 | 9.0 | 17.7% | 19 | 1.13 | 10.0 | 17.7% | 8 |
+| Portfolio | 12 stocks (main): Median Sharpe | 12 stocks (main): Rank | 12 stocks (main): Average rank | 12 stocks (main): Median return | 12 stocks (main): % beats EW (Sharpe) | 12 stocks (new draw): Median Sharpe | 12 stocks (new draw): Rank | 12 stocks (new draw): Average rank | 12 stocks (new draw): Median return | 12 stocks (new draw): % beats EW (Sharpe) | All eligible stocks: Median Sharpe | All eligible stocks: Rank | All eligible stocks: Average rank | All eligible stocks: Median return | All eligible stocks: % beats EW (Sharpe) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| EW | 1.81 | 1.0 | 4.49 | 31.2% |  | 1.64 | 4.0 | 4.70 | 30.3% |  | 1.70 | 3.5 | 4.42 | 35.6% |  |
+| Markowitz (λ=3) | 1.23 | 9.0 | 7.35 | 39.8% | 21 | 1.02 | 10.0 | 7.53 | 29.8% | 21 | 1.24 | 9.0 | 7.39 | 48.3% | 21 |
+| GMV | 1.34 | 7.0 | 6.60 | 17.3% | 31 | 1.23 | 8.0 | 6.60 | 17.4% | 34 | 1.46 | 7.0 | 6.62 | 18.9% | 36 |
+| Max Sharpe | 1.29 | 8.0 | 6.36 | 27.9% | 34 | 1.25 | 7.0 | 6.17 | 27.1% | 39 | 1.38 | 8.0 | 5.68 | 29.3% | 39 |
+| Inverse vol | 1.78 | 3.0 | 4.70 | 25.7% | 47 | 1.58 | 6.0 | 4.74 | 26.0% | 47 | 1.66 | 5.0 | 4.96 | 27.9% | 40 |
+| Risk parity (ERC) | 1.80 | 2.0 | 4.19 | 26.5% | 51 | 1.59 | 5.0 | 4.26 | 26.4% | 49 | 1.75 | 2.0 | 4.00 | 29.1% | 54 |
+| Most diversified | 1.70 | 5.0 | 4.78 | 28.7% | 47 | 1.66 | 3.0 | 4.81 | 26.3% | 50 | 1.85 | 1.0 | 4.05 | 27.5% | 52 |
+| Max decorrelation | 1.66 | 6.0 | 5.03 | 33.3% | 41 | 1.67 | 2.0 | 5.24 | 30.7% | 43 | 1.60 | 6.0 | 5.06 | 32.1% | 42 |
+| Group pick (23 stocks) | 1.70 | 4.0 | 3.90 | 35.6% | 62 | 1.70 | 1.0 | 3.55 | 35.6% | 68 | 1.70 | 3.5 | 4.42 | 35.6% | 0 |
+| SPY (buy & hold) | 1.13 | 10.0 | 7.60 | 17.7% | 15 | 1.13 | 9.0 | 7.40 | 17.7% | 19 | 1.13 | 10.0 | 8.40 | 17.7% | 8 |
 
 Note: Same 100 periods. In "All eligible stocks", EW and the Group pick are the same portfolio (so they share the rank and the Group pick never "beats" EW).
 
@@ -615,16 +617,16 @@ Note: Here every strategy holds the same 23 stocks as the Group pick (EW on 23 s
 
 *Report section: Robustness: the 23-stock universe*
 
-| Portfolio | % beats Group pick: Sharpe | % beats Group pick: Ann. return | % beats Group pick: Max drawdown | % beats Group pick: Ann. volatility | % beats Group pick: Sterling | Median Sharpe difference vs Group pick |
-|---|---|---|---|---|---|---|
-| Markowitz (λ=3) | 21 | 63 | 8 | 0 | 51 | -0.49 |
-| GMV | 36 | 20 | 68 | 100 | 25 | -0.27 |
-| Max Sharpe | 39 | 60 | 30 | 23 | 54 | -0.22 |
-| Inverse vol | 40 | 16 | 91 | 100 | 29 | -0.03 |
-| Risk parity (ERC) | 54 | 23 | 93 | 100 | 35 | 0.01 |
-| Most diversified | 52 | 40 | 63 | 73 | 43 | 0.02 |
-| Max decorrelation | 42 | 63 | 29 | 33 | 63 | -0.07 |
-| SPY (buy & hold) | 8 | 4 | 62 | 96 | 6 | -0.47 |
+| Portfolio | % beats Group pick: Sharpe | % beats Group pick: Ann. return | % beats Group pick: Max drawdown | % beats Group pick: Ann. volatility | % beats Group pick: Sterling | % beats Group pick: Calmar | Median Sharpe difference vs Group pick |
+|---|---|---|---|---|---|---|---|
+| Markowitz (λ=3) | 21 | 63 | 8 | 0 | 51 | 33 | -0.49 |
+| GMV | 36 | 20 | 68 | 100 | 25 | 38 | -0.27 |
+| Max Sharpe | 39 | 60 | 30 | 23 | 54 | 38 | -0.22 |
+| Inverse vol | 40 | 16 | 91 | 100 | 29 | 42 | -0.03 |
+| Risk parity (ERC) | 54 | 23 | 93 | 100 | 35 | 50 | 0.01 |
+| Most diversified | 52 | 40 | 63 | 73 | 43 | 51 | 0.02 |
+| Max decorrelation | 42 | 63 | 29 | 33 | 63 | 50 | -0.07 |
+| SPY (buy & hold) | 8 | 4 | 62 | 96 | 6 | 12 | -0.47 |
 
 ## T34. Full sample 2010-2026: Group pick vs SPY vs ^GSPC (descriptive only - biased by hindsight)
 
@@ -672,6 +674,138 @@ Note: The 23 stocks were chosen in 2026, so this is NOT out-of-sample evidence. 
 
 Note: The brief asks to document failures. Each failed SLSQP optimisation is retried once with a looser tolerance; if it fails again, equal weights are used and the failure is logged in results/04_optimisation_failures.csv.
 
+## T38. How sure are we? % of experiments and 95% uncertainty band (cluster bootstrap by year)
+
+*Report section: 3. Results: uncertainty (overlapping experiments)*
+
+| Comparison | % of experiments | Band low (95%) | Band high (95%) | Clear? |
+|---|---|---|---|---|
+| Group pick beats EW (Sharpe) | 62 | 50 | 72 | yes |
+| ERC beats EW (Sharpe) | 51 | 36 | 68 | no (band includes 50%) |
+| Inverse vol beats EW (Sharpe) | 47 | 30 | 67 | no (band includes 50%) |
+| Most diversified beats EW (Sharpe) | 47 | 32 | 66 | no (band includes 50%) |
+| Max decorrelation beats EW (Sharpe) | 41 | 32 | 53 | no (band includes 50%) |
+| GMV beats EW (Sharpe) | 31 | 17 | 48 | yes |
+| Max Sharpe beats EW (Sharpe) | 34 | 20 | 50 | no (band includes 50%) |
+| Markowitz beats EW (Sharpe) | 21 | 11 | 32 | yes |
+| ERC beats inverse vol (Sharpe) | 65 | 54 | 78 | yes |
+| Group pick beats ERC (Sharpe) | 56 | 43 | 68 | no (band includes 50%) |
+| ERC lower volatility than EW | 100 | 100 | 100 | yes |
+| ERC smaller drawdown than EW | 86 | 77 | 93 | yes |
+| ERC beats SPY (Sharpe) | 86 | 75 | 95 | yes |
+| ERC lower volatility than SPY | 46 | 30 | 63 | no (band includes 50%) |
+| ERC smaller drawdown than SPY | 58 | 44 | 72 | no (band includes 50%) |
+| Group pick beats SPY (Sharpe) | 92 | 81 | 100 | yes |
+| EW beats SPY (Sharpe) | 85 | 74 | 95 | yes |
+
+Note: Each out-of-sample day belongs to about 7 experiments; at most 13 out-of-sample years do not overlap. The band resamples whole start years (14) 2,000 times. "Clear" = the band does not include 50%.
+
+## T39. % of experiments in which each portfolio beats EW (Sharpe), by sub-period
+
+*Report section: Robustness: dependence on the period*
+
+| Portfolio | 2012-2016 | 2017-2020 | 2021-2026 |
+|---|---|---|---|
+| Markowitz (λ=3) | 38 | 15 | 12 |
+| GMV | 44 | 30 | 22 |
+| Max Sharpe | 38 | 11 | 46 |
+| Inverse vol | 47 | 33 | 56 |
+| Risk parity (ERC) | 50 | 44 | 56 |
+| Most diversified | 44 | 52 | 46 |
+| Max decorrelation | 38 | 48 | 39 |
+| Group pick (23 stocks) | 69 | 63 | 56 |
+| SPY (buy & hold) | 25 | 19 | 5 |
+
+Note: Each experiment is assigned to the sub-period that contains the middle of its out-of-sample year (32, 27 and 41 experiments).
+
+## T40. Drawdowns in the years in which SPY fell (12 experiments) and rose
+
+*Report section: Robustness: market regimes*
+
+| Portfolio | Median max drawdown (SPY down) | Median max drawdown (SPY up) | % smaller drawdown than EW (SPY down) | Average Sharpe rank (SPY down) |
+|---|---|---|---|---|
+| EW | -19.8% | -10.3% |  | 4.50 |
+| Markowitz (λ=3) | -27.7% | -23.5% | 17 | 6.67 |
+| GMV | -13.5% | -9.2% | 92 | 5.92 |
+| Max Sharpe | -19.3% | -13.2% | 50 | 4.75 |
+| Inverse vol | -18.4% | -8.7% | 92 | 5.17 |
+| Risk parity (ERC) | -17.4% | -8.9% | 92 | 4.42 |
+| Most diversified | -15.4% | -10.2% | 75 | 4.58 |
+| Max decorrelation | -19.2% | -11.7% | 58 | 4.50 |
+| Group pick (23 stocks) | -20.6% | -9.3% | 25 | 5.67 |
+| SPY (buy & hold) | -19.3% | -9.4% | 67 | 8.83 |
+
+Note: The positive returns of the 23-stock portfolios in falling markets mostly reflect the selection bias of the universe; the relevant evidence for a defensive strategy is the drawdown compared with EW in the same experiment.
+
+## T41. Average rank by net Sharpe ratio in each experiment, for each cost level (1 = best of 10)
+
+*Report section: Robustness: transaction costs*
+
+| Portfolio | 0 bps | 10 bps | 25 bps | 50 bps |
+|---|---|---|---|---|
+| EW | 4.52 | 4.49 | 4.46 | 4.45 |
+| Markowitz (λ=3) | 7.34 | 7.35 | 7.36 | 7.41 |
+| GMV | 6.56 | 6.60 | 6.62 | 6.69 |
+| Max Sharpe | 6.31 | 6.36 | 6.37 | 6.44 |
+| Inverse vol | 4.73 | 4.70 | 4.69 | 4.68 |
+| Risk parity (ERC) | 4.21 | 4.19 | 4.18 | 4.12 |
+| Most diversified | 4.80 | 4.78 | 4.78 | 4.83 |
+| Max decorrelation | 5.02 | 5.03 | 5.06 | 5.06 |
+| Group pick (23 stocks) | 3.90 | 3.90 | 3.90 | 3.83 |
+| SPY (buy & hold) | 7.61 | 7.60 | 7.58 | 7.49 |
+
+## T42. Trading one day later: weights estimated with data up to t-2 instead of t-1
+
+*Report section: Robustness: execution lag*
+
+| Portfolio | Median Sharpe (main) | Median Sharpe (1-day lag) | Median change in Sharpe (lag - main) | % beats EW Sharpe (main) | % beats EW Sharpe (1-day lag) | Average rank (main) | Average rank (1-day lag) |
+|---|---|---|---|---|---|---|---|
+| EW | 1.806 | 1.806 | 0.000 |  |  | 4.49 | 4.50 |
+| Markowitz (λ=3) | 1.232 | 1.297 | 0.000 | 21 | 21 | 7.35 | 7.36 |
+| GMV | 1.338 | 1.338 | 0.000 | 31 | 33 | 6.60 | 6.56 |
+| Max Sharpe | 1.288 | 1.318 | -0.005 | 34 | 35 | 6.36 | 6.34 |
+| Inverse vol | 1.777 | 1.778 | 0.000 | 47 | 46 | 4.70 | 4.75 |
+| Risk parity (ERC) | 1.801 | 1.802 | 0.000 | 51 | 51 | 4.19 | 4.18 |
+| Most diversified | 1.701 | 1.704 | 0.000 | 47 | 47 | 4.78 | 4.80 |
+| Max decorrelation | 1.658 | 1.671 | 0.000 | 41 | 40 | 5.03 | 5.01 |
+| Group pick (23 stocks) | 1.704 | 1.704 | 0.000 | 62 | 62 | 3.90 | 3.91 |
+| SPY (buy & hold) | 1.128 | 1.128 | 0.000 | 15 | 15 | 7.60 | 7.59 |
+
+## T43. Without the five biggest winners of 2010-2026 (NVDA, AVGO, TSLA, MU, AMD): 12 stocks drawn from the other 18
+
+*Report section: Robustness: hindsight in the universe*
+
+| Portfolio | Median return (main) | Median return (without top 5) | Median Sharpe (main) | Median Sharpe (without top 5) | % lower volatility than SPY (main) | % lower volatility than SPY (without top 5) | % smaller drawdown than SPY (main) | % smaller drawdown than SPY (without top 5) | % beats SPY Sharpe (without top 5) | % beats EW Sharpe (without top 5) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| EW | 31.2% | 21.9% | 1.806 | 1.558 | 13 | 70 | 37 | 71 | 84 |  |
+| Markowitz (λ=3) | 39.8% | 18.1% | 1.232 | 0.747 | 0 | 1 | 11 | 19 | 40 | 18 |
+| GMV | 17.3% | 18.8% | 1.338 | 1.409 | 81 | 92 | 56 | 62 | 58 | 38 |
+| Max Sharpe | 27.9% | 18.7% | 1.288 | 1.050 | 14 | 12 | 24 | 38 | 49 | 25 |
+| Inverse vol | 25.7% | 21.5% | 1.777 | 1.599 | 44 | 85 | 59 | 78 | 82 | 38 |
+| Risk parity (ERC) | 26.5% | 21.1% | 1.801 | 1.630 | 46 | 89 | 58 | 79 | 83 | 52 |
+| Most diversified | 28.7% | 22.7% | 1.701 | 1.549 | 36 | 65 | 46 | 65 | 75 | 50 |
+| Max decorrelation | 33.3% | 23.5% | 1.658 | 1.516 | 12 | 48 | 29 | 57 | 73 | 46 |
+| SPY (buy & hold) | 17.7% | 17.7% | 1.128 | 1.128 |  |  |  |  |  | 16 |
+
+Note: Same 100 periods. A sensitivity check (it removes winners we know about), not an unbiased result.
+
+## T44. Maximum drawdown in the three experiments whose out-of-sample year contains the March 2020 crash
+
+*Report section: Robustness: crash*
+
+| Portfolio | Experiment 62 | Experiment 80 | Experiment 94 |
+|---|---|---|---|
+| EW | -29.4% | -32.5% | -31.5% |
+| Markowitz (λ=3) | -29.6% | -45.8% | -51.9% |
+| GMV | -37.9% | -33.9% | -29.2% |
+| Max Sharpe | -35.8% | -44.0% | -33.0% |
+| Inverse vol | -29.9% | -31.0% | -29.4% |
+| Risk parity (ERC) | -31.1% | -32.3% | -30.4% |
+| Most diversified | -36.2% | -36.5% | -33.8% |
+| Max decorrelation | -35.3% | -37.4% | -35.5% |
+| Group pick (23 stocks) | -32.7% | -32.8% | -31.9% |
+| SPY (buy & hold) | -33.7% | -33.7% | -29.1% |
+
 ## T37. Trade-offs: return, downside risk, concentration, turnover and complexity (medians, net of 10 bps)
 
 *Report section: 6. Conclusions and recommendation*
@@ -686,7 +820,7 @@ Note: The brief asks to document failures. Each failed SLSQP optimisation is ret
 | Risk parity (ERC) | 26.5% | 14.4% | -10.0% | 1.80 | 51 | 10.7 | 0.31 | covariances (optimiser) | Medium |
 | Most diversified | 28.7% | 15.2% | -10.7% | 1.70 | 47 | 6.3 | 0.84 | covariances (optimiser) | Medium |
 | Max decorrelation | 33.3% | 19.0% | -13.1% | 1.66 | 41 | 7.1 | 0.86 | correlations (optimiser) | Medium |
-| Group pick (23 stocks) | 35.6% | 15.8% | -10.1% | 1.70 | 62 | 23.0 | 0.28 | nothing (but the stock selection was made with hindsight) | Low |
+| Group pick (23 stocks) | 35.6% | 15.8% | -10.1% | 1.70 | 62 | 23.0 | 0.28 | nothing (but the 23 stocks were chosen with hindsight) | Low |
 | SPY (buy & hold) | 17.7% | 14.0% | -9.4% | 1.13 | 15 |  | 0.00 | nothing (one ETF) | Lowest |
 
 Note: Effective N = 1/Σw² (12 = equal weights on the 12 stocks of each experiment; the Group pick holds 22-23). Complexity = how much must be estimated and optimised at each rebalancing.
@@ -1068,3 +1202,18 @@ Note: Effective N = 1/Σw² (12 = equal weights on the 12 stocks of each experim
 | Most diversified | 52 | 75 | 78 | 64 | 59 | 58 |  | 64 | 93 |
 | Max decorrelation | 42 | 69 | 67 | 63 | 47 | 39 | 36 |  | 89 |
 | SPY (buy & hold) | 8 | 48 | 47 | 30 | 1 | 0 | 7 | 11 |  |
+
+## TA12. Same conclusion "beats / does not beat EW" with the main and the new draw of stocks (% of experiments)
+
+*Report section: Appendix: dependence on the asset subset*
+
+| Portfolio | Agreement (%) |
+|---|---|
+| Markowitz (λ=3) | 78 |
+| GMV | 73 |
+| Max Sharpe | 77 |
+| Inverse vol | 68 |
+| Risk parity (ERC) | 74 |
+| Most diversified | 61 |
+| Max decorrelation | 56 |
+| Group pick (23 stocks) | 58 |

@@ -3,12 +3,12 @@
 | File / folder | What it is | Made by |
 |---|---|---|
 | `REPORT_NOTES.md` | **Start here.** Section-by-section guide to the report: key findings with the numbers, the text for data / methods / assumptions, limitations, recommendation, references, reproducibility appendix, corrections to the current draft and the link to the course labs | written by hand from the results |
-| `INDEX.md` | List of every figure and table: number, caption, report section, notebook that made it, main text or appendix | `notebooks/05_report_pack.ipynb` |
-| `figures/` | 40 figures numbered in the order of the report: `F01`–`F28` for the main text, `FA01`–`FA12` for the appendix (FA11 and FA12 show the two 23-stock charts in their other form: F13 as a heatmap, FA10 as bars) | `notebooks/05_report_pack.ipynb` (copies of `figures/`) |
-| `tables/report_tables.xlsx` | 48 tables (`T01`–`T37` main text, `TA01`–`TA11` appendix), rounded and formatted (%, 2 decimals, p-values), one sheet each with a title and a note; first sheet = index. **Copy tables into Word from here** | `notebooks/05_report_pack.ipynb` |
+| `INDEX.md` | List of every figure and table: number, caption, report section, notebook that made it and **suggested placement** (21 core items for the main text, the rest in the appendix — the brief wants technical output in the appendix) | `notebooks/05_report_pack.ipynb` |
+| `figures/` | 40 figures numbered in the order of the report: `F01`–`F28`, and `FA01`–`FA12` for the appendix only (FA11 and FA12 show the two 23-stock charts in their other form: F13 as a heatmap, FA10 as bars) | `notebooks/05_report_pack.ipynb` (copies of `figures/`) |
+| `tables/report_tables.xlsx` | 56 tables (`T01`–`T44`, and `TA01`–`TA12` for the appendix only), rounded and formatted (%, 2 decimals, p-values), one sheet each with a title and a note; first sheet = index. **Copy tables into Word from here** | `notebooks/05_report_pack.ipynb` |
 | `tables/T..._*.csv`, `tables/TA..._*.csv` | The same tables as CSV (values already formatted as text) | `notebooks/05_report_pack.ipynb` |
 | `tables/all_tables.md` | All the tables in one Markdown file (easy to read on GitHub) | `notebooks/05_report_pack.ipynb` |
-| `tables/png/` | **Every table as an image** (48 PNG files, same colour scheme as the charts, with title and note): insert them in Word like a figure | `notebooks/05_report_pack.ipynb` |
+| `tables/png/` | **Every table as an image** (56 PNG files, same colour scheme as the charts, with title and note): insert them in Word like a figure | `notebooks/05_report_pack.ipynb` |
 
 **How to use it**
 

@@ -1,0 +1,11 @@
+﻿,0 bps,10 bps,25 bps,50 bps
+EW,4.52,4.49,4.46,4.45
+Markowitz (λ=3),7.34,7.35,7.36,7.41
+GMV,6.56,6.6,6.62,6.69
+Max Sharpe,6.31,6.36,6.37,6.44
+Inverse vol,4.73,4.7,4.69,4.68
+Risk parity (ERC),4.21,4.19,4.18,4.12
+Most diversified,4.8,4.78,4.78,4.83
+Max decorrelation,5.02,5.03,5.06,5.06
+Group pick (23 stocks),3.9,3.9,3.9,3.83
+SPY (buy & hold),7.61,7.6,7.58,7.49
