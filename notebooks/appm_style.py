@@ -130,6 +130,7 @@ def apply_style():
         'ytick.color': COLOURS['text_secondary'],
         'legend.frameon': False,
         'legend.labelcolor': COLOURS['text_secondary'],
+        'text.color': COLOURS['text'],                         # default colour of ax.text and annotations
         'lines.linewidth': 1.6,
         'axes.prop_cycle': plt.cycler(color=SERIES_COLOURS),  # default colours when none is given
         'image.cmap': 'appm_sequential',
@@ -156,12 +157,13 @@ def diverging_cmap():
     return LinearSegmentedColormap.from_list('appm_diverging', DIVERGING)
 
 
-def reference_line(ax, y=None, x=None, label=None):
-    """A thin reference line (horizontal at y, or vertical at x), e.g. zero, 50% or beta = 1."""
+def reference_line(ax, y=None, x=None, label=None, zorder=1):
+    """A thin reference line (horizontal at y, or vertical at x), e.g. zero, 50% or beta = 1.
+    zorder=1 draws it behind bars and lines; use a larger zorder (e.g. 3) to draw it on top."""
     if y is not None:
-        ax.axhline(y, color=COLOURS['reference'], linewidth=1, label=label, zorder=1)
+        ax.axhline(y, color=COLOURS['reference'], linewidth=1, label=label, zorder=zorder)
     if x is not None:
-        ax.axvline(x, color=COLOURS['reference'], linewidth=1, label=label, zorder=1)
+        ax.axvline(x, color=COLOURS['reference'], linewidth=1, label=label, zorder=zorder)
 
 
 def text_colour_on(fill_colour):
@@ -217,18 +219,23 @@ def save_table_png(table, path, title=None, note=None, highlight=('Group pick',)
 
     # Wrap long text (cells and headers) so that no column becomes too wide
     def wrap(text, width):
-        return textwrap.wrap(text, width=width, break_long_words=False) or ['']
+        # never break inside a word or at a hyphen ('ex-ante' stays together)
+        return textwrap.wrap(text, width=width, break_long_words=False, break_on_hyphens=False) or ['']
 
     wrapped_cells = [[[cell] if numeric[j] else wrap(cell, max_text_width) for j, cell in enumerate(row)] for row in cells]
     widest_value = [max([len(line) for row in wrapped_cells for line in row[j]] + [1]) for j in range(n_columns)]
-    wrapped_headers = [wrap(headers[j], max(max_header_width, widest_value[j])) for j in range(n_columns)]
+    longest_word = [max([len(word) for word in headers[j].split()] + [1]) for j in range(n_columns)]
+    wrapped_headers = [wrap(headers[j], max(max_header_width, widest_value[j], longest_word[j])) for j in range(n_columns)]
 
     # Sizes in inches: a character is about 0.6 x the font size wide; 72 points = 1 inch
     char_width = font_size * 0.6 / 72
     line_height = font_size * 1.45 / 72
     padding = font_size * 0.8 / 72
     bold_char_width = font_size * 0.68 / 72              # bold header letters are a little wider
-    column_widths = [max(widest_value[j] * char_width, max(len(line) for line in wrapped_headers[j]) * bold_char_width)
+    # if a row is highlighted (written in bold), size the columns for bold text
+    any_highlight = bool(highlight) and any(any(row[0].startswith(word) for word in highlight) for row in cells)
+    body_char_width = bold_char_width if any_highlight else char_width
+    column_widths = [max(widest_value[j] * body_char_width, max(len(line) for line in wrapped_headers[j]) * bold_char_width)
                      + 2.5 * padding for j in range(n_columns)]
     header_height = max(len(lines) for lines in wrapped_headers) * line_height + 1.2 * padding
     row_heights = [max(len(cell) for cell in row) * line_height + 0.9 * padding for row in wrapped_cells]
