@@ -17,6 +17,7 @@ Goal: study the empirical properties of stock returns (stylised facts) and compa
 | `notebooks/data/` | Prices and returns produced by notebook 01 (`clean_prices.csv`, `daily_log_returns.csv`, `weekly_log_returns.csv`, `monthly_log_returns.csv`) and the daily WMT history used by notebook 02 (`walmart_history.csv`: open, high, low, close, adjusted close, volume, dividends and splits). These are the frozen data of the report: do not delete them. The risk-free rate (`risk_free_DGS3.csv`) is created by notebook 04 |
 | `notebooks/05_report_pack.ipynb` | Builds the `report_pack/` folder from `figures/` and `results/` (nothing new is computed): numbered figures, formatted tables (Excel, CSV, Markdown) and an index. Also as `.html` |
 | `report_pack/` | **Everything for the report in one folder** — start with `report_pack/REPORT_NOTES.md` (key findings and numbers by report section, assumptions, limitations, recommendation, references, corrections to the draft), then `INDEX.md`, `figures/` and `tables/report_tables.xlsx` |
+| `notebooks/appm_style.py` | **The colour scheme and look of every chart and table** (one editable dictionary of colours per portfolio, general colours, colour scales, and the function that saves tables as PNG). All notebooks import it: change a colour there and run the notebooks again |
 | `figures/` | All charts (PNG). Those from notebook 02 have no prefix, those from notebook 03 start with `03_`, those from notebook 04 with `04_` |
 | `results/` | All tables as CSV and as Excel (`03_stylised_facts.xlsx`, `04_strategies_backtest.xlsx`) |
 | `reports/` | Report |
@@ -165,6 +166,19 @@ git push origin Miguel_seco          # push only your own branch
 | Benchmarks | Equally weighted and SPY buy & hold |
 | Group pick | the group's 23 stocks (all the eligible ones: 22 before TSLA has data), equal weights, same rebalancing, warm-up, costs, evaluation year and metrics as the strategies; compared as a 10th portfolio |
 | Markowitz | risk aversion λ = 3 (sensitivity with λ = 1 and 5) |
+
+## Colours of the charts and tables
+
+All colours are defined once in `notebooks/appm_style.py` (scheme "B - navy accents", chosen by the group):
+
+- `PORTFOLIO_COLOURS` — one fixed colour per portfolio (the same in every chart); the 8 strategy colours were checked to stay
+  distinguishable for colour-blind readers; the Group pick is navy and SPY grey;
+- `COLOURS` — background, text, grid, reference lines and table colours (navy header, light stripes, highlighted Group pick row);
+- `OTHER_COLOURS`, `METRIC_COLOURS`, `STOCK_COLOURS`, `SEQUENTIAL`, `DIVERGING` — WMT/SPY/^GSPC, metric bars, the 23 stocks and the two
+  heatmap colour scales.
+
+To change the look: edit the colour (a name such as `'navy'` or a hex code such as `'#0d366b'`) and run the notebooks again (locally
+or with the "Run notebooks" button). No other file needs to change.
 
 ## Mapping to the report
 

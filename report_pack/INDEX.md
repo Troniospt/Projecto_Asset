@@ -2,6 +2,7 @@
 
 Created automatically by `notebooks/05_report_pack.ipynb` (do not edit by hand: run the notebook again).
 Figures are in `figures/` (numbered in the order of the report); tables are in `tables/report_tables.xlsx` (one sheet per table), `tables/<number>_<name>.csv` and `tables/all_tables.md`.
+Every table is also an image in `tables/png/` (`<number>_<name>.png`: title, table and note, in the same colours as the figures), ready to insert in Word. The colours of all the figures and tables are set in `notebooks/appm_style.py`.
 The written guide with the key findings and numbers is `REPORT_NOTES.md`.
 F = figure and T = table for the main text; FA and TA = appendix. The "report section" labels follow the numbering of the group's draft (1. universe and data, 2.1 stylised facts, 3. strategies, backtest and results); in `REPORT_NOTES.md` the draft's section 3 is split into methods (section 3), results (section 4) and robustness (section 5).
 
@@ -22,7 +23,7 @@ F = figure and T = table for the main text; FA and TA = appendix. The "report se
 | F11 | `figures/F11_03_conditional_volatility_wmt.png` | 2.1.5 Leverage effect / 2.1.4 Volatility clustering | Conditional volatility of WMT from the daily GJR-GARCH(1,1) model with Student-t innovations (annualised), with the rolling 21-day volatility for comparison. | notebook 03, section 7 | Main |
 | F12 | `figures/F12_03_qqplot_std_residuals_wmt.png` | 2.1.6 Conditional non-normality | Q-Q plots of the standardised residuals of the GJR-GARCH model against the normal and the Student-t distribution, WMT, three frequencies. | notebook 03, section 8 | Main |
 | F13 | `figures/F13_04_weights_illustration.png` | 3. Strategies: objectives and constraints | Weights of each strategy estimated with the last 12 months of data on the 23 stocks (illustration, not a backtest result). | notebook 04, section 4 | Main |
-| F14 | `figures/F14_04_risk_contributions_iv_vs_erc.png` | 3. Strategies: inverse volatility vs equal risk contributions | Risk contributions (% of portfolio risk) of inverse volatility and risk parity (ERC), 23 stocks, last 12 months: with correlated assets inverse volatility does not equalise risk contributions (dashed = 1/N = 4.35%; weights in table TA05). | notebook 04, section 4 | Main |
+| F14 | `figures/F14_04_risk_contributions_iv_vs_erc.png` | 3. Strategies: inverse volatility vs equal risk contributions | Risk contributions (% of portfolio risk) of inverse volatility and risk parity (ERC), 23 stocks, last 12 months: with correlated assets inverse volatility does not equalise risk contributions (line = 1/N = 4.35%; weights in table TA05). | notebook 04, section 4 | Main |
 | F15 | `figures/F15_04_efficient_frontier.png` | 3. Strategies: Markowitz vs GMV vs Max Sharpe | In-sample efficient frontier (last 12 months, long-only) with the position of each strategy; Markowitz with λ = 3 is distinct from GMV and Max Sharpe. | notebook 04, section 4 | Main |
 | F16 | `figures/F16_04_experiment_design.png` | 3. Backtest design | The 100 sampled 3-year periods (grey = first two years, used for estimation with a trailing 1-year window; blue = out-of-sample year) and how often each stock was drawn (seed 2026). | notebook 04, section 5 | Main |
 | F17 | `figures/F17_04_boxplots_metrics.png` | 3. Results: distribution across the 100 experiments | Distribution across the 100 experiments of the Sharpe ratio, return, volatility, maximum drawdown, Sortino and Sterling ratios of the 10 portfolios (net of 10 bps). | notebook 04, section 9.2 | Main |
@@ -47,56 +48,58 @@ F = figure and T = table for the main text; FA and TA = appendix. The "report se
 | FA08 | `figures/FA08_04_universe23_pairwise_sharpe.png` | Appendix: the 23-stock universe | Head-to-head Sharpe comparison of the strategies applied to the 23-stock universe. | notebook 04, section 11 | Appendix |
 | FA09 | `figures/FA09_04_fullsample_drawdowns.png` | Appendix: full sample | Drawdowns of the Group pick, SPY and ^GSPC, 2010-2026. | notebook 04, section 12 | Appendix |
 | FA10 | `figures/FA10_04_avg_weight_by_stock.png` | Appendix: weights | Average weight of each stock when it is drawn, by strategy (equal weight would be 8.3%). | notebook 04, section 10.5 | Appendix |
+| FA11 | `figures/FA11_04_weights_illustration_heatmap.png` | Appendix: strategies | Weights of each strategy with the last 12 months of data on the 23 stocks, as a heatmap (same data as F13; darker = larger weight). | notebook 04, section 4 | Appendix |
+| FA12 | `figures/FA12_04_avg_weight_by_stock_bars.png` | Appendix: weights | Average weight of each stock when it is drawn, one panel per strategy (same data as FA10; line = equal weight 8.3%). | notebook 04, section 10.5 | Appendix |
 
 ## Tables
 
-| No. | Title | Report section | Excel sheet | CSV |
-|---|---|---|---|---|
-| T01 | Investment universe: 23 S&P 500 stocks and SPY, 2010-2026 | 1. Investment universe and data | `T01 universe` | `tables/T01_universe.csv` |
-| T02 | Descriptive statistics of WMT and SPY log returns at three frequencies | 2.1 Stylised facts | `T02 descriptive_wmt_spy` | `tables/T02_descriptive_wmt_spy.csv` |
-| T03 | Summary: is each stylised fact supported for WMT? | 2.1 Stylised facts (summary) | `T03 facts_summary_wmt` | `tables/T03_facts_summary_wmt.csv` |
-| T04 | Evidence for each stylised fact: statistic, p-value and conclusion (WMT, with SPY for comparison) | 2.1 Stylised facts (summary) | `T04 facts_evidence` | `tables/T04_facts_evidence.csv` |
-| T05 | Autocorrelation of log returns, lags 1 to 5 | 2.1.1 Little or no serial correlation | `T05 acf_returns` | `tables/T05_acf_returns.csv` |
-| T06 | Ljung-Box test on log returns (H0: no autocorrelation up to the lag) | 2.1.1 Little or no serial correlation | `T06 ljung_box_returns` | `tables/T06_ljung_box_returns.csv` |
-| T07 | Normality and fat tails: excess kurtosis, Jarque-Bera and frequency of 3-sigma days | 2.1.2 Non-normal distributions and fat tails | `T07 normality` | `tables/T07_normality.csv` |
-| T08 | Asymmetry: skewness with a bootstrap test (robust to fat tails) | 2.1.3 Asymmetry and negative skewness | `T08 skewness` | `tables/T08_skewness.csv` |
-| T09 | Volatility clustering: Ljung-Box on \|r\| and r^2 and ARCH-LM test | 2.1.4 Volatility clustering | `T09 vol_clustering` | `tables/T09_vol_clustering.csv` |
-| T10 | GJR-GARCH(1,1) estimates with normal and Student-t innovations | 2.1.5 Leverage effect | `T10 gjr_garch` | `tables/T10_gjr_garch.csv` |
-| T11 | Correlation between r(t) and \|r(t+k)\| (daily) | 2.1.5 Leverage effect | `T11 leverage_correlation` | `tables/T11_leverage_correlation.csv` |
-| T12 | Standardised residuals of the GJR-GARCH: skewness, excess kurtosis and tests | 2.1.6 Conditional non-normality | `T12 std_residuals` | `tables/T12_std_residuals.csv` |
-| T13 | The portfolios compared: objective, inputs and parameters | 3. Strategies: objectives and constraints | `T13 strategy_definitions` | `tables/T13_strategy_definitions.csv` |
-| T14 | Backtest design and conventions (the same for every strategy) | 3. Backtest design and assumptions | `T14 backtest_design` | `tables/T14_backtest_design.csv` |
-| T15 | Median performance of the 10 portfolios across the 100 experiments (net of 10 bps) | 3. Results | `T15 median_metrics` | `tables/T15_median_metrics.csv` |
-| T16 | Dispersion across the 100 experiments: 25th percentile, median and 75th percentile | 3. Results | `T16 dispersion` | `tables/T16_dispersion.csv` |
-| T17 | % of experiments in which each portfolio beats EW in the same experiment | 3. Results | `T17 beats_ew` | `tables/T17_beats_ew.csv` |
-| T18 | % of experiments in which each portfolio beats the Group pick in the same experiment | 3. Results | `T18 beats_group_pick` | `tables/T18_beats_group_pick.csv` |
-| T19 | % of experiments in which each portfolio beats SPY in the same experiment | 3. Results | `T19 beats_spy` | `tables/T19_beats_spy.csv` |
-| T20 | Rank of each portfolio by net Sharpe ratio in each experiment (1 = best of 10) | 3. Results | `T20 rankings` | `tables/T20_rankings.csv` |
-| T21 | Head-to-head: % of experiments in which A (row) has a higher net Sharpe ratio than B (column) | 3. Results: head-to-head comparison | `T21 pairwise_sharpe` | `tables/T21_pairwise_sharpe.csv` |
-| T22 | Average % of head-to-head comparisons won (against the other 9 portfolios) | 3. Results: head-to-head comparison | `T22 pairwise_avg_win_rate` | `tables/T22_pairwise_avg_win_rate.csv` |
-| T23 | Median paired difference in net Sharpe ratio: A (row) minus B (column) | 3. Results: head-to-head comparison | `T23 pairwise_median_sharpe_diff` | `tables/T23_pairwise_median_sharpe_diff.csv` |
-| T24 | Market risk against SPY: CAPM beta, Jensen's alpha, tracking error and information ratio (medians) | 3. Results: market risk (CAPM) | `T24 capm` | `tables/T24_capm.csv` |
-| T25 | Median net Sharpe ratio with different transaction costs | Robustness: transaction costs | `T25 sharpe_by_cost` | `tables/T25_sharpe_by_cost.csv` |
-| T26 | Rank by median net Sharpe ratio with different transaction costs (1 = best) | Robustness: transaction costs | `T26 ranking_by_cost` | `tables/T26_ranking_by_cost.csv` |
-| T27 | Semi-annual vs quarterly rebalancing (medians, net of 10 bps) | Robustness: rebalancing frequency | `T27 semiannual_vs_quarterly` | `tables/T27_semiannual_vs_quarterly.csv` |
-| T28 | Markowitz risk aversion: λ = 1, 3 and 5 between Max Sharpe, GMV and EW (medians) | Robustness: Markowitz risk aversion | `T28 lambda_sensitivity` | `tables/T28_lambda_sensitivity.csv` |
-| T29 | Median net Sharpe ratio by sub-period of the evaluation year | Robustness: dependence on the period | `T29 sharpe_by_subperiod` | `tables/T29_sharpe_by_subperiod.csv` |
-| T30 | Median Sharpe ratio and return in the experiments whose out-of-sample year had SPY down or up | Robustness: dependence on the period | `T30 market_regime` | `tables/T30_market_regime.csv` |
-| T31 | Do the results depend on the stocks drawn? Main draw, new draw and all eligible stocks | Robustness: dependence on the asset subset | `T31 subset_comparison` | `tables/T31_subset_comparison.csv` |
-| T32 | The strategies applied to the group's 23 stocks (medians, net of 10 bps) | Robustness: the 23-stock universe | `T32 universe23_medians` | `tables/T32_universe23_medians.csv` |
-| T33 | On the 23-stock universe: % of experiments in which each strategy beats the Group pick | Robustness: the 23-stock universe | `T33 universe23_beats_group_pick` | `tables/T33_universe23_beats_group_pick.csv` |
-| T34 | Full sample 2010-2026: Group pick vs SPY vs ^GSPC (descriptive only - biased by hindsight) | Robustness / limitations: full sample | `T34 fullsample_metrics` | `tables/T34_fullsample_metrics.csv` |
-| T35 | Calendar-year returns: Group pick vs SPY vs ^GSPC (2026 = year to date, until 18 September) | Robustness / limitations: full sample | `T35 calendar_year_returns` | `tables/T35_calendar_year_returns.csv` |
-| T36 | Optimisation failures in all the runs of the backtest | Methods: optimisation failures | `T36 optimisation_failures` | `tables/T36_optimisation_failures.csv` |
-| T37 | Trade-offs: return, downside risk, concentration, turnover and complexity (medians, net of 10 bps) | 6. Conclusions and recommendation | `T37 tradeoffs` | `tables/T37_tradeoffs.csv` |
-| TA01 | Descriptive statistics of all 25 series (23 stocks, SPY, ^GSPC) at three frequencies | Appendix: data | `TA01 descriptive_all_assets` | `tables/TA01_descriptive_all_assets.csv` |
-| TA02 | The 100 experiments: periods and the 12 stocks drawn (seed 2026) | Appendix: backtest design | `TA02 experiment_design` | `tables/TA02_experiment_design.csv` |
-| TA03 | Illustration: weights of each strategy with the last 12 months of data (23 stocks) | Appendix: strategies | `TA03 weights_illustration` | `tables/TA03_weights_illustration.csv` |
-| TA04 | Illustration: ex-ante characteristics of each strategy (last 12 months, 23 stocks) | Appendix: strategies | `TA04 illustration_characteristi` | `tables/TA04_illustration_characteristics.csv` |
-| TA05 | Inverse volatility vs ERC: weights and risk contributions (last 12 months, 23 stocks) | Appendix: strategies | `TA05 iv_vs_erc` | `tables/TA05_iv_vs_erc.csv` |
-| TA06 | Average weight of each stock when it is drawn, by strategy | Appendix: weights | `TA06 avg_weight_by_stock` | `tables/TA06_avg_weight_by_stock.csv` |
-| TA07 | Head-to-head: % of experiments in which A (row) has a higher return than B (column) | Appendix: head-to-head comparison | `TA07 pairwise_return` | `tables/TA07_pairwise_return.csv` |
-| TA08 | Head-to-head: % of experiments in which A (row) has a smaller maximum drawdown than B (column) | Appendix: head-to-head comparison | `TA08 pairwise_max_drawdown` | `tables/TA08_pairwise_max_drawdown.csv` |
-| TA09 | Head-to-head: % of experiments in which A (row) has a lower volatility than B (column) | Appendix: head-to-head comparison | `TA09 pairwise_volatility` | `tables/TA09_pairwise_volatility.csv` |
-| TA10 | Head-to-head: % of experiments in which A (row) has a higher Sterling ratio than B (column) | Appendix: head-to-head comparison | `TA10 pairwise_sterling` | `tables/TA10_pairwise_sterling.csv` |
-| TA11 | On the 23-stock universe: head-to-head comparison by net Sharpe ratio | Appendix: the 23-stock universe | `TA11 universe23_pairwise_sharpe` | `tables/TA11_universe23_pairwise_sharpe.csv` |
+| No. | Title | Report section | Excel sheet | CSV | PNG |
+|---|---|---|---|---|---|
+| T01 | Investment universe: 23 S&P 500 stocks and SPY, 2010-2026 | 1. Investment universe and data | `T01 universe` | `tables/T01_universe.csv` | `tables/png/T01_universe.png` |
+| T02 | Descriptive statistics of WMT and SPY log returns at three frequencies | 2.1 Stylised facts | `T02 descriptive_wmt_spy` | `tables/T02_descriptive_wmt_spy.csv` | `tables/png/T02_descriptive_wmt_spy.png` |
+| T03 | Summary: is each stylised fact supported for WMT? | 2.1 Stylised facts (summary) | `T03 facts_summary_wmt` | `tables/T03_facts_summary_wmt.csv` | `tables/png/T03_facts_summary_wmt.png` |
+| T04 | Evidence for each stylised fact: statistic, p-value and conclusion (WMT, with SPY for comparison) | 2.1 Stylised facts (summary) | `T04 facts_evidence` | `tables/T04_facts_evidence.csv` | `tables/png/T04_facts_evidence.png` |
+| T05 | Autocorrelation of log returns, lags 1 to 5 | 2.1.1 Little or no serial correlation | `T05 acf_returns` | `tables/T05_acf_returns.csv` | `tables/png/T05_acf_returns.png` |
+| T06 | Ljung-Box test on log returns (H0: no autocorrelation up to the lag) | 2.1.1 Little or no serial correlation | `T06 ljung_box_returns` | `tables/T06_ljung_box_returns.csv` | `tables/png/T06_ljung_box_returns.png` |
+| T07 | Normality and fat tails: excess kurtosis, Jarque-Bera and frequency of 3-sigma days | 2.1.2 Non-normal distributions and fat tails | `T07 normality` | `tables/T07_normality.csv` | `tables/png/T07_normality.png` |
+| T08 | Asymmetry: skewness with a bootstrap test (robust to fat tails) | 2.1.3 Asymmetry and negative skewness | `T08 skewness` | `tables/T08_skewness.csv` | `tables/png/T08_skewness.png` |
+| T09 | Volatility clustering: Ljung-Box on \|r\| and r^2 and ARCH-LM test | 2.1.4 Volatility clustering | `T09 vol_clustering` | `tables/T09_vol_clustering.csv` | `tables/png/T09_vol_clustering.png` |
+| T10 | GJR-GARCH(1,1) estimates with normal and Student-t innovations | 2.1.5 Leverage effect | `T10 gjr_garch` | `tables/T10_gjr_garch.csv` | `tables/png/T10_gjr_garch.png` |
+| T11 | Correlation between r(t) and \|r(t+k)\| (daily) | 2.1.5 Leverage effect | `T11 leverage_correlation` | `tables/T11_leverage_correlation.csv` | `tables/png/T11_leverage_correlation.png` |
+| T12 | Standardised residuals of the GJR-GARCH: skewness, excess kurtosis and tests | 2.1.6 Conditional non-normality | `T12 std_residuals` | `tables/T12_std_residuals.csv` | `tables/png/T12_std_residuals.png` |
+| T13 | The portfolios compared: objective, inputs and parameters | 3. Strategies: objectives and constraints | `T13 strategy_definitions` | `tables/T13_strategy_definitions.csv` | `tables/png/T13_strategy_definitions.png` |
+| T14 | Backtest design and conventions (the same for every strategy) | 3. Backtest design and assumptions | `T14 backtest_design` | `tables/T14_backtest_design.csv` | `tables/png/T14_backtest_design.png` |
+| T15 | Median performance of the 10 portfolios across the 100 experiments (net of 10 bps) | 3. Results | `T15 median_metrics` | `tables/T15_median_metrics.csv` | `tables/png/T15_median_metrics.png` |
+| T16 | Dispersion across the 100 experiments: 25th percentile, median and 75th percentile | 3. Results | `T16 dispersion` | `tables/T16_dispersion.csv` | `tables/png/T16_dispersion.png` |
+| T17 | % of experiments in which each portfolio beats EW in the same experiment | 3. Results | `T17 beats_ew` | `tables/T17_beats_ew.csv` | `tables/png/T17_beats_ew.png` |
+| T18 | % of experiments in which each portfolio beats the Group pick in the same experiment | 3. Results | `T18 beats_group_pick` | `tables/T18_beats_group_pick.csv` | `tables/png/T18_beats_group_pick.png` |
+| T19 | % of experiments in which each portfolio beats SPY in the same experiment | 3. Results | `T19 beats_spy` | `tables/T19_beats_spy.csv` | `tables/png/T19_beats_spy.png` |
+| T20 | Rank of each portfolio by net Sharpe ratio in each experiment (1 = best of 10) | 3. Results | `T20 rankings` | `tables/T20_rankings.csv` | `tables/png/T20_rankings.png` |
+| T21 | Head-to-head: % of experiments in which A (row) has a higher net Sharpe ratio than B (column) | 3. Results: head-to-head comparison | `T21 pairwise_sharpe` | `tables/T21_pairwise_sharpe.csv` | `tables/png/T21_pairwise_sharpe.png` |
+| T22 | Average % of head-to-head comparisons won (against the other 9 portfolios) | 3. Results: head-to-head comparison | `T22 pairwise_avg_win_rate` | `tables/T22_pairwise_avg_win_rate.csv` | `tables/png/T22_pairwise_avg_win_rate.png` |
+| T23 | Median paired difference in net Sharpe ratio: A (row) minus B (column) | 3. Results: head-to-head comparison | `T23 pairwise_median_sharpe_diff` | `tables/T23_pairwise_median_sharpe_diff.csv` | `tables/png/T23_pairwise_median_sharpe_diff.png` |
+| T24 | Market risk against SPY: CAPM beta, Jensen's alpha, tracking error and information ratio (medians) | 3. Results: market risk (CAPM) | `T24 capm` | `tables/T24_capm.csv` | `tables/png/T24_capm.png` |
+| T25 | Median net Sharpe ratio with different transaction costs | Robustness: transaction costs | `T25 sharpe_by_cost` | `tables/T25_sharpe_by_cost.csv` | `tables/png/T25_sharpe_by_cost.png` |
+| T26 | Rank by median net Sharpe ratio with different transaction costs (1 = best) | Robustness: transaction costs | `T26 ranking_by_cost` | `tables/T26_ranking_by_cost.csv` | `tables/png/T26_ranking_by_cost.png` |
+| T27 | Semi-annual vs quarterly rebalancing (medians, net of 10 bps) | Robustness: rebalancing frequency | `T27 semiannual_vs_quarterly` | `tables/T27_semiannual_vs_quarterly.csv` | `tables/png/T27_semiannual_vs_quarterly.png` |
+| T28 | Markowitz risk aversion: λ = 1, 3 and 5 between Max Sharpe, GMV and EW (medians) | Robustness: Markowitz risk aversion | `T28 lambda_sensitivity` | `tables/T28_lambda_sensitivity.csv` | `tables/png/T28_lambda_sensitivity.png` |
+| T29 | Median net Sharpe ratio by sub-period of the evaluation year | Robustness: dependence on the period | `T29 sharpe_by_subperiod` | `tables/T29_sharpe_by_subperiod.csv` | `tables/png/T29_sharpe_by_subperiod.png` |
+| T30 | Median Sharpe ratio and return in the experiments whose out-of-sample year had SPY down or up | Robustness: dependence on the period | `T30 market_regime` | `tables/T30_market_regime.csv` | `tables/png/T30_market_regime.png` |
+| T31 | Do the results depend on the stocks drawn? Main draw, new draw and all eligible stocks | Robustness: dependence on the asset subset | `T31 subset_comparison` | `tables/T31_subset_comparison.csv` | `tables/png/T31_subset_comparison.png` |
+| T32 | The strategies applied to the group's 23 stocks (medians, net of 10 bps) | Robustness: the 23-stock universe | `T32 universe23_medians` | `tables/T32_universe23_medians.csv` | `tables/png/T32_universe23_medians.png` |
+| T33 | On the 23-stock universe: % of experiments in which each strategy beats the Group pick | Robustness: the 23-stock universe | `T33 universe23_beats_group_pick` | `tables/T33_universe23_beats_group_pick.csv` | `tables/png/T33_universe23_beats_group_pick.png` |
+| T34 | Full sample 2010-2026: Group pick vs SPY vs ^GSPC (descriptive only - biased by hindsight) | Robustness / limitations: full sample | `T34 fullsample_metrics` | `tables/T34_fullsample_metrics.csv` | `tables/png/T34_fullsample_metrics.png` |
+| T35 | Calendar-year returns: Group pick vs SPY vs ^GSPC (2026 = year to date, until 18 September) | Robustness / limitations: full sample | `T35 calendar_year_returns` | `tables/T35_calendar_year_returns.csv` | `tables/png/T35_calendar_year_returns.png` |
+| T36 | Optimisation failures in all the runs of the backtest | Methods: optimisation failures | `T36 optimisation_failures` | `tables/T36_optimisation_failures.csv` | `tables/png/T36_optimisation_failures.png` |
+| T37 | Trade-offs: return, downside risk, concentration, turnover and complexity (medians, net of 10 bps) | 6. Conclusions and recommendation | `T37 tradeoffs` | `tables/T37_tradeoffs.csv` | `tables/png/T37_tradeoffs.png` |
+| TA01 | Descriptive statistics of all 25 series (23 stocks, SPY, ^GSPC) at three frequencies | Appendix: data | `TA01 descriptive_all_assets` | `tables/TA01_descriptive_all_assets.csv` | `tables/png/TA01_descriptive_all_assets.png` |
+| TA02 | The 100 experiments: periods and the 12 stocks drawn (seed 2026) | Appendix: backtest design | `TA02 experiment_design` | `tables/TA02_experiment_design.csv` | `tables/png/TA02_experiment_design.png` |
+| TA03 | Illustration: weights of each strategy with the last 12 months of data (23 stocks) | Appendix: strategies | `TA03 weights_illustration` | `tables/TA03_weights_illustration.csv` | `tables/png/TA03_weights_illustration.png` |
+| TA04 | Illustration: ex-ante characteristics of each strategy (last 12 months, 23 stocks) | Appendix: strategies | `TA04 illustration_characteristi` | `tables/TA04_illustration_characteristics.csv` | `tables/png/TA04_illustration_characteristics.png` |
+| TA05 | Inverse volatility vs ERC: weights and risk contributions (last 12 months, 23 stocks) | Appendix: strategies | `TA05 iv_vs_erc` | `tables/TA05_iv_vs_erc.csv` | `tables/png/TA05_iv_vs_erc.png` |
+| TA06 | Average weight of each stock when it is drawn, by strategy | Appendix: weights | `TA06 avg_weight_by_stock` | `tables/TA06_avg_weight_by_stock.csv` | `tables/png/TA06_avg_weight_by_stock.png` |
+| TA07 | Head-to-head: % of experiments in which A (row) has a higher return than B (column) | Appendix: head-to-head comparison | `TA07 pairwise_return` | `tables/TA07_pairwise_return.csv` | `tables/png/TA07_pairwise_return.png` |
+| TA08 | Head-to-head: % of experiments in which A (row) has a smaller maximum drawdown than B (column) | Appendix: head-to-head comparison | `TA08 pairwise_max_drawdown` | `tables/TA08_pairwise_max_drawdown.csv` | `tables/png/TA08_pairwise_max_drawdown.png` |
+| TA09 | Head-to-head: % of experiments in which A (row) has a lower volatility than B (column) | Appendix: head-to-head comparison | `TA09 pairwise_volatility` | `tables/TA09_pairwise_volatility.csv` | `tables/png/TA09_pairwise_volatility.png` |
+| TA10 | Head-to-head: % of experiments in which A (row) has a higher Sterling ratio than B (column) | Appendix: head-to-head comparison | `TA10 pairwise_sterling` | `tables/TA10_pairwise_sterling.csv` | `tables/png/TA10_pairwise_sterling.png` |
+| TA11 | On the 23-stock universe: head-to-head comparison by net Sharpe ratio | Appendix: the 23-stock universe | `TA11 universe23_pairwise_sharpe` | `tables/TA11_universe23_pairwise_sharpe.csv` | `tables/png/TA11_universe23_pairwise_sharpe.png` |

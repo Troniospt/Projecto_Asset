@@ -7796,7 +7796,7 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=03fa12c8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bdd04e8d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7825,6 +7825,10 @@ a.anchor-link {
 <td><code>report_pack/tables/*.csv</code>, <code>report_pack/tables/all_tables.md</code></td>
 </tr>
 <tr>
+<td>Every table as a <strong>PNG image</strong> (title, table and note, in the same colours as the charts), ready to insert in Word</td>
+<td><code>report_pack/tables/png/</code></td>
+</tr>
+<tr>
 <td>An index: for each figure and table, its caption, the section of the report where it goes and the notebook that made it</td>
 <td><code>report_pack/INDEX.md</code></td>
 </tr>
@@ -7832,11 +7836,12 @@ a.anchor-link {
 </table>
 <p>The written guide to the results (key findings with the numbers, methods, limitations, recommendation and references) is in
 <code>report_pack/REPORT_NOTES.md</code>; it is written by hand and is not created by this notebook.</p>
+<p>The colours of all the charts and tables are set in one place, <code>notebooks/appm_style.py</code> (change a colour there and run the notebooks again).</p>
 <p><strong>Run this notebook after notebooks 02, 03 and 04</strong> (it only reads their outputs). It takes a few seconds.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ae79dbfd">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2d0b9e99">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7848,14 +7853,17 @@ a.anchor-link {
 <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">openpyxl.styles</span><span class="w"> </span><span class="kn">import</span> <span class="n">Font</span><span class="p">,</span> <span class="n">Alignment</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">appm_style</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_style</span><span class="p">,</span> <span class="n">save_table_png</span>     <span class="c1"># the project's colour scheme (notebooks/appm_style.py)</span>
+
+<span class="n">apply_style</span><span class="p">()</span>                                          <span class="c1"># same fonts and colours as the charts of notebooks 02-04</span>
 
 <span class="n">RESULTS</span> <span class="o">=</span> <span class="s1">'../results'</span>
 <span class="n">FIGURES</span> <span class="o">=</span> <span class="s1">'../figures'</span>
 <span class="n">PACK</span> <span class="o">=</span> <span class="s1">'../report_pack'</span>
 
-<span class="c1"># figures/ and tables/ are recreated from scratch every time (so that no old file is left behind);</span>
+<span class="c1"># figures/, tables/ and tables/png/ are recreated from scratch every time (so that no old file is left behind);</span>
 <span class="c1"># REPORT_NOTES.md and README.md, written by hand, are in the main folder and are never touched</span>
-<span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/figures'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/tables'</span><span class="p">]:</span>
+<span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/figures'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/tables'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/tables/png'</span><span class="p">]:</span>
     <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
 
@@ -7869,7 +7877,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=81ff1931">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a2843844">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7882,7 +7890,7 @@ the group can move them as it prefers.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7ccde8c4">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7cab58c4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7935,7 +7943,7 @@ the group can move them as it prefers.</p>
      <span class="s1">'Weights of each strategy estimated with the last 12 months of data on the 23 stocks (illustration, not a backtest result).'</span><span class="p">,</span>
      <span class="s1">'notebook 04, section 4'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'F14'</span><span class="p">,</span> <span class="s1">'04_risk_contributions_iv_vs_erc.png'</span><span class="p">,</span> <span class="s1">'3. Strategies: inverse volatility vs equal risk contributions'</span><span class="p">,</span>
-     <span class="s1">'Risk contributions (</span><span class="si">% o</span><span class="s1">f portfolio risk) of inverse volatility and risk parity (ERC), 23 stocks, last 12 months: with correlated assets inverse volatility does not equalise risk contributions (dashed = 1/N = 4.35%; weights in table TA05).'</span><span class="p">,</span>
+     <span class="s1">'Risk contributions (</span><span class="si">% o</span><span class="s1">f portfolio risk) of inverse volatility and risk parity (ERC), 23 stocks, last 12 months: with correlated assets inverse volatility does not equalise risk contributions (line = 1/N = 4.35%; weights in table TA05).'</span><span class="p">,</span>
      <span class="s1">'notebook 04, section 4'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'F15'</span><span class="p">,</span> <span class="s1">'04_efficient_frontier.png'</span><span class="p">,</span> <span class="s1">'3. Strategies: Markowitz vs GMV vs Max Sharpe'</span><span class="p">,</span>
      <span class="s1">'In-sample efficient frontier (last 12 months, long-only) with the position of each strategy; Markowitz with λ = 3 is distinct from GMV and Max Sharpe.'</span><span class="p">,</span>
@@ -8004,6 +8012,12 @@ the group can move them as it prefers.</p>
      <span class="s1">'Drawdowns of the Group pick, SPY and ^GSPC, 2010-2026.'</span><span class="p">,</span> <span class="s1">'notebook 04, section 12'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'FA10'</span><span class="p">,</span> <span class="s1">'04_avg_weight_by_stock.png'</span><span class="p">,</span> <span class="s1">'Appendix: weights'</span><span class="p">,</span>
      <span class="s1">'Average weight of each stock when it is drawn, by strategy (equal weight would be 8.3%).'</span><span class="p">,</span> <span class="s1">'notebook 04, section 10.5'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'FA11'</span><span class="p">,</span> <span class="s1">'04_weights_illustration_heatmap.png'</span><span class="p">,</span> <span class="s1">'Appendix: strategies'</span><span class="p">,</span>
+     <span class="s1">'Weights of each strategy with the last 12 months of data on the 23 stocks, as a heatmap (same data as F13; darker = larger weight).'</span><span class="p">,</span>
+     <span class="s1">'notebook 04, section 4'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'FA12'</span><span class="p">,</span> <span class="s1">'04_avg_weight_by_stock_bars.png'</span><span class="p">,</span> <span class="s1">'Appendix: weights'</span><span class="p">,</span>
+     <span class="s1">'Average weight of each stock when it is drawn, one panel per strategy (same data as FA10; line = equal weight 8.3%).'</span><span class="p">,</span>
+     <span class="s1">'notebook 04, section 10.5'</span><span class="p">,</span> <span class="s1">'Appendix'</span><span class="p">),</span>
 <span class="p">]</span>
 
 <span class="c1"># Copy each figure with its number in front of the name, e.g. F17_04_boxplots_metrics.png</span>
@@ -8034,7 +8048,7 @@ the group can move them as it prefers.</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Figures copied: 38
+<pre>Figures copied: 40
 Missing figures (run notebooks 02-04 first): []
 Figures in figures/ that are not in the pack: []
 </pre>
@@ -8043,7 +8057,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=30e55448">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b0c8b766">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8095,7 +8109,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=72aeaf2d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1c13257b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8131,7 +8145,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=967e8c30">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fe3b43ac">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8141,7 +8155,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d02bf0d0">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=354cffdd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8232,7 +8246,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=28d4de61">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=51f95d13">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8242,7 +8256,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5ec4d859">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9af3d598">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8292,7 +8306,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4f1bec5b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=75fd6c65">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8302,7 +8316,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cb4fddb0">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8e104da7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8365,7 +8379,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1215fb9e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2dbc7b5d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8375,7 +8389,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e7fa3c34">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f6247155">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8466,7 +8480,7 @@ Figures in figures/ that are not in the pack: []
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a0d975ae">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=653dcc0b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8477,7 +8491,7 @@ columns describe what each portfolio needs to estimate and how complex it is to 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=69b9f17f">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bf37a804">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8527,7 +8541,7 @@ columns describe what each portfolio needs to estimate and how complex it is to 
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6c023a1c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=aa8b7c0e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8537,7 +8551,7 @@ columns describe what each portfolio needs to estimate and how complex it is to 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1c8b1e3e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=16aa7690">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8606,21 +8620,23 @@ columns describe what each portfolio needs to estimate and how complex it is to 
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ae0ffba7">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d76278ec">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="3.-Saving-the-tables:-Excel-(formatted),-CSV-and-Markdown">3. Saving the tables: Excel (formatted), CSV and Markdown<a class="anchor-link" href="#3.-Saving-the-tables:-Excel-(formatted),-CSV-and-Markdown">¶</a></h2><ul>
+<h2 id="3.-Saving-the-tables:-Excel-(formatted),-CSV,-Markdown-and-PNG-images">3. Saving the tables: Excel (formatted), CSV, Markdown and PNG images<a class="anchor-link" href="#3.-Saving-the-tables:-Excel-(formatted),-CSV,-Markdown-and-PNG-images">¶</a></h2><ul>
 <li><strong>Excel:</strong> the numbers stay numbers (so you can still calculate with them); only the way they are <strong>shown</strong> changes
 (number formats). Each sheet has the title in row 1, the note in row 2 and the table from row 3. The first sheet is an index.</li>
 <li><strong>CSV and Markdown:</strong> the numbers are converted to <strong>text</strong> already rounded (e.g. "35.6%"), ready to paste into Word.</li>
+<li><strong>PNG images</strong> (<code>tables/png/</code>): the same rounded tables drawn as pictures with the title above and the note below, in the colours
+of <code>appm_style.py</code> (navy header, light stripes, the Group pick row highlighted). Insert them in Word like a figure.</li>
 </ul>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f066456d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3e13f047">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8699,7 +8715,17 @@ columns describe what each portfolio needs to estimate and how complex it is to 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/tables/all_tables.md'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">markdown_parts</span><span class="p">))</span>
 
-<span class="c1"># 2) Excel with formats</span>
+<span class="c1"># 2) PNG image of every table (title above, note below), drawn by save_table_png of appm_style.py.</span>
+<span class="c1"># The column headers are wrapped after about 11 characters, so that the columns of numbers stay narrow and the image fits a page.</span>
+<span class="c1"># A few tables with long text get another line length for their text columns (characters per line; the default is 42):</span>
+<span class="c1"># shorter lines make a wide table narrower, longer lines make a tall table shorter (TA02: the 12 tickers on one line).</span>
+<span class="n">text_width</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'T13'</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">'T14'</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">'T37'</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">'TA02'</span><span class="p">:</span> <span class="mi">68</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">report_tables</span><span class="p">:</span>
+    <span class="n">save_table_png</span><span class="p">(</span><span class="n">as_text</span><span class="p">(</span><span class="n">entry</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s2">/tables/png/</span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">'number'</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="si">}</span><span class="s2">.png"</span><span class="p">,</span>
+                   <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">'number'</span><span class="p">]</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">'title'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">note</span><span class="o">=</span><span class="n">entry</span><span class="p">[</span><span class="s1">'note'</span><span class="p">],</span>
+                   <span class="n">max_header_width</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">max_text_width</span><span class="o">=</span><span class="n">text_width</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s1">'number'</span><span class="p">],</span> <span class="mi">42</span><span class="p">))</span>
+
+<span class="c1"># 3) Excel with formats</span>
 <span class="n">index_sheet</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="n">entry</span><span class="p">[</span><span class="s1">'number'</span><span class="p">],</span> <span class="n">entry</span><span class="p">[</span><span class="s1">'title'</span><span class="p">],</span> <span class="n">entry</span><span class="p">[</span><span class="s1">'section'</span><span class="p">]]</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">report_tables</span><span class="p">],</span>
                            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'Table'</span><span class="p">,</span> <span class="s1">'Title'</span><span class="p">,</span> <span class="s1">'Report section'</span><span class="p">])</span>
 <span class="n">sheet_names</span> <span class="o">=</span> <span class="p">{}</span>
@@ -8740,6 +8766,7 @@ columns describe what each portfolio needs to estimate and how complex it is to 
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">'Saved:'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/tables/report_tables.xlsx'</span><span class="p">,</span> <span class="s1">'|'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">report_tables</span><span class="p">),</span> <span class="s1">'tables + index sheet'</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">'Saved:'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">report_tables</span><span class="p">),</span> <span class="s1">'CSV files and all_tables.md in'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/tables/'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Saved:'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/tables/png'</span><span class="p">)),</span> <span class="s1">'table images in'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/tables/png/'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8754,13 +8781,14 @@ columns describe what each portfolio needs to estimate and how complex it is to 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Saved: ../report_pack/tables/report_tables.xlsx | 48 tables + index sheet
 Saved: 48 CSV files and all_tables.md in ../report_pack/tables/
+Saved: 48 table images in ../report_pack/tables/png/
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5b622b2b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bcc5bb5f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8770,7 +8798,7 @@ Saved: 48 CSV files and all_tables.md in ../report_pack/tables/
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b40675af">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=326cd256">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8782,6 +8810,8 @@ Saved: 48 CSV files and all_tables.md in ../report_pack/tables/
          <span class="s1">'Created automatically by `notebooks/05_report_pack.ipynb` (do not edit by hand: run the notebook again).'</span><span class="p">,</span>
          <span class="s1">'Figures are in `figures/` (numbered in the order of the report); tables are in `tables/report_tables.xlsx` '</span>
          <span class="s1">'(one sheet per table), `tables/&lt;number&gt;_&lt;name&gt;.csv` and `tables/all_tables.md`.'</span><span class="p">,</span>
+         <span class="s1">'Every table is also an image in `tables/png/` (`&lt;number&gt;_&lt;name&gt;.png`: title, table and note, in the same colours as the '</span>
+         <span class="s1">'figures), ready to insert in Word. The colours of all the figures and tables are set in `notebooks/appm_style.py`.'</span><span class="p">,</span>
          <span class="s1">'The written guide with the key findings and numbers is `REPORT_NOTES.md`.'</span><span class="p">,</span>
          <span class="s1">'F = figure and T = table for the main text; FA and TA = appendix. The "report section" labels follow the numbering of the '</span>
          <span class="s1">'group</span><span class="se">\'</span><span class="s1">s draft (1. universe and data, 2.1 stylised facts, 3. strategies, backtest and results); in `REPORT_NOTES.md` the draft</span><span class="se">\'</span><span class="s1">s '</span>
@@ -8794,12 +8824,12 @@ Saved: 48 CSV files and all_tables.md in ../report_pack/tables/
     <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">'| </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s1"> | `figures/</span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s1">` | </span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">caption</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">made_by</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">place</span><span class="si">}</span><span class="s1"> |'</span><span class="p">)</span>
 
 <span class="n">lines</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'## Tables'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span>
-          <span class="s1">'| No. | Title | Report section | Excel sheet | CSV |'</span><span class="p">,</span>
-          <span class="s1">'|---|---|---|---|---|'</span><span class="p">]</span>
+          <span class="s1">'| No. | Title | Report section | Excel sheet | CSV | PNG |'</span><span class="p">,</span>
+          <span class="s1">'|---|---|---|---|---|---|'</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">report_tables</span><span class="p">:</span>
     <span class="n">title</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s1">'title'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'|'</span><span class="p">,</span> <span class="s1">'</span><span class="se">\\</span><span class="s1">|'</span><span class="p">)</span>
     <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"| </span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">'number'</span><span class="p">]</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">'section'</span><span class="p">]</span><span class="si">}</span><span class="s2"> | `</span><span class="si">{</span><span class="n">sheet_names</span><span class="p">[</span><span class="n">entry</span><span class="p">[</span><span class="s1">'number'</span><span class="p">]]</span><span class="si">}</span><span class="s2">` | "</span>
-                 <span class="sa">f</span><span class="s2">"`tables/</span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">'number'</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="si">}</span><span class="s2">.csv` |"</span><span class="p">)</span>
+                 <span class="sa">f</span><span class="s2">"`tables/</span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">'number'</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="si">}</span><span class="s2">.csv` | `tables/png/</span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">'number'</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="si">}</span><span class="s2">.png` |"</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">PACK</span><span class="si">}</span><span class="s1">/INDEX.md'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
@@ -8819,13 +8849,13 @@ Saved: 48 CSV files and all_tables.md in ../report_pack/tables/
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Saved: ../report_pack/INDEX.md
-38 figures and 48 tables in the report pack
+40 figures and 48 tables in the report pack
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=98022e98">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9724acea">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
