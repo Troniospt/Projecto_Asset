@@ -1,0 +1,18 @@
+﻿Comparison,% of experiments,Band low (95%),Band high (95%),Clear?
+Group pick beats EW (Sharpe),62.0,50.39,71.68141592920354,yes
+ERC beats EW (Sharpe),51.0,35.65217391304348,68.18181818181819,no (band includes 50%)
+Inverse vol beats EW (Sharpe),47.0,30.301268498942918,66.66666666666667,no (band includes 50%)
+Most diversified beats EW (Sharpe),47.0,32.17313664596273,65.51819923371647,no (band includes 50%)
+Max decorrelation beats EW (Sharpe),41.0,31.52073268921095,52.94417767106841,no (band includes 50%)
+GMV beats EW (Sharpe),31.0,16.92079207920792,48.38709677419355,yes
+Max Sharpe beats EW (Sharpe),34.0,19.607843137254903,50.0,no (band includes 50%)
+Markowitz beats EW (Sharpe),21.0,10.751728110599078,32.00246913580246,yes
+ERC beats inverse vol (Sharpe),65.0,53.92156862745098,77.65957446808511,yes
+Group pick beats ERC (Sharpe),56.00000000000001,43.47826086956522,67.67906336088153,no (band includes 50%)
+ERC lower volatility than EW,100.0,100.0,100.0,yes
+ERC smaller drawdown than EW,86.0,77.3184161199625,93.45945829006577,yes
+ERC beats SPY (Sharpe),86.0,75.25773195876289,94.73684210526316,yes
+ERC lower volatility than SPY,46.0,30.274651144861615,63.265306122448976,no (band includes 50%)
+ERC smaller drawdown than SPY,57.99999999999999,43.51751207729469,72.34042553191489,no (band includes 50%)
+Group pick beats SPY (Sharpe),92.0,81.17337461300309,100.0,yes
+EW beats SPY (Sharpe),85.0,73.5632183908046,94.56667835437119,yes

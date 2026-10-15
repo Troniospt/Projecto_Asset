@@ -1,0 +1,11 @@
+﻿Portfolio,Median max drawdown (SPY down),Median max drawdown (SPY up),% smaller drawdown than EW (SPY down),Average Sharpe rank (SPY down)
+EW,-19.8%,-10.3%,,4.50
+Markowitz (λ=3),-27.7%,-23.5%,17,6.67
+GMV,-13.5%,-9.2%,92,5.92
+Max Sharpe,-19.3%,-13.2%,50,4.75
+Inverse vol,-18.4%,-8.7%,92,5.17
+Risk parity (ERC),-17.4%,-8.9%,92,4.42
+Most diversified,-15.4%,-10.2%,75,4.58
+Max decorrelation,-19.2%,-11.7%,58,4.50
+Group pick (23 stocks),-20.6%,-9.3%,25,5.67
+SPY (buy & hold),-19.3%,-9.4%,67,8.83

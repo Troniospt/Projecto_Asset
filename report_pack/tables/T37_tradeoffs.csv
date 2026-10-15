@@ -7,5 +7,5 @@ Inverse vol,25.7%,14.7%,-9.8%,1.78,47,10.9,0.27,volatilities only (simple formul
 Risk parity (ERC),26.5%,14.4%,-10.0%,1.80,51,10.7,0.31,covariances (optimiser),Medium
 Most diversified,28.7%,15.2%,-10.7%,1.70,47,6.3,0.84,covariances (optimiser),Medium
 Max decorrelation,33.3%,19.0%,-13.1%,1.66,41,7.1,0.86,correlations (optimiser),Medium
-Group pick (23 stocks),35.6%,15.8%,-10.1%,1.70,62,23.0,0.28,nothing (but the stock selection was made with hindsight),Low
+Group pick (23 stocks),35.6%,15.8%,-10.1%,1.70,62,23.0,0.28,nothing (but the 23 stocks were chosen with hindsight),Low
 SPY (buy & hold),17.7%,14.0%,-9.4%,1.13,15,,0.00,nothing (one ETF),Lowest

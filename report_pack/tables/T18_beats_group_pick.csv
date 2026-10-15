@@ -1,10 +1,10 @@
-﻿Portfolio,% beats Group pick: Sharpe,% beats Group pick: Ann. return,% beats Group pick: Max drawdown,% beats Group pick: Ann. volatility,% beats Group pick: Sterling
-EW,38,51,45,44,46
-Markowitz (λ=3),21,57,11,0,40
-GMV,32,20,66,99,27
-Max Sharpe,31,50,32,20,46
-Inverse vol,39,29,72,86,35
-Risk parity (ERC),44,30,77,86,36
-Most diversified,38,41,50,65,41
-Max decorrelation,39,58,30,29,50
-SPY (buy & hold),8,4,62,96,6
+﻿Portfolio,% beats Group pick: Sharpe,% beats Group pick: Ann. return,% beats Group pick: Max drawdown,% beats Group pick: Ann. volatility,% beats Group pick: Sterling,% beats Group pick: Calmar
+EW,38,51,45,44,46,40
+Markowitz (λ=3),21,57,11,0,40,28
+GMV,32,20,66,99,27,35
+Max Sharpe,31,50,32,20,46,36
+Inverse vol,39,29,72,86,35,38
+Risk parity (ERC),44,30,77,86,36,41
+Most diversified,38,41,50,65,41,37
+Max decorrelation,39,58,30,29,50,44
+SPY (buy & hold),8,4,62,96,6,12

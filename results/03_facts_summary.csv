@@ -15,8 +15,8 @@
 13,WMT,Monthly,"2. Non-normal, fat tails",excess kurtosis = 0.84,0.006325960920331514,Supported
 14,WMT,Monthly,3. Negative skewness,skewness = -0.360,0.083,Not significant
 15,WMT,Monthly,4. Volatility clustering,LB |r| p = 0.848,0.6721661569493127,Not supported
-16,WMT,Monthly,5. Leverage effect,gamma = 0.000,0.9999999851167626,Not significant
-17,WMT,Monthly,6. Conditional non-normality,z excess kurtosis = 0.66,0.02866097145859859,Supported
+16,WMT,Monthly,5. Leverage effect,gamma = 0.000,0.9999999851167626,Inconclusive (GARCH at boundary)
+17,WMT,Monthly,6. Conditional non-normality,z excess kurtosis = 0.66,0.02866097145859859,Inconclusive (GARCH at boundary)
 18,SPY,Daily,1. Little serial correlation,max |ACF(1-5)| = 0.100,6.557045906356267e-31,Not supported
 19,SPY,Daily,"2. Non-normal, fat tails",excess kurtosis = 12.40,0.0,Supported
 20,SPY,Daily,3. Negative skewness,skewness = -0.555,0.113,Not significant

@@ -1,9 +1,9 @@
-﻿,% beats Group pick: Sharpe,% beats Group pick: Ann. return,% beats Group pick: Max drawdown,% beats Group pick: Ann. volatility,% beats Group pick: Sterling,Median Sharpe difference vs Group pick
-Markowitz (λ=3),21.0,63.0,8.0,0.0,51.0,-0.4882037927072819
-GMV,36.0,20.0,68.0,100.0,25.0,-0.2748735355582498
-Max Sharpe,39.0,60.0,30.0,23.0,54.0,-0.21754325694079074
-Inverse vol,40.0,16.0,91.0,100.0,28.999999999999996,-0.0272229341657082
-Risk parity (ERC),54.0,23.0,93.0,100.0,35.0,0.010040663997017335
-Most diversified,52.0,40.0,63.0,73.0,43.0,0.023074918028104352
-Max decorrelation,42.0,63.0,28.999999999999996,33.0,63.0,-0.07258482543420963
-SPY (buy & hold),8.0,4.0,62.0,96.0,6.0,-0.4730821302894258
+﻿,% beats Group pick: Sharpe,% beats Group pick: Ann. return,% beats Group pick: Max drawdown,% beats Group pick: Ann. volatility,% beats Group pick: Sterling,% beats Group pick: Calmar,Median Sharpe difference vs Group pick
+Markowitz (λ=3),21.0,63.0,8.0,0.0,51.0,33.0,-0.4882037927072819
+GMV,36.0,20.0,68.0,100.0,25.0,38.0,-0.2748735355582498
+Max Sharpe,39.0,60.0,30.0,23.0,54.0,38.0,-0.21754325694079074
+Inverse vol,40.0,16.0,91.0,100.0,28.999999999999996,42.0,-0.0272229341657082
+Risk parity (ERC),54.0,23.0,93.0,100.0,35.0,50.0,0.010040663997017335
+Most diversified,52.0,40.0,63.0,73.0,43.0,51.0,0.023074918028104352
+Max decorrelation,42.0,63.0,28.999999999999996,33.0,63.0,50.0,-0.07258482543420963
+SPY (buy & hold),8.0,4.0,62.0,96.0,6.0,12.0,-0.4730821302894258
